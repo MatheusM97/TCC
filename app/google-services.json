@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "300485112771",
+    "firebase_url": "https://nmanager-ufms.firebaseio.com",
+    "project_id": "nmanager-ufms",
+    "storage_bucket": "nmanager-ufms.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300485112771:android:2200b21073cb60c40f4376",
+        "android_client_info": {
+          "package_name": "br.ufms.nafmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300485112771-mbqaoio0g56b2lmi7nqkg79il2ie5cun.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.ufms.nafmanager",
+            "certificate_hash": "8e4045e02518efb18a83ee9cc798293f51ab1307"
+          }
+        },
+        {
+          "client_id": "300485112771-u68m8729107l1t3pvjc7pjae84kr5ns7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcQu-wNyooxk9RNgwqki_AnHFCTqp-Yk0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300485112771-u68m8729107l1t3pvjc7pjae84kr5ns7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

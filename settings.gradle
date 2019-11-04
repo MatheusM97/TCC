@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='ProjetoNAF'
+rootProject.name='NAFManager'

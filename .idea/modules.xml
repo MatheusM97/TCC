@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ProjetoNAF.iml" filepath="$PROJECT_DIR$/ProjetoNAF.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NAFManager.iml" filepath="$PROJECT_DIR$/NAFManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
