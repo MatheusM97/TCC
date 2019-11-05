@@ -1,19 +1,23 @@
 package br.ufms.nafmanager.model;
 
+import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 public class Atendimento {
 
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     private Date dataAtendimento;
-    private Long tempoFinalizacao;
+    private String tempoAtendimento;
     private ArrayList<String> atendimentoTipo;
 
     public Atendimento(){}
 
-    public Atendimento(Date dataAtendimento, Long tempoFinalizacao, ArrayList<String> tipoIds){
+    public Atendimento(Date dataAtendimento, String tempoAtendimento, ArrayList<String> tipoIds){
         this.dataAtendimento = dataAtendimento;
-        this.tempoFinalizacao = tempoFinalizacao;
+        this.tempoAtendimento = tempoAtendimento;
         this.atendimentoTipo = new ArrayList<>();
         this.atendimentoTipo = tipoIds;
     }
@@ -26,12 +30,13 @@ public class Atendimento {
         this.dataAtendimento = dataAtendimento;
     }
 
-    public Long getTempoFinalizacao() {
-        return tempoFinalizacao;
+    public String getTempoAtendimento() {
+        return this.tempoAtendimento;
     }
 
-    public void setTempoFinalizacao(Long tempoFinalizacao) {
-        this.tempoFinalizacao = tempoFinalizacao;
+    public void setTempoAtendimento(int tempoAtendimento) {
+        Time tempo = new Time(tempoAtendimento);
+       this.tempoAtendimento =  sdf.format(tempo);
     }
 
     public ArrayList<String> getAtendimentoTipo() {

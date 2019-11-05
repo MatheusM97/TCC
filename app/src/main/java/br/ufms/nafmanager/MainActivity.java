@@ -25,11 +25,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import br.ufms.nafmanager.model.Atendimento;
 import br.ufms.nafmanager.model.AtendimentoTipo;
@@ -58,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 inserirAtendimento(atendimentosIds);
                 limparTudo();
+                Toast.makeText(MainActivity.this, "Sucesso!", Toast.LENGTH_SHORT).show();
             }
         });
         atendimentosIds = new ArrayList<>();
@@ -81,8 +89,8 @@ public class MainActivity extends AppCompatActivity {
                                 atendimentoTipoLista.add(atendimentoTipo);
                                 count ++;
 
-                                if(count == 5)
-                                    break;
+//                                if(count == 5)
+//                                    break;
                             }
                         } else {
                             System.out.println("Error getting documents: " + task.getException());
@@ -115,23 +123,27 @@ public class MainActivity extends AppCompatActivity {
 
     private void inserirAtendimento(ArrayList<String> atendimentosIds){
         this.dataFimAtendimento = new Date();
-        Long tempoFim = this.dataFimAtendimento.getTime() - this.dataInicioAtendimento.getTime();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy:HH:mm:ss");
+
+        Long diffInMillies = Math.abs(this.dataFimAtendimento.getTime() - this.dataInicioAtendimento.getTime());
+
         Atendimento atendimento = new Atendimento();
         atendimento.setDataAtendimento(new Date());
-        atendimento.setTempoFinalizacao(tempoFim);
+        atendimento.setTempoAtendimento(Integer.parseInt(diffInMillies.toString()));
         atendimento.setAtendimentoTipo(atendimentosIds);
 
         firebaseFirestore.collection("atendimento").add(atendimento)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        System.out.println("Sucesso ao gravar atendimento!");
+                        System.out.println("Sucesso!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        System.out.println("Falha ao gravar atendimento!");
+                        System.out.println("Falhou!");
                     }
                 });
     }
@@ -140,5 +152,9 @@ public class MainActivity extends AppCompatActivity {
         this.atendimentoTipoLista = new ArrayList<>();
         this.dataInicioAtendimento = new Date();
         this.carregarAtendimentoTipo();
+    }
+
+    public void dialogDataAtendimento(){
+
     }
 }

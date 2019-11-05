@@ -1,5 +1,7 @@
 package br.ufms.nafmanager.model;
 
+import java.util.UUID;
+
 public class AtendimentoTipo {
     private String id;
     private String nome;
