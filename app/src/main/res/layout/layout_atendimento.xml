@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#F0F0F0"
+    >
+
+
+
+
+    <TextView
+        android:id="@+id/tv_dtAtendimento"
+        android:text="Data"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:textColor="#000000"
+        android:layout_alignParentTop="true"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="abrirDatePicker"/>
+
+    <TextView
+        android:id="@+id/tv_dataAtendimentoView"
+        android:layout_below="@+id/tv_dtAtendimento"
+        android:text="${01/01/2000}"
+        android:textSize="20dp"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="abrirDatePicker"
+        />
+
+    <CheckBox
+        android:id="@+id/ctv_atendimentoConclusivo"
+        android:layout_below="@+id/tv_dataAtendimentoView"
+        android:text="Atendimento foi conclusivo"
+        android:textStyle="bold"
+        android:textSize="22dp"
+        android:checked="true"
+        android:button="@null"
+        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:gravity="center_vertical"
+        android:paddingBottom="2dp"
+        />
+
+    <ListView
+        android:id="@+id/lv_atendimento_tipo"
+        android:layout_below="@+id/ctv_atendimentoConclusivo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/atendimento_layout_btn"
+        android:background="#F0F0F0"
+        />
+
+    <RelativeLayout
+        android:id="@+id/atendimento_layout_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+<!--        <Button-->
+<!--            android:id="@+id/btn_cancelarAtendimento"-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_alignParentLeft="true"-->
+<!--            android:layout_marginLeft="20dp"-->
+<!--            android:layout_marginBottom="5dp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:background="@drawable/btn_cancelar"-->
+<!--            android:text="cancelar"-->
+<!--            android:textStyle="normal"-->
+<!--            android:fontFamily="sans-serif"-->
+<!--            android:textColor="#283593"-->
+<!--            android:textSize="18sp"/>-->
+        <Button
+            android:id="@+id/btn_finalizarAtendimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:background="@drawable/btn_finalizar"
+            android:text="concluir"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+</RelativeLayout>
