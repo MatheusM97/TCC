@@ -8,5 +8,6 @@
     <color name="customColor3">#193F86</color>
     <color name="customColor4">#FDFFFF</color>
 
-
+    <color name="mdtp_accent_color">#2185E5</color>
+    <color name="mdtp_accent_color_dark">#143965</color>
 </resources>

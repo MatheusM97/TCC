@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,13 +8,62 @@
     tools:context=".activities.MainActivity">
 
     <Button
-        android:id="@+id/tv_start"
-        android:layout_width="wrap_content"
+        android:id="@+id/btn_inserirUnidade"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Iniciar atendimento!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_margin="10dp"
+        android:textStyle="normal"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"
+        android:text="Inserir unidade"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/btn_cancelar"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/btn_inserirUniversidade"
+        android:layout_above="@+id/btn_inserirUnidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textStyle="normal"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"
+        android:text="Inserir Universidade"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/btn_cancelar"
+        />
+
+    <Button
+        android:id="@+id/btn_inserirUsuario"
+        android:layout_above="@+id/btn_inserirUniversidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textStyle="normal"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"
+        android:text="Inserir usuário"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/btn_cancelar"
+        />
+
+    <Button
+        android:id="@+id/btn_realizarAtendimento"
+        android:layout_above="@+id/btn_inserirUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textStyle="normal"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"
+        android:text="Iniciar atendimento"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/btn_cancelar"
+        />
+
+</RelativeLayout>

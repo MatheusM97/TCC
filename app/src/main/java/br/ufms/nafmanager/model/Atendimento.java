@@ -1,27 +1,22 @@
 package br.ufms.nafmanager.model;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.UUID;
 
-public class Atendimento {
+public class Atendimento extends CustomObject {
 
     SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
     private Date dataAtendimento;
     private String tempoAtendimento;
+    private Boolean atendimentoConclusivo;
     private ArrayList<String> atendimentoTipo;
 
-    public Atendimento(){}
+    private String usuarioId;
+    private String universidadeId;
+    private String unidadeId;
 
-    public Atendimento(Date dataAtendimento, String tempoAtendimento, ArrayList<String> tipoIds){
-        this.dataAtendimento = dataAtendimento;
-        this.tempoAtendimento = tempoAtendimento;
-        this.atendimentoTipo = new ArrayList<>();
-        this.atendimentoTipo = tipoIds;
-    }
+    public Atendimento(){}
 
     public Date getDataAtendimento() {
         return dataAtendimento;
@@ -48,5 +43,45 @@ public class Atendimento {
 
     public void setAtendimentoTipo(ArrayList<String> atendimentoTipo) {
         this.atendimentoTipo = atendimentoTipo;
+    }
+
+    public Boolean getAtendimentoConclusivo() {
+        return atendimentoConclusivo;
+    }
+
+    public void setAtendimentoConclusivo(Boolean atendimentoConclusivo) {
+        this.atendimentoConclusivo = atendimentoConclusivo;
+    }
+
+    public String getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(String usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public String getUniversidadeId() {
+        return universidadeId;
+    }
+
+    public void setUniversidadeId(String universidadeId) {
+        this.universidadeId = universidadeId;
+    }
+
+    public String getUnidadeId() {
+        return unidadeId;
+    }
+
+    public void setUnidadeId(String unidadeId) {
+        this.unidadeId = unidadeId;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj.getClass().getName().equals(this.getClass().getName()))
+        return true;
+
+        return false;
     }
 }

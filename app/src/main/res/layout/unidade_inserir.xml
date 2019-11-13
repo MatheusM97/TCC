@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_unidade_Nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Nome"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"></TextView>
+    <EditText
+        android:id="@+id/et_unidadeNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"
+        ></EditText>
+
+    <TextView
+        android:id="@+id/tv_unidade_tipo_nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Tipo"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"></TextView>
+    <Spinner
+        android:id="@+id/sp_unidadeTipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+    ></Spinner>
+
+    <TextView
+        android:id="@+id/tv_estadoNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Estado"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"></TextView>
+    <Spinner
+        android:id="@+id/sp_estadoNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ></Spinner>
+
+    <TextView
+        android:id="@+id/tv_CidadeNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Cidade"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"></TextView>
+    <Spinner
+        android:id="@+id/sp_CidadeNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ></Spinner>
+
+    <TextView
+        android:id="@+id/tv_regiaoFiscal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Região fiscal"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"></TextView>
+
+    <EditText
+        android:id="@+id/et_regiaoFiscal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"></EditText>
+
+    <Button
+        android:id="@+id/btn_inserirUnidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/btn_finalizar"
+        android:text="Concluir"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="normal"></Button>
+</LinearLayout>

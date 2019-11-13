@@ -1,0 +1,88 @@
+package br.ufms.nafmanager.persistencies;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import br.ufms.nafmanager.model.Cidade;
+
+public class SE {
+    public static List<Cidade> getCidades() {
+        List<Cidade> lista = new ArrayList<Cidade>();
+        lista.add(new Cidade("","Amparo de São Francisco","SE"));
+        lista.add(new Cidade("","Aquidabã","SE"));
+        lista.add(new Cidade("","Aracaju","SE"));
+        lista.add(new Cidade("","Arauá","SE"));
+        lista.add(new Cidade("","Areia Branca","SE"));
+        lista.add(new Cidade("","Barra dos Coqueiros","SE"));
+        lista.add(new Cidade("","Boquim","SE"));
+        lista.add(new Cidade("","Brejo Grande","SE"));
+        lista.add(new Cidade("","Campo do Brito","SE"));
+        lista.add(new Cidade("","Canhoba","SE"));
+        lista.add(new Cidade("","Canindé de São Francisco","SE"));
+        lista.add(new Cidade("","Capela","SE"));
+        lista.add(new Cidade("","Carira","SE"));
+        lista.add(new Cidade("","Carmópolis","SE"));
+        lista.add(new Cidade("","Cedro de São João","SE"));
+        lista.add(new Cidade("","Cristinápolis","SE"));
+        lista.add(new Cidade("","Cumbe","SE"));
+        lista.add(new Cidade("","Divina Pastora","SE"));
+        lista.add(new Cidade("","Estância","SE"));
+        lista.add(new Cidade("","Feira Nova","SE"));
+        lista.add(new Cidade("","Frei Paulo","SE"));
+        lista.add(new Cidade("","Gararu","SE"));
+        lista.add(new Cidade("","General Maynard","SE"));
+        lista.add(new Cidade("","Gracho Cardoso","SE"));
+        lista.add(new Cidade("","Ilha das Flores","SE"));
+        lista.add(new Cidade("","Indiaroba","SE"));
+        lista.add(new Cidade("","Itabaiana","SE"));
+        lista.add(new Cidade("","Itabaianinha","SE"));
+        lista.add(new Cidade("","Itabi","SE"));
+        lista.add(new Cidade("","Itaporanga d'Ajuda","SE"));
+        lista.add(new Cidade("","Japaratuba","SE"));
+        lista.add(new Cidade("","Japoatã","SE"));
+        lista.add(new Cidade("","Lagarto","SE"));
+        lista.add(new Cidade("","Laranjeiras","SE"));
+        lista.add(new Cidade("","Macambira","SE"));
+        lista.add(new Cidade("","Malhada dos Bois","SE"));
+        lista.add(new Cidade("","Malhador","SE"));
+        lista.add(new Cidade("","Maruim","SE"));
+        lista.add(new Cidade("","Moita Bonita","SE"));
+        lista.add(new Cidade("","Monte Alegre de Sergipe","SE"));
+        lista.add(new Cidade("","Muribeca","SE"));
+        lista.add(new Cidade("","Neópolis","SE"));
+        lista.add(new Cidade("","Nossa Senhora Aparecida","SE"));
+        lista.add(new Cidade("","Nossa Senhora da Glória","SE"));
+        lista.add(new Cidade("","Nossa Senhora das Dores","SE"));
+        lista.add(new Cidade("","Nossa Senhora de Lourdes","SE"));
+        lista.add(new Cidade("","Nossa Senhora do Socorro","SE"));
+        lista.add(new Cidade("","Pacatuba","SE"));
+        lista.add(new Cidade("","Pedra Mole","SE"));
+        lista.add(new Cidade("","Pedrinhas","SE"));
+        lista.add(new Cidade("","Pinhão","SE"));
+        lista.add(new Cidade("","Pirambu","SE"));
+        lista.add(new Cidade("","Poço Redondo","SE"));
+        lista.add(new Cidade("","Poço Verde","SE"));
+        lista.add(new Cidade("","Porto da Folha","SE"));
+        lista.add(new Cidade("","Propriá","SE"));
+        lista.add(new Cidade("","Riachão do Dantas","SE"));
+        lista.add(new Cidade("","Riachuelo","SE"));
+        lista.add(new Cidade("","Ribeirópolis","SE"));
+        lista.add(new Cidade("","Rosário do Catete","SE"));
+        lista.add(new Cidade("","Salgado","SE"));
+        lista.add(new Cidade("","Santa Luzia do Itanhy","SE"));
+        lista.add(new Cidade("","Santa Rosa de Lima","SE"));
+        lista.add(new Cidade("","Santana do São Francisco","SE"));
+        lista.add(new Cidade("","Santo Amaro das Brotas","SE"));
+        lista.add(new Cidade("","São Cristóvão","SE"));
+        lista.add(new Cidade("","São Domingos","SE"));
+        lista.add(new Cidade("","São Francisco","SE"));
+        lista.add(new Cidade("","São Miguel do Aleixo","SE"));
+        lista.add(new Cidade("","Simão Dias","SE"));
+        lista.add(new Cidade("","Siriri","SE"));
+        lista.add(new Cidade("","Telha","SE"));
+        lista.add(new Cidade("","Tobias Barreto","SE"));
+        lista.add(new Cidade("","Tomar do Geru","SE"));
+        lista.add(new Cidade("","Umbaúba","SE"));
+        return lista;
+    }
+}
