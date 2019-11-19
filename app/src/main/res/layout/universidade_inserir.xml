@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_universidade_nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Nome da universidade"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"></TextView>
+    <EditText
+        android:id="@+id/et_universidade_nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:singleLine="true"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"
+        android:maxLines="1"
+        android:imeOptions="actionDone"
+        android:nextFocusForward="@+id/sp_universidade_estado_nome"></EditText>
+
+    <TextView
+        android:id="@+id/tv_universidade_estado_nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Estado"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"></TextView>
+
+    <Spinner
+        android:id="@+id/sp_universidade_estado_nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"></Spinner>
+
+    <TextView
+        android:id="@+id/tv_universidade_cidade_nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Cidade"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"></TextView>
+
+    <Spinner
+        android:id="@+id/sp_universidade_cidade_nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        ></Spinner>
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/tv_universidade_coordenador"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginLeft="5dp"-->
+<!--        android:text="Coordenador"-->
+<!--        android:textColor="#000000"-->
+<!--        android:textSize="20dp"-->
+<!--        android:textStyle="normal"></TextView>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/sp_universidade_coordenador"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Selecione o coordenador"-->
+<!--        android:padding="10dp"-->
+<!--        android:textSize="16dp"-->
+<!--        android:textColor="#000000"-->
+<!--        ></TextView>-->
+
+    <TextView
+        android:id="@+id/tv_unidade_vinculada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Unidade vinculada"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"></TextView>
+
+    <Spinner
+        android:id="@+id/sp_universidade_unidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ></Spinner>
+
+
+    <Button
+        android:id="@+id/btn_inserirUniversidade"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/btn_finalizar"
+        android:text="Concluir"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="normal"></Button>
+</LinearLayout>

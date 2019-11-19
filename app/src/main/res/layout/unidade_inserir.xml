@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_unidade_Nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:text="Nome"
+        android:text="Nome da unidade"
         android:textColor="#000000"
         android:textSize="20dp"
         android:textStyle="normal"></TextView>
+
     <EditText
         android:id="@+id/et_unidadeNome"
         android:layout_width="match_parent"
@@ -21,7 +23,7 @@
         android:textColor="#000000"
         android:textSize="20dp"
         android:textStyle="normal"
-        ></EditText>
+        android:maxLines="1"></EditText>
 
     <TextView
         android:id="@+id/tv_unidade_tipo_nome"
@@ -32,11 +34,11 @@
         android:textColor="#000000"
         android:textSize="20dp"
         android:textStyle="normal"></TextView>
+
     <Spinner
         android:id="@+id/sp_unidadeTipo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-    ></Spinner>
+        android:layout_height="wrap_content"></Spinner>
 
     <TextView
         android:id="@+id/tv_estadoNome"
@@ -47,14 +49,14 @@
         android:textColor="#000000"
         android:textSize="20dp"
         android:textStyle="normal"></TextView>
+
     <Spinner
         android:id="@+id/sp_estadoNome"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ></Spinner>
+        android:layout_height="wrap_content"></Spinner>
 
     <TextView
-        android:id="@+id/tv_CidadeNome"
+        android:id="@+id/tv_cidadeNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
@@ -62,11 +64,30 @@
         android:textColor="#000000"
         android:textSize="20dp"
         android:textStyle="normal"></TextView>
-    <Spinner
-        android:id="@+id/sp_CidadeNome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ></Spinner>
+
+        <Spinner
+            android:id="@+id/sp_cidadeNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ></Spinner>
+
+<!--    <AutoCompleteTextView-->
+<!--        android:id="@+id/ac_cidadeNome"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:maxLines="1"-->
+<!--        android:bufferType="@null"/>-->
+
+<!--    <jrizani.jrspinner.JRSpinner-->
+<!--        android:id="@+id/sp_cidade"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:hint="@string/choose"-->
+<!--        android:textColor="@color/colorPrimary"-->
+<!--        app:backgroundTint="@color/colorPrimary"-->
+<!--        app:jrs_title="Cidade"-->
+<!--        app:jrs_icon_tint="@color/colorPrimary"-->
+<!--        app:jrs_multiple="true"/>-->
 
     <TextView
         android:id="@+id/tv_regiaoFiscal"
@@ -86,6 +107,8 @@
         android:singleLine="true"
         android:textColor="#000000"
         android:textSize="20dp"
+        android:inputType="number"
+        android:maxLines="1"
         android:textStyle="normal"></EditText>
 
     <Button

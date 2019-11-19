@@ -7,62 +7,74 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
+        <Button
+            android:id="@+id/btn_realizarAtendimento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textStyle="normal"
+            android:textSize="18dp"
+            android:textColor="@color/colorPrimary"
+            android:text="Iniciar atendimento"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/btn_cancelar"
+            />
+
     <Button
-        android:id="@+id/btn_inserirUnidade"
+        android:id="@+id/btn_unidadeManager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:textStyle="normal"
         android:textSize="18dp"
         android:textColor="@color/colorPrimary"
-        android:text="Inserir unidade"
+        android:text="Unidade"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/btn_cancelar"
+        android:layout_below="@+id/btn_realizarAtendimento"
+        />
+
+    <Button
+        android:id="@+id/btn_universidadeManager"
+        android:layout_below="@+id/btn_unidadeManager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textStyle="normal"
+        android:textSize="18dp"
+        android:textColor="@color/colorPrimary"
+        android:text="Universidade"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="@drawable/btn_cancelar"
         />
 
     <Button
-        android:id="@+id/btn_inserirUniversidade"
-        android:layout_above="@+id/btn_inserirUnidade"
+        android:id="@+id/btn_usuarioManager"
+        android:layout_below="@+id/btn_universidadeManager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:textStyle="normal"
         android:textSize="18dp"
         android:textColor="@color/colorPrimary"
-        android:text="Inserir Universidade"
+        android:text="Usuário"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="@drawable/btn_cancelar"
         />
 
     <Button
-        android:id="@+id/btn_inserirUsuario"
-        android:layout_above="@+id/btn_inserirUniversidade"
+        android:id="@+id/btn_acessoManager"
+        android:layout_below="@+id/btn_usuarioManager"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:textStyle="normal"
         android:textSize="18dp"
         android:textColor="@color/colorPrimary"
-        android:text="Inserir usuário"
+        android:text="Acesso"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/btn_cancelar"
-        />
-
-    <Button
-        android:id="@+id/btn_realizarAtendimento"
-        android:layout_above="@+id/btn_inserirUsuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:textStyle="normal"
-        android:textSize="18dp"
-        android:textColor="@color/colorPrimary"
-        android:text="Iniciar atendimento"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:background="@drawable/btn_cancelar"
         />
 

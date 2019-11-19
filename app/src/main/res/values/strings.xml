@@ -4,5 +4,7 @@
         <item>Superintendência</item>
         <item>Delegacia</item>
     </string-array>
+    <string name="dialog_ok">Confirmar</string>
+    <string name="dialog_cancel">Cancelar</string>
 
 </resources>

@@ -1,26 +1,19 @@
 package br.ufms.nafmanager.model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class Usuario  extends CustomObject{
     private String cpf;
     private String senha;
     private String nome;
     private String email;
     private String telefone;
-    private List<String> universidadesVinculadas;
-    private List<String> unidadesVinculadas;
-    private Map<String,Boolean> permissoes;
 
     public Usuario(){
         this.status = "rascunho";
-        this.unidadesVinculadas = new ArrayList<>();
-        this.universidadesVinculadas = new ArrayList<>();
-        this.permissoes = new HashMap<>();
-        this.permissoes.put("participante", true);
+    }
+
+    public Usuario(String id, String nome){
+        this.id = id;
+        this.nome = nome;
     }
 
     public String getCpf() {
@@ -63,21 +56,6 @@ public class Usuario  extends CustomObject{
         this.telefone = telefone;
     }
 
-    public List<String> getUniversidadesVinculadas() {
-        return universidadesVinculadas;
-    }
-
-    public void setUniversidadesVinculadas(List<String> universidadesVinculadas) {
-        this.universidadesVinculadas = universidadesVinculadas;
-    }
-
-    public List<String> getUnidadesVinculadas() {
-        return unidadesVinculadas;
-    }
-
-    public void setUnidadesVinculadas(List<String> unidadesVinculadas) {
-        this.unidadesVinculadas = unidadesVinculadas;
-    }
 
     @Override
     public boolean equals(Object obj){
@@ -86,4 +64,10 @@ public class Usuario  extends CustomObject{
 
         return false;
     }
+
+    @Override
+    public String toString(){
+        return nome;
+    }
+
 }

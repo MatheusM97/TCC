@@ -45,14 +45,14 @@
 
     <Spinner
         android:id="@+id/sp_atendido"
-        android:layout_below="@+id/tv_dtAtendimento"
+        android:layout_below="@+id/tv_dataAtendimentoView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         ></Spinner>
 
     <CheckBox
         android:id="@+id/ctv_atendimentoConclusivo"
-        android:layout_below="@+id/sp_unidadeTipo"
+        android:layout_below="@+id/sp_atendido"
         android:text="Atendimento foi conclusivo"
         android:textStyle="bold"
         android:textSize="22dp"

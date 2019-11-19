@@ -12,6 +12,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufms.nafmanager.model.Acesso;
 import br.ufms.nafmanager.model.Atendido;
 import br.ufms.nafmanager.model.Atendimento;
 import br.ufms.nafmanager.model.AtendimentoTipo;
@@ -20,24 +21,41 @@ import br.ufms.nafmanager.model.CustomObject;
 import br.ufms.nafmanager.model.Estado;
 import br.ufms.nafmanager.model.Unidade;
 import br.ufms.nafmanager.model.UnidadeTipo;
+import br.ufms.nafmanager.model.Universidade;
 import br.ufms.nafmanager.model.Usuario;
 
 public class Persistencia {
 
     private static Persistencia mInstance = null;
-    private int versao = 0;
+    private int versao = 1;
     private FirebaseFirestore firebaseFirestore;
     private List<UnidadeTipo> unidadeTipos;
     private List<Estado> estados;
     private List<AtendimentoTipo> atendimentos;
     private List<Atendido> atendidos;
+    private List<Cidade> cidades;
+    private List<Unidade> unidades;
+    private List<Usuario> usuarios;
+    private List<Universidade> universidades;
+    private Usuario usuarioLogado;
+    private List<Acesso> usuarioAcesso;
 
     protected Persistencia() {
         this.firebaseFirestore = FirebaseFirestore.getInstance();
         this.buscaVersao();
-        this.getUnidadesTipo();
-        this.getEstados();
+        if (this.versao == -1) {
+            this.inserirDadosDefault();
+        }
+        this.carregarUnidadesTipo();
+        this.carregaEstados();
         this.getAtendimentoTipoLocal();
+        this.carregaAtendidos();
+    }
+
+    public void inserirDadosDefault() {
+        insereEstados();
+        insereUnidadesTipo();
+        insereAtendidos();
     }
 
     public static synchronized Persistencia getInstance() {
@@ -53,18 +71,19 @@ public class Persistencia {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
+                    versao = 1;
                     try {
-                        versao = Integer.parseInt(task.getResult().getDocuments().get(0).getString("versao").toString());
+                        String vers = task.getResult().getDocuments().get(0).get("versao").toString();
+                        versao = Integer.parseInt(vers);
                     } catch (Exception e) {
-                        versao = 1;
                     }
                 }
             }
         });
     }
 
-    public void persistirSeNaoExistir(CustomObject obj){
-
+    public int getVersao() {
+        return versao;
     }
 
     public void persistirObjeto(CustomObject obj) {
@@ -80,6 +99,10 @@ public class Persistencia {
             colecao = "estado";
         else if (new Cidade().equals(obj))
             colecao = "cidade";
+        else if (new Universidade().equals(obj))
+            colecao = "universidade";
+        else if (new Acesso().equals(obj))
+            colecao = "acesso";
 
 
         if (colecao != null && colecao.length() > 0) {
@@ -93,49 +116,156 @@ public class Persistencia {
         }
     }
 
-    public List<Estado> getEstados() {
-        if (versao == -1) {//todo:versionalize
-            insereEstados();
-            getEstadosLocal();
-        } else if (versao == 0) {
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void carregaUsuarios() {
+        usuarios = new ArrayList<Usuario>();
+        firebaseFirestore.collection("usuario")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Usuario usr = (Usuario) document.toObject(Usuario.class);
+                        usuarios.add(usr);
+                    }
+                }
+            }
+        });
+    }
+
+    public List<Unidade> getUnidades() {
+        return unidades;
+    }
+
+    public void carregaCoordenadores() {
+//        todo: coordenadores nas universidades
+//        coordenadores = new ArrayList<>();
+//        firebaseFirestore.collection("acesso")
+//                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    for (QueryDocumentSnapshot document : task.getResult()) {
+//                        Usuario usr = document.toObject(Usuario.class);
+//                        if (usr.getCoordenador())
+//                            coordenadores.add(usr);
+//                    }
+//                }
+//            }
+//        });
+    }
+
+    public void carregaUnidades() {
+        this.unidades = new ArrayList<>();
+        firebaseFirestore.collection("unidade")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Unidade und = new Unidade();
+                        if (document.getString("id") != null)
+                            und.setId(document.getString("id"));
+                        if (document.getString("nome") != null)
+                            und.setNome(document.getString("nome"));
+                        if (document.getString("estadoId") != null)
+                            und.setEstadoId(document.getString("estadoId"));
+                        if (document.getString("estadoNome") != null)
+                            und.setEstadoNome(document.getString("estadoNome"));
+                        if (document.getString("estadoSigla") != null)
+                            und.setEstadoSigla(document.getString("estadoSigla"));
+                        und.setCidadeId(document.getString("cidadeId"));
+                        if (document.getString("cidadeNome") != null)
+                            und.setCidadeNome((document.getString("cidadeNome")));
+                        if (document.getLong("regiaoFiscal") != null)
+                            und.setRegiaoFiscal(Integer.parseInt(document.getLong("regiaoFiscal").toString()));
+                        if (document.getString("responsavelId") != null)
+                            und.setResponsavelId(document.getString("responsavelId"));
+                        if (document.getString("responsavelNome") != null)
+                            und.setResponsavelNome(document.getString("responsavelNome"));
+                        unidades.add(und);
+                    }
+                }
+            }
+        });
+    }
+
+    public void carregaAcessos(){
+        usuarioAcesso = new ArrayList<>();
+        if(usuarioLogado.getId() != null && !usuarioLogado.getId().isEmpty())
+        firebaseFirestore.collection("acesso").whereEqualTo("usuarioId", usuarioLogado.getId())
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Acesso acesso = (Acesso) document.toObject(Acesso.class);
+                        usuarioAcesso.add(acesso);
+                    }
+                }
+            }
+        });
+    }
+
+    public List<Acesso> getAcessos(){
+        return usuarioAcesso;
+    }
+
+    public void carregaEstados(){
+        if (versao == 0) {
             getEstadosLocal();
         } else {
             getEstadosBanco();
         }
-
+    }
+    public List<Estado> getEstados() {
         return estados;
     }
 
-    public List<UnidadeTipo> getUnidadesTipo() {
-        if (versao == -1) {//todo:versionalize
-            insereUnidadesTipo();
-            getUnidadesTipoLocal();
-        } else if (versao == 0) {
+    public void carregarUnidadesTipo(){
+        if (versao == 0) {
             getUnidadesTipoLocal();
         } else {
             getUnidadesTipoBanco();
         }
+    }
 
+    public List<UnidadeTipo> getUnidadesTipo() {
         return unidadeTipos;
     }
 
-    public List<Atendido> getAtendido() {
-        if (versao == -1) {//todo:versionalize
-            insereAtendidos();
-            getAtendidosLocal();
-        } else if (versao == 0) {
+    public void carregaAtendidos(){
+        if (versao == 0) {
             getAtendidosLocal();
         } else {
             getAtendidosBanco();
         }
+    }
 
+    public List<Atendido> getAtendido() {
         return atendidos;
+    }
+
+    public List<Cidade> getCidades(Estado est) {
+        if (versao == 0) {
+            cidades = getCidadesLocal(est);
+        } else {
+            getCidadesBanco(est);
+        }
+
+        return cidades;
     }
 
     private void insereEstados() {
         getEstadosLocal();
         for (Estado estado : estados) {
             this.persistirObjeto(estado);
+            for (Cidade cidade : this.getCidadesLocal(estado)) {
+                this.persistirObjeto(cidade);
+            }
         }
     }
 
@@ -153,7 +283,29 @@ public class Persistencia {
         }
     }
 
+    public void carregaUniversidades() {
+        universidades = new ArrayList<Universidade>();
+        firebaseFirestore.collection("universidade")
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        universidades.add(
+                                new Universidade(document.getString("id"),
+                                        document.getString("nome")));
+                    }
+                }
+            }
+        });
+    }
+
+    public List<Universidade> getUniversidades(){
+        return universidades;
+    }
+
     private void getEstadosBanco() {
+        estados = new ArrayList<>();
         firebaseFirestore.collection("estado")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -168,6 +320,7 @@ public class Persistencia {
     }
 
     private void getUnidadesTipoBanco() {
+        unidadeTipos = new ArrayList<>();
         firebaseFirestore.collection("unidade_tipo")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -182,6 +335,7 @@ public class Persistencia {
     }
 
     private void getAtendidosBanco() {
+        atendidos = new ArrayList<>();
         firebaseFirestore.collection("atendido")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -193,6 +347,43 @@ public class Persistencia {
                 }
             }
         });
+    }
+
+    private void getCidadesBanco(Estado estado) {
+        firebaseFirestore.collection("cidade").whereEqualTo("sigla", estado.getSigla())
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Cidade cd = (Cidade) document.toObject(Cidade.class);
+                        cidades.add(cd);
+                    }
+                }
+            }
+        });
+    }
+
+    public void getAutenticar(String usr, String psd) {
+        usuarioLogado = new Usuario();
+        firebaseFirestore.collection("usuario").whereEqualTo("cpf", usr).whereEqualTo("senha", psd)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        usuarioLogado = (Usuario) document.toObject(Usuario.class);
+                        break;
+                    }
+                    carregaAcessos();
+                }
+            }
+        });
+    }
+
+
+    public Usuario getUsuarioLogado() {
+        return usuarioLogado;
     }
 
     private void getUnidadesTipoLocal() {
@@ -216,12 +407,12 @@ public class Persistencia {
 
     private void getAtendidosLocal() {
         List<Atendido> lista = new ArrayList<Atendido>();
-        lista.add(new Atendido("","Pessoa Física"));
-        lista.add(new Atendido("","Microempreendedor Individual(MEI)"));
-        lista.add(new Atendido("","Microempresa optante pelo Simples Nacional"));
-        lista.add(new Atendido("","Empresa de Pequeno porte optante pelo Simples Nacional"));
-        lista.add(new Atendido("","Entidade sem fins lucrativos"));
-        lista.add(new Atendido("","Outro"));
+        lista.add(new Atendido("", "Pessoa Física"));
+        lista.add(new Atendido("", "Microempreendedor Individual(MEI)"));
+        lista.add(new Atendido("", "Microempresa optante pelo Simples Nacional"));
+        lista.add(new Atendido("", "Empresa de Pequeno porte optante pelo Simples Nacional"));
+        lista.add(new Atendido("", "Entidade sem fins lucrativos"));
+        lista.add(new Atendido("", "Outro"));
         this.atendidos = lista;
     }
 
@@ -258,34 +449,93 @@ public class Persistencia {
     }
 
 
-    public List<AtendimentoTipo> getAtendimentos(){
+    public List<AtendimentoTipo> getAtendimentos() {
         return this.atendimentos;
     }
 
-    public void getAtendimentoTipoLocal(){
+    public void getAtendimentoTipoLocal() {
         List<AtendimentoTipo> lista = new ArrayList<AtendimentoTipo>();
-        lista.add(new AtendimentoTipo("BFUw5tuJHZPmcKwb2u4f","Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF"));
-        lista.add(new AtendimentoTipo("m7pHX9YXcasc4NCnLF83","Auxílio à inscrição e Informações cadastrais de CPF"));
-        lista.add(new AtendimentoTipo("efE4yAzydBFpPYEOhP46","Auxílio à inscrição e Informações cadastrais do CNPJ"));
-        lista.add(new AtendimentoTipo("eX4ddhUEeVkcgS4gIuo8","Auxílio à emissão e informações sobre Certidões Negativas de Débitos PF e PJ"));
-        lista.add(new AtendimentoTipo("wbLxjD9kU0nQGTZEDfp4","Auxílio à consulta à situação fiscal"));
-        lista.add(new AtendimentoTipo("4oTugvnwxE17vcHsMzO8","Agendamento on-line de s na RFB"));
-        lista.add(new AtendimentoTipo("4oTugvnwxE17vcHsMzO8","Informações e auxílio à regularização de CPF Suspenso"));
-        lista.add(new AtendimentoTipo("67zNThARxUzayOvgiIjP","Informações e auxílio à elaboração de pedido de isenção de IRPF para portadores de moléstias graves"));
-        lista.add(new AtendimentoTipo("EkOhufIPvpQDGn1U1y6S","Orientações e auxílio à elaboração de pedidos de isenção de IPI/IOF na compra de veículos por portadores de deficiência física, mental ou visual"));
-        lista.add(new AtendimentoTipo("NBHGbyhivHfcLWwsktO4","Auxílio à apresentação de pedidos de restituição de pagamentos indevidos e/ou a maior (Perdcomps)"));
-        lista.add(new AtendimentoTipo("UGkGSdR3iEyVjSROTESN","Informações gerais sobre ITR"));
-        lista.add(new AtendimentoTipo("4oxpvKyIdjBR3nDhqlZV","Auxílio à inscrição e Informações gerais sobre o Microempreendedor Individual"));
-        lista.add(new AtendimentoTipo("TfLRF8xnMWjzmw0FhJmH","Auxílio à inscrição e Informações gerais sobre o Simples Nacional"));
-        lista.add(new AtendimentoTipo("ltqhMsqYa3rJc7JAUs9N","Auxílio à inscrição e informações cadastrais da matrícula CEI"));
-        lista.add(new AtendimentoTipo("fBW0Bx1hZj9tl1gZDAgM","Informações e auxílio no eSocial do empregador doméstico"));
-        lista.add(new AtendimentoTipo("ajnGAJAHNFmWbhdgKFBQ","Auxílio à emissão e informações sobre guias para o recolhimento da contribuição previdenciária de Produtores Rurais Pessoa Física, Segurado Especial, Contribuinte Individual e obras de pessoas físicas"));
-        lista.add(new AtendimentoTipo("XMKtd0V5fIn31P5MD63x","Orientações e auxílio ao cumprimento de obrigações tributárias acessórias para associações e demais entidades sem fins lucrativos"));
-        lista.add(new AtendimentoTipo("aQQlvMIceikWdV3gjx2X","Informações e auxilio para a obtenção de Certificado Digital"));
-        lista.add(new AtendimentoTipo("uw72qLtG2q8iYSRNVrCS","Informações e auxilio para realizar a opção pelo Domicílio Tributário Eletrônico - DTE"));
-        lista.add(new AtendimentoTipo("IWoDGO6nZEBju6LHVj8K","Auxílio à habilitação nos sistemas RADAR e Siscomex"));
-        lista.add(new AtendimentoTipo("AiEwDKQQvGhp2dXPwNkm","Informações sobre regras de importação e exportação através dos Correios"));
-        lista.add(new AtendimentoTipo("xGYylzx84CdVzI6duIHy","Informações sobre Regras de Bagagem"));
+        lista.add(new AtendimentoTipo("BFUw5tuJHZPmcKwb2u4f", "Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF"));
+        lista.add(new AtendimentoTipo("m7pHX9YXcasc4NCnLF83", "Auxílio à inscrição e Informações cadastrais de CPF"));
+        lista.add(new AtendimentoTipo("efE4yAzydBFpPYEOhP46", "Auxílio à inscrição e Informações cadastrais do CNPJ"));
+        lista.add(new AtendimentoTipo("eX4ddhUEeVkcgS4gIuo8", "Auxílio à emissão e informações sobre Certidões Negativas de Débitos PF e PJ"));
+        lista.add(new AtendimentoTipo("wbLxjD9kU0nQGTZEDfp4", "Auxílio à consulta à situação fiscal"));
+        lista.add(new AtendimentoTipo("4oTugvnwxE17vcHsMzO8", "Agendamento on-line de s na RFB"));
+        lista.add(new AtendimentoTipo("4oTugvnwxE17vcHsMzO8", "Informações e auxílio à regularização de CPF Suspenso"));
+        lista.add(new AtendimentoTipo("67zNThARxUzayOvgiIjP", "Informações e auxílio à elaboração de pedido de isenção de IRPF para portadores de moléstias graves"));
+        lista.add(new AtendimentoTipo("EkOhufIPvpQDGn1U1y6S", "Orientações e auxílio à elaboração de pedidos de isenção de IPI/IOF na compra de veículos por portadores de deficiência física, mental ou visual"));
+        lista.add(new AtendimentoTipo("NBHGbyhivHfcLWwsktO4", "Auxílio à apresentação de pedidos de restituição de pagamentos indevidos e/ou a maior (Perdcomps)"));
+        lista.add(new AtendimentoTipo("UGkGSdR3iEyVjSROTESN", "Informações gerais sobre ITR"));
+        lista.add(new AtendimentoTipo("4oxpvKyIdjBR3nDhqlZV", "Auxílio à inscrição e Informações gerais sobre o Microempreendedor Individual"));
+        lista.add(new AtendimentoTipo("TfLRF8xnMWjzmw0FhJmH", "Auxílio à inscrição e Informações gerais sobre o Simples Nacional"));
+        lista.add(new AtendimentoTipo("ltqhMsqYa3rJc7JAUs9N", "Auxílio à inscrição e informações cadastrais da matrícula CEI"));
+        lista.add(new AtendimentoTipo("fBW0Bx1hZj9tl1gZDAgM", "Informações e auxílio no eSocial do empregador doméstico"));
+        lista.add(new AtendimentoTipo("ajnGAJAHNFmWbhdgKFBQ", "Auxílio à emissão e informações sobre guias para o recolhimento da contribuição previdenciária de Produtores Rurais Pessoa Física, Segurado Especial, Contribuinte Individual e obras de pessoas físicas"));
+        lista.add(new AtendimentoTipo("XMKtd0V5fIn31P5MD63x", "Orientações e auxílio ao cumprimento de obrigações tributárias acessórias para associações e demais entidades sem fins lucrativos"));
+        lista.add(new AtendimentoTipo("aQQlvMIceikWdV3gjx2X", "Informações e auxilio para a obtenção de Certificado Digital"));
+        lista.add(new AtendimentoTipo("uw72qLtG2q8iYSRNVrCS", "Informações e auxilio para realizar a opção pelo Domicílio Tributário Eletrônico - DTE"));
+        lista.add(new AtendimentoTipo("IWoDGO6nZEBju6LHVj8K", "Auxílio à habilitação nos sistemas RADAR e Siscomex"));
+        lista.add(new AtendimentoTipo("AiEwDKQQvGhp2dXPwNkm", "Informações sobre regras de importação e exportação através dos Correios"));
+        lista.add(new AtendimentoTipo("xGYylzx84CdVzI6duIHy", "Informações sobre Regras de Bagagem"));
         this.atendimentos = lista;
+    }
+
+    public List<Cidade> getCidadesLocal(Estado estado) {
+        if ("AC".equals(estado.getSigla())) {
+            return AC.getCidades();
+        } else if ("AL".equals(estado.getSigla())) {
+            return AL.getCidades();
+        } else if ("AM".equals(estado.getSigla())) {
+            return AM.getCidades();
+        } else if ("AP".equals(estado.getSigla())) {
+            return AP.getCidades();
+        } else if ("BA".equals(estado.getSigla())) {
+            return BA.getCidades();
+        } else if ("CE".equals(estado.getSigla())) {
+            return CE.getCidades();
+        } else if ("DF".equals(estado.getSigla())) {
+            return DF.getCidades();
+        } else if ("ES".equals(estado.getSigla())) {
+            return ES.getCidades();
+        } else if ("GO".equals(estado.getSigla())) {
+            return GO.getCidades();
+        } else if ("MA".equals(estado.getSigla())) {
+            return MA.getCidades();
+        } else if ("MG".equals(estado.getSigla())) {
+            return MG.getCidades();
+        } else if ("MS".equals(estado.getSigla())) {
+            return MS.getCidades();
+        } else if ("MT".equals(estado.getSigla())) {
+            return MT.getCidades();
+        } else if ("PA".equals(estado.getSigla())) {
+            return PA.getCidades();
+        } else if ("PB".equals(estado.getSigla())) {
+            return PB.getCidades();
+        } else if ("PE".equals(estado.getSigla())) {
+            return PE.getCidades();
+        } else if ("PI".equals(estado.getSigla())) {
+            return PI.getCidades();
+        } else if ("PR".equals(estado.getSigla())) {
+            return PR.getCidades();
+        } else if ("RJ".equals(estado.getSigla())) {
+            return RJ.getCidades();
+        } else if ("RN".equals(estado.getSigla())) {
+            return RN.getCidades();
+        } else if ("RO".equals(estado.getSigla())) {
+            return RO.getCidades();
+        } else if ("RR".equals(estado.getSigla())) {
+            return RR.getCidades();
+        } else if ("RS".equals(estado.getSigla())) {
+            return RS.getCidades();
+        } else if ("SC".equals(estado.getSigla())) {
+            return SC.getCidades();
+        } else if ("SE".equals(estado.getSigla())) {
+            return SE.getCidades();
+        } else if ("SP".equals(estado.getSigla())) {
+            return SP.getCidades();
+        } else if ("TO".equals(estado.getSigla())) {
+            return TO.getCidades();
+        }
+        return null;
     }
 }

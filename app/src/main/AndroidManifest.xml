@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,9 +18,17 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".activities.MainActivity"/>
         <activity android:name=".activities.AtendimentoActivity"/>
-        <activity android:name=".activities.UsuarioActivity"/>
-        <activity android:name=".activities.UnidadeActivity"/>
+        <activity android:name=".activities.UsuarioManager"/>
+        <activity android:name=".activities.UnidadeManager"/>
+        <activity android:name=".activities.UniversidadeManager"/>
+        <activity android:name=".activities.UnidadeInserir"/>
+        <activity android:name=".activities.UniversidadeInserir"/>
+        <activity android:name=".activities.UsuarioInserir"/>
+        <activity android:name=".activities.AcessoManager"/>
+        <activity android:name=".activities.AcessoInserir"/>
+        <activity android:name=".activities.AcessoVincular"/>
 
     </application>
 

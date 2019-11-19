@@ -13,6 +13,14 @@ public class Unidade extends CustomObject {
     private String estadoSigla;
     private int regiaoFiscal;
 
+    public Unidade(){super();}
+
+    public Unidade(String id, String nome){
+        super();
+        this.id = id;
+        this.nome = nome;
+    }
+
     public String getNome() {
         return nome;
     }
