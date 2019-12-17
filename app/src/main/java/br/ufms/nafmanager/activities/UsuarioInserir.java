@@ -46,8 +46,8 @@ public class UsuarioInserir extends AppCompatActivity {
 
         this.spinnerUnv = (Spinner) findViewById(R.id.sp_usuario_universidade);
         this.universidadeLista = new ArrayList<Universidade>();
-        this.universidadeLista.add(new Universidade("","Selecione"));
-        for(Universidade unv : Persistencia.getInstance().getUniversidades()){
+        this.universidadeLista.add(new Universidade("", "Selecione"));
+        for (Universidade unv : Persistencia.getInstance().getUniversidades()) {
             this.universidadeLista.add(unv);
         }
 
@@ -66,33 +66,70 @@ public class UsuarioInserir extends AppCompatActivity {
 
     public void inserirUsuario() {
         Usuario usuario = new Usuario();
-        usuario.setCpf(this.usuarioCpf.getText().toString());
-        usuario.setSenha(this.usuarioSenha.getText().toString());
-        usuario.setNome(this.usuarioNome.getText().toString());
-        usuario.setEmail(this.usuarioEmail.getText().toString());
-        usuario.setTelefone(this.usuarioTelefone.getText().toString());
-
-        Persistencia.getInstance().persistirObjeto(usuario);
-        if (usuario.getId() != null && usuario.getId().length() > 0) {
-            if (spinnerUnv.getSelectedItem() != null && spinnerUnv.getSelectedItem().toString().length() > 0
-                    && !((Universidade) spinnerUnv.getSelectedItem()).getId().isEmpty()) {
-                Universidade univ;
-                univ = (Universidade) spinnerUnv.getSelectedItem();
-                Acesso acesso = new Acesso(usuario.getId(), usuario.getNome(), univ.getId(), univ.getNome());
-                acesso.setUnidadeId(univ.getUnidadeId());
-                acesso.setUnidadeNome(univ.getUnidadeNome());
-                acesso.setParticipante(true);
-                acesso.setStatus("rascunho");
-                Persistencia.getInstance().persistirObjeto(acesso);
-                if (acesso.getId() != null && acesso.getId().length() > 0) {
-                    Toast.makeText(this, "Usuário cadastrado!", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(this, "Usuário salvo, porém acesso não pode ser definido", Toast.LENGTH_LONG);
-            }
-            this.finish();
-        } else {
-            Toast.makeText(this, "Não foi possível cadastrar!", Toast.LENGTH_SHORT).show();
+        if (this.usuarioCpf.getText() != null && this.usuarioCpf.getText().length() > 0) {
+            usuario.setCpf(this.usuarioCpf.getText().toString());
         }
+
+        if (this.usuarioSenha.getText() != null && this.usuarioSenha.getText().length() > 0) {
+            usuario.setSenha(this.usuarioSenha.getText().toString());
+        }
+
+        if (this.usuarioNome.getText() != null && this.usuarioNome.getText().length() > 0) {
+            usuario.setNome(this.usuarioNome.getText().toString());
+        }
+
+        if (this.usuarioEmail.getText() != null && this.usuarioEmail.getText().length() > 0) {
+            usuario.setEmail(this.usuarioEmail.getText().toString());
+        }
+
+        if (this.usuarioTelefone.getText() != null && this.usuarioTelefone.getText().length() > 0) {
+            usuario.setTelefone(this.usuarioTelefone.getText().toString());
+        }
+
+        if (validar(usuario)) {
+            Persistencia.getInstance().persistirObjeto(usuario);
+            if (usuario.getId() != null && usuario.getId().length() > 0) {
+                if (spinnerUnv.getSelectedItem() != null && spinnerUnv.getSelectedItem().toString().length() > 0
+                        && !((Universidade) spinnerUnv.getSelectedItem()).getId().isEmpty()) {
+                    Universidade univ;
+                    univ = (Universidade) spinnerUnv.getSelectedItem();
+                    Acesso acesso = new Acesso(usuario.getId(), usuario.getNome(), univ.getId(), univ.getNome());
+                    acesso.setUnidadeId(univ.getUnidadeId());
+                    acesso.setUnidadeNome(univ.getUnidadeNome());
+                    acesso.setParticipante(true);
+                    acesso.setStatus("rascunho");
+                    Persistencia.getInstance().persistirObjeto(acesso);
+                    if (acesso.getId() != null && acesso.getId().length() > 0) {
+                        Toast.makeText(this, "Usuário cadastrado!", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(this, "Usuário salvo, porém acesso não pode ser definido", Toast.LENGTH_LONG);
+                }
+                this.finish();
+            } else {
+                Toast.makeText(this, "Não foi possível cadastrar!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private boolean validar(Usuario usuario) {
+
+        if (usuario.getCpf() == null || usuario.getCpf().length() <= 0) {
+            Toast.makeText(this, "É necessário informar o CPF", Toast.LENGTH_SHORT);
+            return false;
+        }
+
+        if (usuario.getSenha() == null || usuario.getSenha().length() <= 0) {
+            Toast.makeText(this, "É necessário informar a senha", Toast.LENGTH_SHORT);
+            return false;
+        }
+
+        if (usuario.getNome() == null || usuario.getNome().length() <= 0) {
+            Toast.makeText(this, "É necessário informar o nome", Toast.LENGTH_SHORT);
+            return false;
+        }
+
+
+        return true;
     }
 }

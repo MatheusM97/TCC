@@ -8,7 +8,6 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import br.ufms.nafmanager.R;
-import br.ufms.nafmanager.persistencies.Persistencia;
 
 public class AcessoManager extends AppCompatActivity {
 
@@ -18,11 +17,9 @@ public class AcessoManager extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Persistencia.getInstance();
         setContentView(R.layout.acesso_manager);
-
         btn_inserirAcesso = (Button) findViewById(R.id.btn_inserirAcesso);
-        btn_vincularAcesso = (Button) findViewById(R.id.btn_vincularAcesso);
+        btn_vincularAcesso = (Button) findViewById(R.id.btn_editar_acesso);
 
         btn_inserirAcesso.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -34,7 +31,7 @@ public class AcessoManager extends AppCompatActivity {
         btn_vincularAcesso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iniciarTelas(new AcessoVincular());
+                iniciarTelas(new AcessoEditar());
             }
         });
     }

@@ -3,6 +3,8 @@ package br.ufms.nafmanager.model;
 public class Atendido extends CustomObject {
     private String nome;
 
+    public Atendido(){}
+
     public Atendido(String id, String nome){
         this.id = id;
         this.nome = nome;

@@ -7,18 +7,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -27,16 +21,17 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import br.ufms.nafmanager.R;
+import br.ufms.nafmanager.model.Atendido;
 import br.ufms.nafmanager.model.Atendimento;
 import br.ufms.nafmanager.model.AtendimentoTipo;
 import br.ufms.nafmanager.persistencies.Persistencia;
 
-public class AtendimentoActivity extends AppCompatActivity{
+public class AtendimentoActivity extends AppCompatActivity {
 
     //variáveis inicio
 
-    private String usuarioLogadoId = "";
-    private String usuarioLogadoNome = "";
+    private String usuarioId = "";
+    private String usuarioNome = "";
     private String universidadeId = "";
     private String universidadeNome = "";
     private String unidadeId = "";
@@ -56,29 +51,30 @@ public class AtendimentoActivity extends AppCompatActivity{
     private CheckBox atendimentoConclusivo;
     private ListView lvAtendimentoTipo;
     private Button btnFinalizarAtendimento;
-    private Button btnCancelarAtendimento;
 
     private SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
 
-    private FirebaseFirestore firebaseFirestore;
     private Date dataInicioAtendimento;
 
     private List<AtendimentoTipo> atendimentoTipoLista = new ArrayList<AtendimentoTipo>();
     private ArrayAdapter<AtendimentoTipo> atendimentoTipoAdapter;
     private ArrayList<String> atendimentosIds;
+    private List<Atendido> atendidoList;
+    private Spinner spnAtendido;
     //variáveis fim
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            if (extras.getString("usuarioLogadoId") != null)
-                this.usuarioLogadoId = extras.getString("usuarioLogadoId");
 
-            if (extras.getString("usuarioLogadoNome") != null)
-                this.usuarioLogadoNome = extras.getString("usuarioLogadoNome");
+        if (extras != null) {
+            if (extras.getString("usuarioId") != null)
+                this.usuarioId = extras.getString("usuarioId");
+
+            if (extras.getString("usuarioNome") != null)
+                this.usuarioNome = extras.getString("usuarioNome");
 
             if (extras.getString("universidadeId") != null)
                 this.universidadeId = extras.getString("universidadeId");
@@ -97,6 +93,12 @@ public class AtendimentoActivity extends AppCompatActivity{
         lvAtendimentoTipo = (ListView) findViewById(R.id.lv_atendimento_tipo);
         btnFinalizarAtendimento = (Button) findViewById(R.id.btn_finalizarAtendimento);
         atendimentoConclusivo = (CheckBox) findViewById(R.id.ctv_atendimentoConclusivo);
+        spnAtendido = (Spinner) findViewById(R.id.sp_atendido);
+        atendidoList = Persistencia.getInstance().getAtendido();
+
+        ArrayAdapter<Atendido> atendidoAdapter = new ArrayAdapter<Atendido>(this, android.R.layout.simple_spinner_dropdown_item, atendidoList);
+        atendidoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnAtendido.setAdapter(atendidoAdapter);
 
         atendimentosIds = new ArrayList<>();
         this.dataInicioAtendimento = new Date();
@@ -107,9 +109,7 @@ public class AtendimentoActivity extends AppCompatActivity{
             }
         });
         carregarAtendimentoTipoLocal();
-        instanciarDados();
         instanciarDataInicial();
-//        carregarAtendimentoTipo();
         iniciarCronometroAtendimento();
     }
 
@@ -139,26 +139,22 @@ public class AtendimentoActivity extends AppCompatActivity{
         this.tempoInicioAtendimento = new Date();
     }
 
-    private void carregarAtendimentoTipo() {
-        firebaseFirestore.collection("atendimento_tipo")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                AtendimentoTipo atendimentoTipo = document.toObject(AtendimentoTipo.class);
-                                atendimentoTipo.setId(document.getId());
-                                atendimentoTipoLista.add(atendimentoTipo);
-                            }
-                        }
-                    }
-                });
-    }
-
-    private void instanciarDados() {
-        firebaseFirestore = FirebaseFirestore.getInstance();
-    }
+//    private void carregarAtendimentoTipo() {
+//        firebaseFirestore.collection("atendimento_tipo")
+//                .get()
+//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                        if (task.isSuccessful()) {
+//                            for (QueryDocumentSnapshot document : task.getResult()) {
+//                                AtendimentoTipo atendimentoTipo = document.toObject(AtendimentoTipo.class);
+//                                atendimentoTipo.setId(document.getId());
+//                                atendimentoTipoLista.add(atendimentoTipo);
+//                            }
+//                        }
+//                    }
+//                });
+//    }
 
     private void inserirAtendimento(ArrayList<String> atendimentosIds) {
         if (this.atendimentosIds != null && this.atendimentosIds.size() > 0) {
@@ -173,12 +169,25 @@ public class AtendimentoActivity extends AppCompatActivity{
             atendimento.setDataAtendimento(dataAtendimento);
             atendimento.setTempoAtendimento(this.getTempoDeAtendimento());
             atendimento.setAtendimentoConclusivo(this.atendimentoConclusivo.isChecked());
-            if (this.usuarioLogadoId != null && this.usuarioLogadoId.length() > 0)
-                atendimento.setUsuarioId(this.usuarioLogadoId);
+            if (this.usuarioId != null && this.usuarioId.length() > 0)
+                atendimento.setUsuarioId(this.usuarioId);
+            if (this.usuarioNome != null && this.usuarioNome.length() > 0)
+                atendimento.setUsuarioNome(this.usuarioNome);
             if (this.unidadeId != null && this.unidadeId.length() > 0)
                 atendimento.setUnidadeId(this.unidadeId);
+            if (this.unidadeNome != null && this.unidadeNome.length() > 0)
+                atendimento.setUnidadeNome(this.unidadeNome);
             if (this.universidadeId != null && this.universidadeId.length() > 0)
                 atendimento.setUniversidadeId(this.universidadeId);
+            if (this.universidadeNome != null && this.universidadeNome.length() > 0)
+                atendimento.setUniversidadeNome(this.universidadeNome);
+
+            if(spnAtendido.getSelectedItem() != null && spnAtendido.getSelectedItem().toString().length() > 0){
+                Atendido at = (Atendido) spnAtendido.getSelectedItem();
+                atendimento.setAtendidoId(at.getId());
+                atendimento.setAtendidoNome(at.getNome());
+            }
+
             atendimento.setAtendimentoTipo(atendimentosIds);
 
             Persistencia.getInstance().persistirObjeto(atendimento);
@@ -213,7 +222,6 @@ public class AtendimentoActivity extends AppCompatActivity{
         this.finish();
     }
 
-
     private void instanciarDataInicial() {
         this.tvDataAtendimento = (TextView) findViewById(R.id.tv_dataAtendimentoView);
         this.lbDataAtendimento = (TextView) findViewById(R.id.tv_dtAtendimento);
@@ -238,13 +246,11 @@ public class AtendimentoActivity extends AppCompatActivity{
     }
 
     public void showDatePicker(int q) {
-        if(q == 0){
-            DialogFragment newFragment = new CustomDatePickerFragment(this.tvDataAtendimento, this.tvHoraAtendimento,0);
+        if (q == 0) {
+            DialogFragment newFragment = new CustomDatePickerFragment(this.tvDataAtendimento, this.tvHoraAtendimento, 0);
             newFragment.show(getSupportFragmentManager(), "date picker");
-        }
-
-        else{
-            DialogFragment newFragment = new CustomDatePickerFragment(this.tvDataAtendimento, this.tvHoraAtendimento,1);
+        } else {
+            DialogFragment newFragment = new CustomDatePickerFragment(this.tvDataAtendimento, this.tvHoraAtendimento, 1);
             newFragment.show(getSupportFragmentManager(), "time picker");
         }
     }

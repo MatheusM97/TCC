@@ -26,9 +26,9 @@
 
     <CheckBox
         android:id="@+id/cb_acesso_participante"
-        android:layout_below="@+id/sp_acesso_usuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/sp_acesso_usuario"
         android:button="@null"
         android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
         android:gravity="center_vertical"
@@ -41,9 +41,9 @@
 
     <CheckBox
         android:id="@+id/cb_acesso_supervisor"
-        android:layout_below="@+id/cb_acesso_participante"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/cb_acesso_participante"
         android:button="@null"
         android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
         android:gravity="center_vertical"
@@ -56,9 +56,9 @@
 
     <CheckBox
         android:id="@+id/cb_acesso_coordenador"
-        android:layout_below="@+id/cb_acesso_supervisor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/cb_acesso_supervisor"
         android:button="@null"
         android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
         android:gravity="center_vertical"
@@ -71,9 +71,9 @@
 
     <CheckBox
         android:id="@+id/cb_acesso_representante"
-        android:layout_below="@+id/cb_acesso_coordenador"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/cb_acesso_coordenador"
         android:button="@null"
         android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
         android:gravity="center_vertical"
@@ -86,15 +86,15 @@
 
     <Space
         android:id="@+id/spc_acesso"
-        android:layout_below="@+id/cb_acesso_representante"
         android:layout_width="wrap_content"
-        android:layout_height="5dp"/>
+        android:layout_height="5dp"
+        android:layout_below="@+id/cb_acesso_representante" />
 
     <TextView
         android:id="@+id/tv_acesso_universidade"
-        android:layout_below="@+id/spc_acesso"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/spc_acesso"
         android:layout_marginLeft="5dp"
         android:layout_marginTop="10dp"
         android:text="Universidade"
@@ -132,15 +132,13 @@
         android:id="@+id/btn_acesso_inserir"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_margin="5dp"
         android:background="@drawable/btn_finalizar"
         android:gravity="center"
         android:text="Concluir"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
-        android:layout_alignParentBottom="true"
         android:textStyle="normal"></Button>
 
 </RelativeLayout>
-
-

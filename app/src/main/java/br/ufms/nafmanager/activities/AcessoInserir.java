@@ -53,7 +53,8 @@ public class AcessoInserir extends AppCompatActivity {
 
         universidadeLista = new ArrayList<Universidade>();
         universidadeLista.add(new Universidade("", "Selecione"));
-        for (Universidade unv : Persistencia.getInstance().getUniversidades()) {
+        List<Universidade> unvBanco =  Persistencia.getInstance().getUniversidades();
+        for (Universidade unv : unvBanco) {
             this.universidadeLista.add(unv);
         }
 
@@ -63,7 +64,8 @@ public class AcessoInserir extends AppCompatActivity {
 
         usuarioLista = new ArrayList<Usuario>();
         usuarioLista.add(new Usuario("", "Selecione"));
-        for (Usuario uns : Persistencia.getInstance().getUsuarios()) {
+        List<Usuario> usrBanco =  Persistencia.getInstance().getUsuarios();
+        for (Usuario uns :usrBanco) {
             this.usuarioLista.add(uns);
         }
 
@@ -118,6 +120,16 @@ public class AcessoInserir extends AppCompatActivity {
                         Universidade uni = (Universidade) spnUniversidade.getSelectedItem();
                         acesso.setUniversidadeId(uni.getId());
                         acesso.setUniversidadeNome(uni.getNome());
+                        acesso.setUnidadeId(uni.getUnidadeId());
+                        acesso.setUnidadeNome(uni.getUnidadeNome());
+                    }
+
+                    if(spnUnidade.getSelectedItem() != null){
+                        Unidade unid = (Unidade) spnUnidade.getSelectedItem();
+                        if(unid.getId() != null && unid.getId().length() > 0){
+                            acesso.setUnidadeId(unid.getId());
+                            acesso.setUnidadeNome(unid.getNome());
+                        }
                     }
 
                     acesso.setParticipante(cbParticipante.isChecked());
@@ -153,7 +165,7 @@ public class AcessoInserir extends AppCompatActivity {
             return false;
         }
 
-        if (acesso.isCoordenador() || acesso.isParticipante() || acesso.isSupervisor() && (acesso.getUniversidadeId() == null || acesso.getUniversidadeId().length() <= 0)) {
+        if ((acesso.isCoordenador() || acesso.isParticipante() || acesso.isSupervisor() )&& (acesso.getUniversidadeId() == null || acesso.getUniversidadeId().length() <= 0)) {
             Toast.makeText(this, "É necessário informar a universidade", Toast.LENGTH_SHORT).show();
             return false;
         }

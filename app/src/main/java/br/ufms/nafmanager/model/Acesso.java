@@ -112,7 +112,7 @@ public class Acesso extends CustomObject {
 
     @Override
     public String toString(){
-        return usuarioNome;
+        return (universidadeNome != null && universidadeNome.length() >0 )?universidadeNome: unidadeNome;
     }
 
     @Override

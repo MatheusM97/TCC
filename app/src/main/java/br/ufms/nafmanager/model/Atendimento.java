@@ -11,9 +11,14 @@ public class Atendimento extends CustomObject {
     private String tempoAtendimento;
     private Boolean atendimentoConclusivo;
     private ArrayList<String> atendimentoTipo;
+    private String atendidoId;
+    private String atendidoNome;
 
     private String usuarioId;
+    private String usuarioNome;
     private String universidadeId;
+    private String universidadeNome;
+    private String unidadeNome;
     private String unidadeId;
 
     public Atendimento(){}
@@ -75,6 +80,46 @@ public class Atendimento extends CustomObject {
 
     public void setUnidadeId(String unidadeId) {
         this.unidadeId = unidadeId;
+    }
+
+    public String getAtendidoId() {
+        return atendidoId;
+    }
+
+    public void setAtendidoId(String atendidoId) {
+        this.atendidoId = atendidoId;
+    }
+
+    public String getAtendidoNome() {
+        return atendidoNome;
+    }
+
+    public void setAtendidoNome(String atendidoNome) {
+        this.atendidoNome = atendidoNome;
+    }
+
+    public String getUsuarioNome() {
+        return usuarioNome;
+    }
+
+    public void setUsuarioNome(String usuarioNome) {
+        this.usuarioNome = usuarioNome;
+    }
+
+    public String getUniversidadeNome() {
+        return universidadeNome;
+    }
+
+    public void setUniversidadeNome(String universidadeNome) {
+        this.universidadeNome = universidadeNome;
+    }
+
+    public String getUnidadeNome() {
+        return unidadeNome;
+    }
+
+    public void setUnidadeNome(String unidadeNome) {
+        this.unidadeNome = unidadeNome;
     }
 
     @Override

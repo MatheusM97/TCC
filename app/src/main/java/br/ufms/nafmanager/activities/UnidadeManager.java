@@ -13,7 +13,6 @@ public class UnidadeManager extends AppCompatActivity {
 
     private TextView btn_inserirUnidade;
 
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.unidade_manager);
