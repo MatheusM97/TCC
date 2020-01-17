@@ -3,7 +3,7 @@ package br.ufms.nafmanager.model;
 public class Atendido extends CustomObject {
     private String nome;
 
-    public Atendido(){}
+    public Atendido(){super();}
 
     public Atendido(String id, String nome){
         this.id = id;
@@ -29,5 +29,15 @@ public class Atendido extends CustomObject {
     @Override
     public String toString(){
         return nome;
+    }
+
+    @Override
+    public boolean validar() {
+        return true;
+    }
+
+    @Override
+    public boolean validarRemocao() {
+        return true;
     }
 }

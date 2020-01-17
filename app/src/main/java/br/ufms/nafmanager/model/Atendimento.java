@@ -129,4 +129,14 @@ public class Atendimento extends CustomObject {
 
         return false;
     }
+
+    @Override
+    public boolean validar() {
+        return true;
+    }
+
+    @Override
+    public boolean validarRemocao() {
+        return true;
+    }
 }

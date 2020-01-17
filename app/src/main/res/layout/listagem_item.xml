@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/et_listagemTitulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:padding="2dp"
+            android:text="NOME DO ITEM"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#4d4d4d"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/et_listagemSubstitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Subtitulo"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+
+<!--    <ImageView-->
+<!--        android:id="@+id/btn_listagemRemover"-->
+<!--        android:src="@drawable/delete2"-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:padding="5dp" />-->
+</RelativeLayout>

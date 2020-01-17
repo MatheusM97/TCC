@@ -8,12 +8,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import br.ufms.nafmanager.R;
+import br.ufms.nafmanager.activities.regiao.RegiaoPrincipal;
+import br.ufms.nafmanager.activities.unidade.UnidadePrincipal;
+import br.ufms.nafmanager.activities.universidade.UniversidadePrincipal;
+import br.ufms.nafmanager.activities.usuario.UsuarioPrincipal;
 import br.ufms.nafmanager.model.Acesso;
 import br.ufms.nafmanager.persistencies.Persistencia;
 
 public class MainActivity extends AppCompatActivity {
-
-    //variáveis inicio
 
     private String usuarioId;
     private String usuarioNome;
@@ -23,11 +25,12 @@ public class MainActivity extends AppCompatActivity {
     private String universidadeNome;
     private String acessoId;
 
+    private TextView btn_regiaoManager;
     private TextView btn_unidadeManager;
     private TextView btn_usuarioManager;
     private TextView btn_universidadeManager;
-    private TextView btn_iniciarAtendimento;
-    private TextView btn_acessoManager;
+//    private TextView btn_iniciarAtendimento;
+//    private TextView btn_acessoManager;
     private Acesso acessoAtual;
 
     @Override
@@ -58,17 +61,17 @@ public class MainActivity extends AppCompatActivity {
                 this.unidadeNome = extras.getString("unidadeNome");
         }
 
-        acessoAtual = new Acesso();
-        acessoAtual = Persistencia.getInstance().getAcessoAtual();
+//        acessoAtual = new Acesso();
+//        acessoAtual = Persistencia.getInstance().getAcessoAtual();
 
-        Persistencia.getInstance().carregaUnidades();
         Persistencia.getInstance().carregaAtendidos();
+
 
         btn_unidadeManager = (TextView) findViewById(R.id.btn_unidadeManager);
         btn_unidadeManager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iniciarTelas(new UnidadeManager());
+                iniciarTelas(new UnidadePrincipal());
             }
         });
 
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         btn_universidadeManager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iniciarTelas(new UniversidadeManager());
+                iniciarTelas(new UniversidadePrincipal());
             }
         });
 
@@ -84,25 +87,33 @@ public class MainActivity extends AppCompatActivity {
         btn_usuarioManager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iniciarTelas(new UsuarioManager());
+                iniciarTelas(new UsuarioPrincipal());
             }
         });
 
-        btn_iniciarAtendimento = (TextView) findViewById(R.id.btn_realizarAtendimento);
-        btn_iniciarAtendimento.setOnClickListener(new View.OnClickListener() {
+        btn_regiaoManager = (TextView) findViewById(R.id.btn_regiaoManager);
+        btn_regiaoManager.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                iniciarTelas(new AtendimentoActivity());
+                iniciarTelas(new RegiaoPrincipal());
             }
         });
 
-        btn_acessoManager = (TextView) findViewById(R.id.btn_acessoManager);
-        btn_acessoManager.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                iniciarTelas(new AcessoManager());
-            }
-        });
+//        btn_acessoManager = (TextView) findViewById(R.id.btn_acessoManager);
+//        btn_acessoManager.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                iniciarTelas(new AcessoManager());
+//            }
+//        });
+
+//        btn_iniciarAtendimento = (TextView) findViewById(R.id.btn_realizarAtendimento);
+//        btn_iniciarAtendimento.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                iniciarTelas(new AtendimentoActivity());
+//            }
+//        });
 
 //        if(Persistencia.getInstance().getVersao() > 0){
 //            btn_acessoManager.setVisibility(View.INVISIBLE);
@@ -129,9 +140,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        Persistencia.getInstance().carregaUniversidades();
-        Persistencia.getInstance().carregaUnidades();
-        Persistencia.getInstance().carregaUsuarios();
+//        Persistencia.getInstance().carregaUniversidades();
+//        Persistencia.getInstance().carregaUnidades();
+//        Persistencia.getInstance().carregaUsuarios();
     }
 
     public void iniciarTelas(Object obj) {

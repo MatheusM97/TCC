@@ -1,14 +1,13 @@
 package br.ufms.nafmanager.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.firebase.firestore.IgnoreExtraProperties;
 
+@IgnoreExtraProperties
 public class Estado extends CustomObject {
     private String nome;
     private String sigla;
-    private List<Cidade> cidades;
 
-    public Estado(){super(); this.cidades = new ArrayList<Cidade>();}
+    public Estado(){super();}
 
     public Estado(String id, String nome, String sigla){
         super();
@@ -33,14 +32,6 @@ public class Estado extends CustomObject {
         this.sigla = sigla;
     }
 
-    public List<Cidade> getCidades() {
-        return cidades;
-    }
-
-    public void setCidades(List<Cidade> cidades) {
-        this.cidades = cidades;
-    }
-
     @Override
     public boolean equals(Object obj){
         if(obj.getClass().getName().equals(this.getClass().getName()))
@@ -52,5 +43,15 @@ public class Estado extends CustomObject {
     @Override
     public String toString(){
         return nome;
+    }
+
+    @Override
+    public boolean validar() {
+        return true;
+    }
+
+    @Override
+    public boolean validarRemocao() {
+        return true;
     }
 }

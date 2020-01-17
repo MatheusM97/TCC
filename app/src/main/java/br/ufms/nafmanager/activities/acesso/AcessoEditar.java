@@ -1,4 +1,4 @@
-package br.ufms.nafmanager.activities;
+package br.ufms.nafmanager.activities.acesso;
 
 import androidx.appcompat.app.AppCompatActivity;
 

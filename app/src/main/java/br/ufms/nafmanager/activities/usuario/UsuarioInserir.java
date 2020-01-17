@@ -1,4 +1,4 @@
-package br.ufms.nafmanager.activities;
+package br.ufms.nafmanager.activities.usuario;
 
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +15,7 @@ import java.util.List;
 
 import br.ufms.nafmanager.R;
 import br.ufms.nafmanager.adapters.MaskEditUtil;
+import br.ufms.nafmanager.adapters.StatusEnum;
 import br.ufms.nafmanager.model.Acesso;
 import br.ufms.nafmanager.model.Universidade;
 import br.ufms.nafmanager.model.Usuario;
@@ -24,19 +25,34 @@ public class UsuarioInserir extends AppCompatActivity {
 
     private EditText usuarioCpf;
     private EditText usuarioSenha;
+    private EditText usuarioSenha2;
     private EditText usuarioNome;
     private EditText usuarioTelefone;
     private EditText usuarioEmail;
     private Spinner spinnerUnv;
     private Button btnCadastrarUsuario;
     private List<Universidade> universidadeLista;
+    private Usuario usuario;
+    private boolean edicao = false;
+    private boolean auto = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_inserir);
+
+        if (getIntent().getSerializableExtra("usuario") != null) {
+            this.usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+            this.edicao = true;
+        }
+
+        if(getParent().getClass().getName().equals("")){
+            auto = true;
+        }
+
         this.usuarioCpf = (EditText) findViewById(R.id.et_usuarioCpf);
         this.usuarioSenha = (EditText) findViewById(R.id.et_usuarioSenha);
+        this.usuarioSenha2 = (EditText) findViewById(R.id.et_usuarioSenha2);
         this.usuarioNome = (EditText) findViewById(R.id.et_usuarioNome);
         this.usuarioEmail = (EditText) findViewById(R.id.et_usuarioEmail);
         this.usuarioTelefone = (EditText) findViewById(R.id.et_usuarioTelefone);
@@ -61,11 +77,26 @@ public class UsuarioInserir extends AppCompatActivity {
                 inserirUsuario();
             }
         });
+
+        if (edicao && usuario != null) {
+            carregarTela();
+        }
     }
 
+    private void carregarTela() {
+        this.usuarioCpf.setText(usuario.getCpf());
+        this.usuarioSenha.setText(usuario.getSenha());
+        this.usuarioSenha2.setText(usuario.getSenha());
+        this.usuarioNome.setText(usuario.getNome());
+        this.usuarioTelefone.setText(usuario.getTelefone());
+        this.usuarioEmail.setText(usuario.getEmail());
+    }
 
     public void inserirUsuario() {
-        Usuario usuario = new Usuario();
+
+        if (!edicao && usuario.getId() == null && usuario.getId().length() == 0) {
+            usuario = new Usuario();
+        }
         if (this.usuarioCpf.getText() != null && this.usuarioCpf.getText().length() > 0) {
             usuario.setCpf(this.usuarioCpf.getText().toString());
         }
@@ -97,7 +128,10 @@ public class UsuarioInserir extends AppCompatActivity {
                     acesso.setUnidadeId(univ.getUnidadeId());
                     acesso.setUnidadeNome(univ.getUnidadeNome());
                     acesso.setParticipante(true);
-                    acesso.setStatus("rascunho");
+
+                    if(auto)
+                        acesso.setStatus(StatusEnum.RASCUNHO);
+
                     Persistencia.getInstance().persistirObjeto(acesso);
                     if (acesso.getId() != null && acesso.getId().length() > 0) {
                         Toast.makeText(this, "Usuário cadastrado!", Toast.LENGTH_SHORT).show();
@@ -115,21 +149,66 @@ public class UsuarioInserir extends AppCompatActivity {
     private boolean validar(Usuario usuario) {
 
         if (usuario.getCpf() == null || usuario.getCpf().length() <= 0) {
-            Toast.makeText(this, "É necessário informar o CPF", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "É necessário informar o CPF!", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (usuario.getSenha() == null || usuario.getSenha().length() <= 0) {
-            Toast.makeText(this, "É necessário informar a senha", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "É necessário informar a senha!", Toast.LENGTH_SHORT).show();
             return false;
+        }
+
+        if(this.usuarioSenha2 == null || this.usuarioSenha2.getText().length() <= 0){
+            Toast.makeText(this, "É necessário confirmar a senha!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(!this.usuarioSenha2.getText().toString().equals(usuario.getSenha())){
+            Toast.makeText(this, "As senhas não são iguais!", Toast.LENGTH_SHORT).show();
         }
 
         if (usuario.getNome() == null || usuario.getNome().length() <= 0) {
-            Toast.makeText(this, "É necessário informar o nome", Toast.LENGTH_SHORT);
+            Toast.makeText(this, "É necessário informar o nome!", Toast.LENGTH_SHORT);
             return false;
         }
 
+        if(!isValidCPF(usuario.getCpf())){
+            Toast.makeText(this, "CPF inválido!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
 
         return true;
+    }
+
+    public boolean isValidCPF(String cpf){
+        String cpfDigitos = cpf.replaceAll("[^0-9]","");
+
+        int digito1 = Integer.parseInt(cpfDigitos.substring(9,10));
+        int digito2 = Integer.parseInt(cpfDigitos.substring(10,11));
+
+        int digito1Calculado = calculoModulo(cpfDigitos, 9, 10);
+        int digito2Calculado = calculoModulo(cpfDigitos, 10, 11);
+
+        if(digito1 != digito1Calculado || digito2 != digito2Calculado)
+            return false;
+        return true;
+    }
+
+    public int calculoModulo(String valor, int quantidadeDigitos, int peso){
+        String digitos = valor.replaceAll("[^0-9]", "");
+
+        int soma = 0;
+        for(int i = 0; i < quantidadeDigitos; i++){
+            int valorInteiro = Integer.parseInt(digitos.substring(i, i+1));
+            soma += peso * valorInteiro;
+            peso--;
+        }
+
+        int resto = (soma * 10) % 11;
+
+        if(resto < 10)
+            return resto;
+
+        return 0;
     }
 }

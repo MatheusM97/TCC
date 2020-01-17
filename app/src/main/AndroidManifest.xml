@@ -35,15 +35,20 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:screenOrientation="portrait" />
         <activity android:name=".activities.AtendimentoActivity" />
-        <activity android:name=".activities.UsuarioManager" />
-        <activity android:name=".activities.UnidadeManager" />
-        <activity android:name=".activities.UniversidadeManager" />
-        <activity android:name=".activities.UnidadeInserir" />
-        <activity android:name=".activities.UniversidadeInserir" />
-        <activity android:name=".activities.UsuarioInserir" />
-        <activity android:name=".activities.AcessoManager" />
-        <activity android:name=".activities.AcessoInserir" />
-        <activity android:name=".activities.AcessoVincular" />
+        <activity android:name=".activities.usuario.UsuarioPrincipal" />
+        <activity android:name=".activities.unidade.UnidadePrincipal" />
+        <activity android:name=".activities.universidade.UniversidadePrincipal" />
+        <activity android:name=".activities.regiao.RegiaoPrincipal" />
+        <activity android:name=".activities.unidade.UnidadeInserir" />
+        <activity android:name=".activities.universidade.UniversidadeInserir" />
+        <activity android:name=".activities.usuario.UsuarioInserir" />
+        <activity android:name=".activities.acesso.AcessoManager" />
+        <activity android:name=".activities.acesso.AcessoInserir" />
+        <activity android:name=".activities.unidade.UnidadeGerenciar" />
+        <activity android:name=".activities.universidade.UniversidadeGerenciar" />
+        <activity android:name=".activities.usuario.UsuarioGerenciar" />
+        <activity android:name=".activities.regiao.RegiaoInserir" />
+        <activity android:name=".activities.regiao.RegiaoGerenciar" />
     </application>
 
 </manifest>

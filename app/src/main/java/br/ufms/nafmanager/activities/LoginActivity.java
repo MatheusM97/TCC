@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.List;
 
 import br.ufms.nafmanager.R;
+import br.ufms.nafmanager.activities.usuario.UsuarioInserir;
 import br.ufms.nafmanager.adapters.MaskEditUtil;
 import br.ufms.nafmanager.model.Acesso;
 import br.ufms.nafmanager.model.Usuario;
@@ -31,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText senha;
     private Button btn_login;
     private Button btn_registrar;
-    private Usuario usuarioLogado;
+    private Usuario usuarioAtual;
     private ProgressDialog progressDialog;
     private List<Acesso> acList;
 
@@ -75,11 +76,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void realizarLogin() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        if(getCurrentFocus() != null && getCurrentFocus().getWindowToken() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
 
         if (Persistencia.getInstance().getVersao() > 0) {
-            this.usuarioLogado = new Usuario();
+            this.usuarioAtual = new Usuario();
             if (login.getText() != null && login.getText().toString().length() > 0 &&
                     senha.getText() != null && senha.getText().toString().length() > 0) {
                 Persistencia.getInstance().getAutenticar(login.getText().toString(), senha.getText().toString());
@@ -88,10 +91,10 @@ public class LoginActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        usuarioLogado = Persistencia.getInstance().getUsuarioLogado();
+                        usuarioAtual = Persistencia.getInstance().getUsuarioAtual();
                         progressDialog.dismiss();
 
-                        if (usuarioLogado != null && usuarioLogado.getId() != null && usuarioLogado.getId().length() > 0) {
+                        if (usuarioAtual != null && usuarioAtual.getId() != null && usuarioAtual.getId().length() > 0) {
 
                             login.setText("");
                             senha.setText("");

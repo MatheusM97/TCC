@@ -1,17 +1,16 @@
 package br.ufms.nafmanager.model;
 
-public class Unidade extends CustomObject {
+import com.google.firebase.firestore.IgnoreExtraProperties;
+
+import java.io.Serializable;
+
+@IgnoreExtraProperties
+public class Unidade extends CustomObject implements Serializable {
     private String nome;
-    private String tipoNome;
     private String tipoId;
     private String responsavelId;
-    private String responsavelNome;
     private String cidadeId;
-    private String cidadeNome;
-    private String estadoId;
-    private String estadoNome;
-    private String estadoSigla;
-    private int regiaoFiscal;
+    private String regiaoFiscalId;
 
     public Unidade(){super();}
 
@@ -45,52 +44,12 @@ public class Unidade extends CustomObject {
         this.cidadeId = cidadeId;
     }
 
-    public String getCidadeNome() {
-        return cidadeNome;
+    public String getRegiaoFiscalId() {
+        return regiaoFiscalId;
     }
 
-    public void setCidadeNome(String cidadeNome) {
-        this.cidadeNome = cidadeNome;
-    }
-
-    public String getEstadoId() {
-        return estadoId;
-    }
-
-    public void setEstadoId(String estadoId) {
-        this.estadoId = estadoId;
-    }
-
-    public String getEstadoNome() {
-        return estadoNome;
-    }
-
-    public void setEstadoNome(String estadoNome) {
-        this.estadoNome = estadoNome;
-    }
-
-    public String getEstadoSigla() {
-        return estadoSigla;
-    }
-
-    public void setEstadoSigla(String estadoSigla) {
-        this.estadoSigla = estadoSigla;
-    }
-
-    public int getRegiaoFiscal() {
-        return regiaoFiscal;
-    }
-
-    public void setRegiaoFiscal(int regiaoFiscal) {
-        this.regiaoFiscal = regiaoFiscal;
-    }
-
-    public String getTipoNome() {
-        return tipoNome;
-    }
-
-    public void setTipoNome(String tipoNome) {
-        this.tipoNome = tipoNome;
+    public void setRegiaoFiscalId(String regiaoFiscalId) {
+        this.regiaoFiscalId = regiaoFiscalId;
     }
 
     public String getTipoId() {
@@ -99,14 +58,6 @@ public class Unidade extends CustomObject {
 
     public void setTipoId(String tipoId) {
         this.tipoId = tipoId;
-    }
-
-    public String getResponsavelNome() {
-        return responsavelNome;
-    }
-
-    public void setResponsavelNome(String responsavelNome) {
-        this.responsavelNome = responsavelNome;
     }
 
     @Override
@@ -120,5 +71,35 @@ public class Unidade extends CustomObject {
     @Override
     public String toString(){
         return nome;
+    }
+
+    @Override
+    public boolean validar() {
+        if (this.getNome() == null || this.getNome().length() <= 0) {
+            mensagem = "É necessário informar um nome";
+            return false;
+        }
+
+        if (this.getTipoId() == null || this.getTipoId().length() <= 0) {
+            mensagem = "É necessário selecionar um tipo";
+            return false;
+        }
+
+        if (this.getCidadeId() == null || this.getCidadeId().length() <= 0) {
+            mensagem = "É necessário selecionar uma cidade";
+            return false;
+        }
+
+        if (this.getRegiaoFiscalId() == null || this.getRegiaoFiscalId().length() <= 0) {
+            mensagem = "É necessário selecionar uma região fiscal";
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean validarRemocao() {
+        return true;
     }
 }

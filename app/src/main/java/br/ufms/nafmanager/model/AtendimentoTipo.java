@@ -1,12 +1,10 @@
 package br.ufms.nafmanager.model;
 
-import java.util.UUID;
-
 public class AtendimentoTipo {
     private String id;
     private String nome;
 
-    public AtendimentoTipo(){}
+    public AtendimentoTipo(){super();}
 
     public AtendimentoTipo(String id, String nome) {
         this.id = id;

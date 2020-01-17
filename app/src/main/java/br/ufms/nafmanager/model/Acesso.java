@@ -122,4 +122,14 @@ public class Acesso extends CustomObject {
 
         return false;
     }
+
+    @Override
+    public boolean validar() {
+        return true;
+    }
+
+    @Override
+    public boolean validarRemocao() {
+        return true;
+    }
 }

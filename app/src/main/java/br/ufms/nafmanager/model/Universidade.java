@@ -1,6 +1,8 @@
 package br.ufms.nafmanager.model;
 
-public class Universidade extends CustomObject {
+import java.io.Serializable;
+
+public class Universidade extends CustomObject implements Serializable {
     private String nome;
     private String cidadeId;
     private String cidadeNome;
@@ -15,6 +17,7 @@ public class Universidade extends CustomObject {
     }
 
     public Universidade(String id, String nome) {
+        super();
         this.id = id;
         this.nome = nome;
     }
@@ -94,5 +97,15 @@ public class Universidade extends CustomObject {
     @Override
     public String toString() {
         return nome;
+    }
+
+    @Override
+    public boolean validar() {
+        return true;
+    }
+
+    @Override
+    public boolean validarRemocao() {
+        return true;
     }
 }

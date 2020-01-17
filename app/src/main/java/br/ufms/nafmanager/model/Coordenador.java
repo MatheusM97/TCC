@@ -18,4 +18,14 @@ public class Coordenador extends CustomObject {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    @Override
+    public boolean validar() {
+        return true;
+    }
+
+    @Override
+    public boolean validarRemocao() {
+        return true;
+    }
 }

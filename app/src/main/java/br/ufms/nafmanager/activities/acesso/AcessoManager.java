@@ -1,4 +1,4 @@
-package br.ufms.nafmanager.activities;
+package br.ufms.nafmanager.activities.acesso;
 
 import android.content.Intent;
 import android.os.Bundle;
