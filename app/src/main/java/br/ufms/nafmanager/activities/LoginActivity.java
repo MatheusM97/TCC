@@ -79,6 +79,11 @@ public class LoginActivity extends CustomActivity {
     private void realizarLogin() {
         this.usuarioAtual = new Usuario();
 
+        if(Persistencia.getInstance().getVersao() == 0) {
+            iniciarMain();
+            return;
+        }
+
         if (getCurrentFocus() != null && getCurrentFocus().getWindowToken() != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
@@ -137,11 +142,15 @@ public class LoginActivity extends CustomActivity {
 
     private void iniciar() {
         if (usuarioAtual.validarStatus()) {
-            Intent novaIntent = new Intent(getBaseContext(), MainActivity.class);
-            startActivity(novaIntent);    
+            iniciarMain();
         }
         else
             Toast.makeText(this, usuarioAtual.getMensagem(), Toast.LENGTH_SHORT).show();
+    }
+
+    private void iniciarMain() {
+        Intent novaIntent = new Intent(getBaseContext(), MainActivity.class);
+        startActivity(novaIntent);
     }
 
 //    private void controlaAcessos() {
