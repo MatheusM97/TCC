@@ -480,7 +480,7 @@ public class Persistencia {
         DocumentReference dr = firebaseFirestore
                 .collection("banco")
                 .document("I2Mh0OOkU2WoMaejdhDU");
-        dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
@@ -507,20 +507,24 @@ public class Persistencia {
         });
     }
 
-    public void getAutenticar(String usr, String psd) {
+    public void getAutenticar(Usuario usuario) {
         usuarioAtual = new Usuario();
         firebaseFirestore.collection("usuario")
-                .whereEqualTo("cpf", usr)
-                .whereEqualTo("senha", psd)
+                .whereEqualTo("cpf", usuario.getCpf())
+                .whereEqualTo("senha", usuario.getSenha())
+                .whereEqualTo("status", StatusEnum.ATIVO)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        usuarioAtual = (Usuario) document.toObject(Usuario.class);
-                        carregaAcessos(usuarioAtual.getId());
-                        break;
+                    if(task.getResult().getDocuments().size() > 0){
+                        QueryDocumentSnapshot doc = (QueryDocumentSnapshot) task.getResult().getDocuments().get(0);
+                        usuarioAtual = (Usuario) doc.toObject(Usuario.class);
                     }
+
+                    if(!usuarioAtual.temId())
+                        usuarioAtual.setMensagem("Usuário não foi encontrado!");
+
                 }
             }
         });

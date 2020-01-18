@@ -126,7 +126,6 @@ public class UsuarioInserir extends AppCompatActivity {
                     univ = (Universidade) spinnerUnv.getSelectedItem();
                     Acesso acesso = new Acesso(usuario.getId(), usuario.getNome(), univ.getId(), univ.getNome());
                     acesso.setUnidadeId(univ.getUnidadeId());
-                    acesso.setUnidadeNome(univ.getUnidadeNome());
                     acesso.setParticipante(true);
 
                     if(auto)

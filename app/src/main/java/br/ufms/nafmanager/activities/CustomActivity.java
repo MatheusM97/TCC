@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import br.ufms.nafmanager.R;
 
 public class CustomActivity extends AppCompatActivity {
-    protected ProgressDialog progressDialog;
     protected int marcador = 0;
     protected boolean editando = false;
+    protected ProgressDialog progressDialog;
 
     protected void showDialog() {
         this.progressDialog = new ProgressDialog(this);

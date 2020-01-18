@@ -2,12 +2,10 @@ package br.ufms.nafmanager.model;
 
 public class Acesso extends CustomObject {
     private String usuarioId;
-    private String usuarioNome;
     private String universidadeId;
-    private String universidadeNome;
     private String unidadeId;
-    private String unidadeNome;
     private boolean participante = false;
+    private boolean professor = false;
     private boolean supervisor = false;
     private boolean coordenador = false;
     private boolean representante = false;
@@ -17,9 +15,7 @@ public class Acesso extends CustomObject {
 
     public Acesso(String usuarioId, String usuarioNome, String universidadeId, String universidadeNome){
         this.usuarioId = usuarioId;
-        this.usuarioNome = usuarioNome;
         this.universidadeId = universidadeId;
-        this.universidadeNome = universidadeNome;
     }
 
     public String getUsuarioId() {
@@ -30,14 +26,6 @@ public class Acesso extends CustomObject {
         this.usuarioId = usuarioId;
     }
 
-    public String getUsuarioNome() {
-        return usuarioNome;
-    }
-
-    public void setUsuarioNome(String usuarioNome) {
-        this.usuarioNome = usuarioNome;
-    }
-
     public String getUniversidadeId() {
         return universidadeId;
     }
@@ -46,28 +34,12 @@ public class Acesso extends CustomObject {
         this.universidadeId = universidadeId;
     }
 
-    public String getUniversidadeNome() {
-        return universidadeNome;
-    }
-
-    public void setUniversidadeNome(String universidadeNome) {
-        this.universidadeNome = universidadeNome;
-    }
-
     public String getUnidadeId() {
         return unidadeId;
     }
 
     public void setUnidadeId(String unidadeId) {
         this.unidadeId = unidadeId;
-    }
-
-    public String getUnidadeNome() {
-        return unidadeNome;
-    }
-
-    public void setUnidadeNome(String unidadeNome) {
-        this.unidadeNome = unidadeNome;
     }
 
     public boolean isParticipante() {
@@ -108,11 +80,6 @@ public class Acesso extends CustomObject {
 
     public void setMaster(boolean master) {
         this.master = master;
-    }
-
-    @Override
-    public String toString(){
-        return (universidadeNome != null && universidadeNome.length() >0 )?universidadeNome: unidadeNome;
     }
 
     @Override

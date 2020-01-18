@@ -113,22 +113,18 @@ public class AcessoInserir extends AppCompatActivity {
                     if (spnUsuario.getSelectedItem() != null && ((Usuario) spnUsuario.getSelectedItem()).getId() != null) {
                         Usuario usr = (Usuario) spnUsuario.getSelectedItem();
                         acesso.setUsuarioId(usr.getId());
-                        acesso.setUsuarioNome(usr.getNome());
                     }
 
                     if (spnUniversidade.getSelectedItem() != null && ((Universidade) spnUniversidade.getSelectedItem()).getId() != null) {
                         Universidade uni = (Universidade) spnUniversidade.getSelectedItem();
                         acesso.setUniversidadeId(uni.getId());
-                        acesso.setUniversidadeNome(uni.getNome());
                         acesso.setUnidadeId(uni.getUnidadeId());
-                        acesso.setUnidadeNome(uni.getUnidadeNome());
                     }
 
                     if(spnUnidade.getSelectedItem() != null){
                         Unidade unid = (Unidade) spnUnidade.getSelectedItem();
                         if(unid.getId() != null && unid.getId().length() > 0){
                             acesso.setUnidadeId(unid.getId());
-                            acesso.setUnidadeNome(unid.getNome());
                         }
                     }
 

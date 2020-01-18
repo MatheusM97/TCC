@@ -6,6 +6,8 @@ import com.google.firebase.firestore.IgnoreExtraProperties;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.ufms.nafmanager.persistencies.Persistencia;
+
 @IgnoreExtraProperties
 public class Usuario extends CustomObject{
     private String cpf;
@@ -91,6 +93,41 @@ public class Usuario extends CustomObject{
     @Override
     public boolean validar() {
         return true;
+    }
+
+    public boolean validarLogin(){
+        if(this.cpf == null || this.cpf.length() == 0){
+            this.mensagem = "Informe o CPF";
+            return false;
+        }
+
+        if(this.senha == null || this.senha.length() == 0){
+            this.mensagem = "Informe a senha";
+            return false;
+        }
+
+        return true;
+    }
+
+    public void realizarLogin(){
+        Persistencia.getInstance().getAutenticar(this);
+    }
+
+    public boolean validarStatus(){
+        switch (getStatus()){
+            case ATIVO:
+                return true;
+            default:
+                this.mensagem = "Usuário se encontra " + getStatus();
+                return false;
+        }
+    }
+
+    public boolean temId(){
+        if(this.id != null && this.id.length() > 0)
+            return true;
+
+        return false;
     }
 
     @Override
