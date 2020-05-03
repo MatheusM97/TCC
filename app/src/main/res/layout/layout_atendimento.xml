@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#F0F0F0"
+    android:id="@+id/layout_1"
     >
 
     <TextView
@@ -13,10 +14,10 @@
         android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/tv_dataAtendimentoView"
         android:gravity="left"
-        android:padding="5dp"
+        android:padding="3dp"
         android:text="Data"
         android:textColor="#000000"
-        android:textSize="22dp"
+        android:textSize="17dp"
         android:textStyle="bold" />
 
     <TextView
@@ -26,9 +27,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="10dp"
-        android:padding="5dp"
+        android:padding="3dp"
         android:text="${01/01/2000}"
-        android:textSize="22dp"
+        android:textSize="17dp"
         android:textStyle="bold"/>
 
     <TextView
@@ -38,9 +39,9 @@
         android:layout_alignParentTop="true"
         android:gravity="right"
         android:layout_toRightOf="@+id/tv_dataAtendimentoView"
-        android:padding="5dp"
+        android:padding="3dp"
         android:text="${00:00}"
-        android:textSize="22dp"
+        android:textSize="17dp"
         android:textStyle="bold"/>
 
     <TextView
@@ -49,24 +50,165 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:text="Tipo de usuário"
+        android:text="Tipo de atendimento:"
         android:textColor="#000000"
         android:textSize="20dp"
-        android:textStyle="normal"></TextView>
+        android:textStyle="normal">
+    </TextView>
 
     <Spinner
         android:id="@+id/sp_atendido"
         android:layout_below="@+id/tv_atendimento_atendido"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        ></Spinner>
+        android:spinnerMode="dialog">
+    </Spinner>
+
+    <TextView
+        android:id="@+id/tv_tipo_documento"
+        android:layout_below="@id/sp_atendido"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Tipo de documento:"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal">
+    </TextView>
+
+    <Spinner
+        android:id="@+id/sp_tipoDocumento"
+        android:layout_below="@id/sp_atendido"
+        android:layout_width="match_parent"
+        android:layout_height="23dp"
+        android:paddingTop="5dp"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/tv_tipo_documento"
+        android:spinnerMode="dialog">
+    </Spinner>
+
+    <TextView
+        android:focusable="false"
+        android:id="@+id/tv_documento"
+        android:layout_below="@id/tv_tipo_documento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Documento:"
+        android:paddingBottom="0dp"
+        android:paddingTop="10dp"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal">
+    </TextView>
+
+    <EditText
+        android:id="@+id/et_cpf"
+        android:layout_below="@id/tv_tipo_documento"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/tv_documento"
+        android:textColor="#000000"
+        android:textStyle="normal"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:singleLine="true"
+        android:inputType="number"
+        android:imeOptions="actionNext"
+        android:nextFocusDown="@id/et_nome"
+        android:visibility="invisible"
+        ></EditText>
+
+    <EditText
+        android:id="@+id/et_cnpj"
+        android:layout_below="@id/tv_tipo_documento"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/tv_documento"
+        android:textColor="#000000"
+        android:textStyle="normal"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:singleLine="true"
+        android:inputType="number"
+        android:imeOptions="actionNext"
+        android:nextFocusDown="@id/et_nome"
+        android:visibility="invisible"
+        ></EditText>
+
+    <TextView
+        android:focusable="false"
+        android:id="@+id/tv_atendido_nome"
+        android:layout_below="@id/et_cpf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Nome:          "
+        android:paddingBottom="0dp"
+        android:paddingTop="11dp"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal">
+    </TextView>
+
+    <EditText
+        android:id="@+id/et_nome"
+        android:layout_below="@id/et_cpf"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/tv_atendido_nome"
+        android:textColor="#000000"
+        android:textStyle="normal"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:singleLine="true"
+        android:imeOptions="actionNext"
+        android:nextFocusDown="@id/et_telefone"
+        ></EditText>
+
+    <TextView
+        android:focusable="false"
+        android:id="@+id/tv_telefone"
+        android:layout_below="@id/et_nome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="Telefone:     "
+        android:paddingBottom="0dp"
+        android:paddingTop="15dp"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal">
+    </TextView>
+
+    <EditText
+        android:id="@+id/et_telefone"
+        android:layout_below="@id/et_nome"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/tv_telefone"
+        android:textColor="#000000"
+        android:textStyle="normal"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:singleLine="true"
+        android:inputType="number"
+        ></EditText>
 
     <CheckBox
         android:id="@+id/ctv_atendimentoConclusivo"
-        android:layout_below="@+id/sp_atendido"
+        android:layout_below="@+id/et_telefone"
         android:text="Atendimento foi conclusivo"
         android:textStyle="bold"
-        android:textSize="22dp"
+        android:textSize="17dp"
         android:checked="true"
         android:button="@null"
         android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
@@ -81,17 +223,18 @@
     <ListView
         android:id="@+id/lv_atendimento_tipo"
         android:layout_below="@+id/ctv_atendimentoConclusivo"
-        android:layout_above="@+id/atendimento_layout_btn"
+        android:layout_above="@id/btn_finalizarAtendimento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#F0F0F0"
         />
 
-    <RelativeLayout
-        android:id="@+id/atendimento_layout_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/atendimento_layout_btn"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_above="@id/lv_atendimento_tipo">-->
+
         <Button
             android:id="@+id/btn_finalizarAtendimento"
             android:layout_width="match_parent"
@@ -100,6 +243,8 @@
             android:background="@drawable/btn_finalizar"
             android:text="concluir"
             android:textColor="#FFFFFF"
-            android:textSize="18sp"/>
-    </RelativeLayout>
+            android:textSize="18sp"
+            android:layout_alignParentBottom="true"/>
+<!--    </RelativeLayout>-->
+
 </RelativeLayout>

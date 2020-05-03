@@ -16,14 +16,16 @@
             android:layout_marginTop="5dp"
             android:padding="2dp"
             android:text="NOME DO ITEM"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="#4d4d4d"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:textStyle="bold" />
+
         <TextView
             android:id="@+id/et_listagemSubstitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Subtitulo"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"/>
     </LinearLayout>
 

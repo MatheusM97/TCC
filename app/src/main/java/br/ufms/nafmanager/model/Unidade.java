@@ -8,11 +8,15 @@ import java.io.Serializable;
 public class Unidade extends CustomObject implements Serializable {
     private String nome;
     private String tipoId;
-    private String responsavelId;
     private String cidadeId;
-    private String regiaoFiscalId;
+    private String regiaoId;
 
     public Unidade(){super();}
+
+    public Unidade(String id){
+        super();
+        this.id = id;
+    }
 
     public Unidade(String id, String nome){
         super();
@@ -28,14 +32,6 @@ public class Unidade extends CustomObject implements Serializable {
         this.nome = nome;
     }
 
-    public String getResponsavelId() {
-        return responsavelId;
-    }
-
-    public void setResponsavelId(String responsavelId) {
-        this.responsavelId = responsavelId;
-    }
-
     public String getCidadeId() {
         return cidadeId;
     }
@@ -44,12 +40,12 @@ public class Unidade extends CustomObject implements Serializable {
         this.cidadeId = cidadeId;
     }
 
-    public String getRegiaoFiscalId() {
-        return regiaoFiscalId;
+    public String getRegiaoId() {
+        return regiaoId;
     }
 
-    public void setRegiaoFiscalId(String regiaoFiscalId) {
-        this.regiaoFiscalId = regiaoFiscalId;
+    public void setRegiaoId(String regiaoId) {
+        this.regiaoId = regiaoId;
     }
 
     public String getTipoId() {
@@ -58,14 +54,6 @@ public class Unidade extends CustomObject implements Serializable {
 
     public void setTipoId(String tipoId) {
         this.tipoId = tipoId;
-    }
-
-    @Override
-    public boolean equals(Object obj){
-        if(obj.getClass().getName().equals(this.getClass().getName()))
-            return true;
-
-        return false;
     }
 
     @Override
@@ -90,7 +78,7 @@ public class Unidade extends CustomObject implements Serializable {
             return false;
         }
 
-        if (this.getRegiaoFiscalId() == null || this.getRegiaoFiscalId().length() <= 0) {
+        if (this.getRegiaoId() == null || this.getRegiaoId().length() <= 0) {
             mensagem = "É necessário selecionar uma região fiscal";
             return false;
         }

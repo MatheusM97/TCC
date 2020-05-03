@@ -29,7 +29,6 @@
         android:layout_marginLeft="50dp"
         android:singleLine="true"
         android:inputType="number"
-
         ></EditText>
 
     <TextView

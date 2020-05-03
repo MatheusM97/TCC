@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_acessoTipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:text="Tipo"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"></TextView>
+
+    <Spinner
+        android:id="@+id/sp_acessoTipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:layout_below="@+id/tv_acessoTipo"
+        android:focusable="true"
+        android:focusableInTouchMode="true"></Spinner>
+
+    <TextView
+        android:id="@+id/tv_acesso_universidade"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sp_acessoTipo"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:text="Universidade"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"></TextView>
+
+    <Spinner
+        android:id="@+id/sp_acesso_universidade"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:layout_below="@+id/tv_acesso_universidade"
+        android:focusable="true"
+        android:focusableInTouchMode="true"></Spinner>
+
+    <TextView
+        android:id="@+id/tv_acesso_unidade"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sp_acessoTipo"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:text="Unidade"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"></TextView>
+
+    <Spinner
+        android:id="@+id/sp_acesso_unidade"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:layout_below="@id/tv_acesso_unidade"
+        android:focusable="true"
+        android:focusableInTouchMode="true"></Spinner>
+
+    <TextView
+        android:id="@+id/tv_acesso_regiao"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sp_acessoTipo"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:text="Região"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"></TextView>
+
+    <Spinner
+        android:id="@+id/sp_acesso_regiao"
+        android:visibility="invisible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:layout_below="@id/tv_acesso_regiao"
+        android:focusable="true"
+        android:focusableInTouchMode="true"></Spinner>
+
+    <TextView
+        android:id="@+id/tv_papeis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sp_acesso_unidade"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:text="Papéis"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:textStyle="normal"></TextView>
+
+    <CheckBox
+        android:id="@+id/cb_acesso_participante"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_papeis"
+        android:button="@null"
+        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="50dp"
+        android:text="Aluno"
+        android:textSize="20dp" />
+
+    <CheckBox
+        android:id="@+id/cb_acesso_professor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cb_acesso_participante"
+        android:button="@null"
+        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="50dp"
+        android:text="Professor"
+        android:textSize="20dp" />
+
+    <CheckBox
+        android:id="@+id/cb_acesso_representanteUniversidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cb_acesso_professor"
+        android:button="@null"
+        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="50dp"
+        android:text="Representante"
+        android:textSize="20dp" />
+
+    <CheckBox
+        android:id="@+id/cb_acesso_representante"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_papeis"
+        android:button="@null"
+        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="50dp"
+        android:text="Representante"
+        android:textSize="20dp" />
+
+    <CheckBox
+        android:id="@+id/cb_acesso_master"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/cb_acesso_representante"
+        android:button="@null"
+        android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginRight="50dp"
+        android:text="Moderador"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/btn_acesso_inserir"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="5dp"
+        android:background="@drawable/btn_finalizar"
+        android:gravity="center"
+        android:text="Concluir"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:textStyle="normal"></Button>
+
+</RelativeLayout>

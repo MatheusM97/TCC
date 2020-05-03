@@ -18,19 +18,6 @@
         android:textSize="18dp"
         android:textStyle="normal" />
 
-<!--    <Button-->
-<!--        android:id="@+id/btn_realizarAtendimento"-->
-<!--        android:layout_below="@id/btn_regiaoManager"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:background="@drawable/btn_cancelar"-->
-<!--        android:text="Iniciar atendimento"-->
-<!--        android:textColor="@color/colorPrimary"-->
-<!--        android:textSize="18dp"-->
-<!--        android:textStyle="normal" />-->
-
     <Button
         android:id="@+id/btn_unidadeManager"
         android:layout_width="match_parent"
@@ -72,17 +59,43 @@
         android:textSize="18dp"
         android:textStyle="normal" />
 
-<!--    <Button-->
-<!--        android:id="@+id/btn_acessoManager"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_below="@+id/btn_usuarioManager"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_margin="10dp"-->
-<!--        android:background="@drawable/btn_cancelar"-->
-<!--        android:text="Acesso"-->
-<!--        android:textColor="@color/colorPrimary"-->
-<!--        android:textSize="18dp"-->
-<!--        android:textStyle="normal" />-->
+    <Button
+        android:id="@+id/btn_acessoManager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_usuarioManager"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/btn_cancelar"
+        android:text="Acesso"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp"
+        android:textStyle="normal" />
+
+    <Button
+        android:id="@+id/btn_atendimento"
+        android:layout_below="@id/btn_acessoManager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/btn_cancelar"
+        android:text="Atendimento"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp"
+        android:textStyle="normal" />
+
+    <Button
+        android:id="@+id/btn_sair"
+        android:layout_below="@id/btn_atendimento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/btn_cancelar"
+        android:text="Sair"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp"
+        android:textStyle="normal" />
 
 </RelativeLayout>

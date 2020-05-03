@@ -31,7 +31,7 @@ public class RegiaoAdapter extends ArrayAdapter<Regiao> {
         TextView subtitleText = (TextView) rowView.findViewById(R.id.et_listagemSubstitulo);
 
         titleText.setText(lista.get(position).getNome());
-        subtitleText.setText(lista.get(position).getNumero().toString());
+        subtitleText.setText("");
 
         return rowView;
     }

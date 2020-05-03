@@ -1,13 +1,12 @@
 package br.ufms.nafmanager.persistencies;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import br.ufms.nafmanager.model.Cidade;
 
 public class AC {
-    public static List<Cidade> getCidades() {
-        List<Cidade> lista = new ArrayList<Cidade>();
+    public static ArrayList<Cidade> getCidades() {
+        ArrayList<Cidade> lista = new ArrayList<Cidade>();
         lista.add(new Cidade("2siVqb3dxmfmvQptUIvZ","Acrelândia","YOHaadyseN9LJy6v2wzQ", "AC"));
         lista.add(new Cidade("uPgdPIM4hI5T4TwZ39EZ","Assis Brasil","YOHaadyseN9LJy6v2wzQ", "AC"));
         lista.add(new Cidade("wcgVadpiBCogSKaHj7nM","Brasiléia","YOHaadyseN9LJy6v2wzQ", "AC"));

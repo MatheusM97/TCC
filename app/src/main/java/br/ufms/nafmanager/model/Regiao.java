@@ -3,16 +3,13 @@ package br.ufms.nafmanager.model;
 public class Regiao extends CustomObject {
     private String nome;
 
-    private Long numero;
+    public Regiao(){
+        super();
+    }
 
-    public Regiao(){super();}
-
-    @Override
-    public boolean equals(Object obj){
-        if(obj.getClass().getName().equals(this.getClass().getName()))
-            return true;
-
-        return false;
+    public Regiao(String id, String nome){
+        this.id = id;
+        this.nome = nome;
     }
 
     public String getNome() {
@@ -23,17 +20,9 @@ public class Regiao extends CustomObject {
         this.nome = nome;
     }
 
-    public Long getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Long numero) {
-        this.numero = numero;
-    }
-
     @Override
     public String toString(){
-        return this.nome+ " ("+ this.numero +")";
+        return this.nome;
     }
 
     @Override
@@ -42,12 +31,6 @@ public class Regiao extends CustomObject {
             this.mensagem = "É necessário informar um nome";
             return false;
         }
-
-        if (this.numero == null || this.numero <= 0) {
-            this.mensagem = "É necessário informar um número";
-            return false;
-        }
-
         return true;
     }
 

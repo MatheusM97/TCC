@@ -1,27 +1,24 @@
 package br.ufms.nafmanager.activities.usuario;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import br.ufms.nafmanager.R;
+import br.ufms.nafmanager.activities.CustomActivity;
 import br.ufms.nafmanager.adapters.MaskEditUtil;
-import br.ufms.nafmanager.adapters.StatusEnum;
-import br.ufms.nafmanager.model.Acesso;
 import br.ufms.nafmanager.model.Universidade;
 import br.ufms.nafmanager.model.Usuario;
 import br.ufms.nafmanager.persistencies.Persistencia;
 
-public class UsuarioInserir extends AppCompatActivity {
+public class UsuarioInserir extends CustomActivity {
 
     private EditText usuarioCpf;
     private EditText usuarioSenha;
@@ -29,6 +26,9 @@ public class UsuarioInserir extends AppCompatActivity {
     private EditText usuarioNome;
     private EditText usuarioTelefone;
     private EditText usuarioEmail;
+    private TextView tvSenha;
+    private TextView tvSenha2;
+    private TextView tvUniversidade;
     private Spinner spinnerUnv;
     private Button btnCadastrarUsuario;
     private List<Universidade> universidadeLista;
@@ -41,16 +41,38 @@ public class UsuarioInserir extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usuario_inserir);
 
-        if (getIntent().getSerializableExtra("usuario") != null) {
+        this.edicao = false;
+        if(getIntent().getSerializableExtra("usuario") != null){
             this.usuario = (Usuario) getIntent().getSerializableExtra("usuario");
             this.edicao = true;
         }
 
-        if(getParent().getClass().getName().equals("")){
+        if(Persistencia.getInstance().getUsuarioAtual() == null || Persistencia.getInstance().getUsuarioAtual().equals(new Usuario())){
             auto = true;
         }
 
+        vincularComponentes();
+
+        if(edicao && usuario != null){
+            carregarTela();
+        }
+
+        controlaAcesso();
+    }
+
+    private void controlaAcesso() {
+        if(!auto && !edicao){
+            tvSenha.setVisibility(View.INVISIBLE);
+            tvSenha2.setVisibility(View.INVISIBLE);
+            usuarioSenha.setVisibility(View.INVISIBLE);
+            usuarioSenha2.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private void vincularComponentes() {
         this.usuarioCpf = (EditText) findViewById(R.id.et_usuarioCpf);
+        this.tvSenha =  findViewById(R.id.tv_usuarioSenha);
+        this.tvSenha2 = findViewById(R.id.tv_usuarioSenha2);
         this.usuarioSenha = (EditText) findViewById(R.id.et_usuarioSenha);
         this.usuarioSenha2 = (EditText) findViewById(R.id.et_usuarioSenha2);
         this.usuarioNome = (EditText) findViewById(R.id.et_usuarioNome);
@@ -60,26 +82,15 @@ public class UsuarioInserir extends AppCompatActivity {
         this.usuarioCpf.addTextChangedListener(MaskEditUtil.mask(usuarioCpf, MaskEditUtil.FORMAT_CPF));
         this.usuarioTelefone.addTextChangedListener(MaskEditUtil.mask(usuarioTelefone, MaskEditUtil.FORMAT_FONE));
 
-        this.spinnerUnv = (Spinner) findViewById(R.id.sp_usuario_universidade);
-        this.universidadeLista = new ArrayList<Universidade>();
-        this.universidadeLista.add(new Universidade("", "Selecione"));
-        for (Universidade unv : Persistencia.getInstance().getUniversidades()) {
-            this.universidadeLista.add(unv);
-        }
-
-        ArrayAdapter<Universidade> adapter = new ArrayAdapter<Universidade>(this, android.R.layout.simple_spinner_dropdown_item, universidadeLista);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        this.spinnerUnv.setAdapter(adapter);
-
         this.btnCadastrarUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                inserirUsuario();
+                preValidar();
             }
         });
 
-        if (edicao && usuario != null) {
-            carregarTela();
+        if(edicao) {
+            this.usuarioCpf.setEnabled(false);
         }
     }
 
@@ -92,9 +103,8 @@ public class UsuarioInserir extends AppCompatActivity {
         this.usuarioEmail.setText(usuario.getEmail());
     }
 
-    public void inserirUsuario() {
-
-        if (!edicao && usuario.getId() == null && usuario.getId().length() == 0) {
+    private void copiarTela(){
+        if (!edicao && (usuario == null || usuario.getId() == null)) {
             usuario = new Usuario();
         }
         if (this.usuarioCpf.getText() != null && this.usuarioCpf.getText().length() > 0) {
@@ -103,6 +113,10 @@ public class UsuarioInserir extends AppCompatActivity {
 
         if (this.usuarioSenha.getText() != null && this.usuarioSenha.getText().length() > 0) {
             usuario.setSenha(this.usuarioSenha.getText().toString());
+        }
+
+        if(this.usuarioSenha2.getText() != null && this.usuarioSenha2.getText().length() > 0){
+            usuario.setSenha2(this.usuarioSenha2.getText().toString());
         }
 
         if (this.usuarioNome.getText() != null && this.usuarioNome.getText().length() > 0) {
@@ -117,97 +131,67 @@ public class UsuarioInserir extends AppCompatActivity {
             usuario.setTelefone(this.usuarioTelefone.getText().toString());
         }
 
-        if (validar(usuario)) {
-            Persistencia.getInstance().persistirObjeto(usuario);
-            if (usuario.getId() != null && usuario.getId().length() > 0) {
-                if (spinnerUnv.getSelectedItem() != null && spinnerUnv.getSelectedItem().toString().length() > 0
-                        && !((Universidade) spinnerUnv.getSelectedItem()).getId().isEmpty()) {
-                    Universidade univ;
-                    univ = (Universidade) spinnerUnv.getSelectedItem();
-                    Acesso acesso = new Acesso(usuario.getId(), usuario.getNome(), univ.getId(), univ.getNome());
-                    acesso.setUnidadeId(univ.getUnidadeId());
-                    acesso.setParticipante(true);
+        if(!auto && !edicao) {
+            usuario.setSenha(usuario.getCpfSomenteDigitos());
+            usuarioSenha2.setText(usuario.getCpfSomenteDigitos());
+        }
+    }
 
-                    if(auto)
-                        acesso.setStatus(StatusEnum.RASCUNHO);
+    public void preValidar() {
+        this.copiarTela();
+        this.usuario.validarSenhas();
 
-                    Persistencia.getInstance().persistirObjeto(acesso);
-                    if (acesso.getId() != null && acesso.getId().length() > 0) {
-                        Toast.makeText(this, "Usuário cadastrado!", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(this, "Usuário salvo, porém acesso não pode ser definido", Toast.LENGTH_LONG);
-                }
-                this.finish();
-            } else {
-                Toast.makeText(this, "Não foi possível cadastrar!", Toast.LENGTH_SHORT).show();
+        if(usuario.getMensagem() != null && usuario.getMensagem().trim().length() > 0){
+            inserir();
+        }
+
+        if(!edicao){
+            validarJaInserido();
+        }
+        else{
+            inserir();
+        }
+    }
+
+    private void inserir(){
+        if(usuario.getMensagem() == null || usuario.getMensagem().length() <= 0){
+            if(usuario.salvar()){
+                Persistencia.getInstance().setUsuarioCarregado(usuario);
+                finish();
             }
         }
+
+        Toast.makeText(this, usuario.getMensagem(), Toast.LENGTH_SHORT).show();
     }
 
-    private boolean validar(Usuario usuario) {
-
-        if (usuario.getCpf() == null || usuario.getCpf().length() <= 0) {
-            Toast.makeText(this, "É necessário informar o CPF!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if (usuario.getSenha() == null || usuario.getSenha().length() <= 0) {
-            Toast.makeText(this, "É necessário informar a senha!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if(this.usuarioSenha2 == null || this.usuarioSenha2.getText().length() <= 0){
-            Toast.makeText(this, "É necessário confirmar a senha!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        if(!this.usuarioSenha2.getText().toString().equals(usuario.getSenha())){
-            Toast.makeText(this, "As senhas não são iguais!", Toast.LENGTH_SHORT).show();
-        }
-
-        if (usuario.getNome() == null || usuario.getNome().length() <= 0) {
-            Toast.makeText(this, "É necessário informar o nome!", Toast.LENGTH_SHORT);
-            return false;
-        }
-
-        if(!isValidCPF(usuario.getCpf())){
-            Toast.makeText(this, "CPF inválido!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        return true;
+    private void validarJaInserido() {
+        showDialog();
+        Persistencia.getInstance().verificaUsuarioCadastrado(usuario);
+        verificaUsuario();
     }
 
-    public boolean isValidCPF(String cpf){
-        String cpfDigitos = cpf.replaceAll("[^0-9]","");
+    public void verificaUsuario(){
+        if(Persistencia.getInstance().isPesquisouUsuarioJahCadastrado()){
+            if(Persistencia.getInstance().getUsuarioVerificado() != null && Persistencia.getInstance().getUsuarioVerificado().getId() != null){
+                usuario.setMensagem(Persistencia.getInstance().getUsuarioVerificado().getMensagem());
+            }
 
-        int digito1 = Integer.parseInt(cpfDigitos.substring(9,10));
-        int digito2 = Integer.parseInt(cpfDigitos.substring(10,11));
+            Persistencia.getInstance().setPesquisouUsuarioJahCadastrado(false);
+            Persistencia.getInstance().setUsuarioVerificado(null);
 
-        int digito1Calculado = calculoModulo(cpfDigitos, 9, 10);
-        int digito2Calculado = calculoModulo(cpfDigitos, 10, 11);
-
-        if(digito1 != digito1Calculado || digito2 != digito2Calculado)
-            return false;
-        return true;
-    }
-
-    public int calculoModulo(String valor, int quantidadeDigitos, int peso){
-        String digitos = valor.replaceAll("[^0-9]", "");
-
-        int soma = 0;
-        for(int i = 0; i < quantidadeDigitos; i++){
-            int valorInteiro = Integer.parseInt(digitos.substring(i, i+1));
-            soma += peso * valorInteiro;
-            peso--;
+            hideDialog();
+            inserir();
+            return;
         }
-
-        int resto = (soma * 10) % 11;
-
-        if(resto < 10)
-            return resto;
-
-        return 0;
+        else
+            aguardaResolucao();
+    }
+    private void aguardaResolucao() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                verificaUsuario();
+            }
+        },1000);
     }
 }

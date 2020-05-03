@@ -31,7 +31,7 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
         TextView subtitleText = (TextView) rowView.findViewById(R.id.et_listagemSubstitulo);
 
         titleText.setText(lista.get(position).getNome());
-        subtitleText.setText(MaskEditUtil.mask(lista.get(position).getCpf()) + " - "+ lista.get(position).getEmail());
+        subtitleText.setText(MaskEditUtil.mask(lista.get(position).getCpfMascarado()) + " - "+ lista.get(position).getEmail());
 
         return rowView;
     }
@@ -39,5 +39,21 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
     public Usuario getObjeto(int position){
         Usuario und = lista.get(position);
         return und;
+    }
+
+    public void atualizarObjeto(Usuario usuario) {
+        for (Usuario usr : this.lista) {
+            if (usr.getId().equals(usuario.getId())) {
+                this.lista.remove(usr);
+                this.lista.add(usuario);
+                break;
+            }
+        }
+    }
+
+    public void remover(int position){
+        if(position >= 0){
+            this.lista.remove(position);
+        }
     }
 }

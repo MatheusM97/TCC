@@ -17,13 +17,32 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.layout_splash);
         Persistencia.getInstance().buscaVersao();
 
+//        Persistencia.getInstance().inserirDadosDefault();
+        Persistencia.getInstance().carregaRegioes();
+        Persistencia.getInstance().carregaUniversidades();
+        Persistencia.getInstance().carregaUnidades();
+        Persistencia.getInstance().carregaEstados();
+
+        telaAguardando();
+    }
+
+    private void telaAguardando() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
+                podeInicializar();
             }
-        }, 6000);
+        }, 500);
+    }
+
+    private void podeInicializar(){
+        if(Persistencia.getInstance().carregouEstados && Persistencia.getInstance().carregouUniversidades){
+            Intent intent = new Intent(SplashScreen.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        else{
+            telaAguardando();
+        }
     }
 }

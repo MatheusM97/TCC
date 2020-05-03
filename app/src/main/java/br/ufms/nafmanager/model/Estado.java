@@ -33,14 +33,6 @@ public class Estado extends CustomObject {
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(obj.getClass().getName().equals(this.getClass().getName()))
-            return true;
-
-        return false;
-    }
-
-    @Override
     public String toString(){
         return nome;
     }

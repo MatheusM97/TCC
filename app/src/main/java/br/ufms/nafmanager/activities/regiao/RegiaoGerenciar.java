@@ -15,11 +15,11 @@ import androidx.annotation.NonNull;
 import br.ufms.nafmanager.R;
 import br.ufms.nafmanager.activities.CustomActivity;
 import br.ufms.nafmanager.adapters.RegiaoAdapter;
+import br.ufms.nafmanager.model.Acesso;
 import br.ufms.nafmanager.model.Regiao;
 import br.ufms.nafmanager.persistencies.Persistencia;
 
 public class RegiaoGerenciar extends CustomActivity {
-    private Regiao regiao;
     private RegiaoAdapter adp;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +62,13 @@ public class RegiaoGerenciar extends CustomActivity {
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-        this.marcador = info.position;
-        getMenuInflater().inflate(R.menu.lista, menu);
+        Acesso acessoLogado = Persistencia.getInstance().getAcessoAtual();
+
+        if(acessoLogado.getNivelAcesso() >= 7L){
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+            this.marcador = info.position;
+            getMenuInflater().inflate(R.menu.lista, menu);
+        }
     }
 
     @Override

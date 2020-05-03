@@ -9,7 +9,6 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -22,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufms.nafmanager.R;
+import br.ufms.nafmanager.model.Acesso;
 import br.ufms.nafmanager.model.Cidade;
 import br.ufms.nafmanager.model.Estado;
 import br.ufms.nafmanager.model.Regiao;
@@ -37,9 +37,8 @@ public class UnidadeInserir extends AppCompatActivity {
     private Spinner spinnerCidade;
     private Spinner spinnerRegiao;
     private Button btn_inserirUnidade;
-    private List<Cidade> cidadeLista;
+    private ArrayList<Cidade> cidadeLista;
     private ArrayList<Regiao> regiaoLista;
-    private AutoCompleteTextView acCidade;
     private boolean edicao = false;
     private Unidade unidade;
     private List<UnidadeTipo> tipoLista = new ArrayList<>();
@@ -47,6 +46,7 @@ public class UnidadeInserir extends AppCompatActivity {
     private ArrayAdapter<Estado> estAdp;
     private ArrayAdapter<UnidadeTipo> adp;
     private ArrayAdapter<Regiao> regAdp;
+    private boolean copiandoTela = false;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +62,18 @@ public class UnidadeInserir extends AppCompatActivity {
 
         if(edicao && unidade != null){
             carregarTela();
+        }
+
+        controlaAcesso();
+    }
+
+    private void controlaAcesso() {
+        Acesso acessoLogado = Persistencia.getInstance().getAcessoAtual();
+
+        spinnerRegiao.setEnabled(false);
+
+        if(acessoLogado.getNivelAcesso() == 7L){
+            spinnerRegiao.setEnabled(true);
         }
     }
 
@@ -112,8 +124,13 @@ public class UnidadeInserir extends AppCompatActivity {
         spinnerEstado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                cidadeLista = Persistencia.getInstance().getCidades((Estado) parent.getSelectedItem());
-                setAdapterCidade();
+                if(copiandoTela){
+                    copiandoTela = false;
+                }
+                else{
+                    cidadeLista = Persistencia.getInstance().getCidades((Estado) parent.getSelectedItem());
+                    setAdapterCidade();
+                }
             }
 
             @Override
@@ -179,30 +196,28 @@ public class UnidadeInserir extends AppCompatActivity {
 
         UnidadeTipo uTipo = new UnidadeTipo();
         uTipo.setId(unidade.getTipoId());
+        uTipo = uTipo.buscaObjetoNaLista(Persistencia.getInstance().getUnidadesTipo());
 
         this.spinnerTipo.setSelection(adp.getPosition(uTipo));
 
-        int pos = 0;
-//        for(int i =0; i <= estAdp.getCount(); i++){
-//            Estado estado = estAdp.getItem(i);
-//            if(estado.getId().equals(unidade.getEstado().getId())){
-//                pos = i;
-//                break;
-//            }
-//        }
-        this.spinnerEstado.setSelection(pos);
+        Cidade cid = new Cidade();
+        cid.setId(unidade.getCidadeId());
+        cid = cid.buscaObjetoNaLista(Persistencia.getInstance().getCidades());
 
-        pos = 0;
-        if(unidade.getRegiaoFiscalId() != null && unidade.getRegiaoFiscalId().length() > 0){
-            for(int i = 0; i <= regAdp.getCount(); i++){
-                Regiao reg = regAdp.getItem(i);
-                if(reg.getId().equals(unidade.getRegiaoFiscalId())){
-                    pos = i;
-                    break;
-                }
-            }
-        }
-        this.spinnerRegiao.setSelection(pos);
+        Estado est = new Estado();
+        est.setId(cid.getEstadoId());
+        est = est.buscaObjetoNaLista(Persistencia.getInstance().getEstados());
+        this.spinnerEstado.setSelection(estAdp.getPosition(est));
+
+        Regiao reg = new Regiao();
+        reg.setId(unidade.getRegiaoId());
+        reg = reg.buscaObjetoNaLista(Persistencia.getInstance().getRegioes());
+        this.spinnerRegiao.setSelection(regAdp.getPosition(reg));
+
+        this.cidadeLista = Persistencia.getInstance().getCidades(est);
+        this.setAdapterCidade();
+        this.spinnerCidade.setSelection(cidadeAdptr.getPosition(Persistencia.getInstance().getCidade(unidade.getCidadeId())));
+        this.copiandoTela = true;
     }
 
     private void copiarTela() {
@@ -216,7 +231,7 @@ public class UnidadeInserir extends AppCompatActivity {
 
         if (spinnerRegiao.getSelectedItem() != null && spinnerRegiao.getSelectedItem().toString().length() > 0) {
             Regiao reg = (Regiao) spinnerRegiao.getSelectedItem();
-            unidade.setRegiaoFiscalId(reg.getId());
+            unidade.setRegiaoId(reg.getId());
         }
 
         if (spinnerTipo.getSelectedItem() != null && spinnerTipo.getSelectedItem().toString().length() > 0) {
@@ -239,18 +254,5 @@ public class UnidadeInserir extends AppCompatActivity {
         cidadeAdptr = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, cidadeLista);
         cidadeAdptr.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         this.spinnerCidade.setAdapter(cidadeAdptr);
-
-        if (edicao && unidade != null && unidade.getId() != null) {
-            int pos = 0;
-
-            for(int i =0; i <= cidadeAdptr.getCount(); i++){
-                Cidade cid = cidadeAdptr.getItem(i);
-                if(unidade.getCidadeId().equals(cid.getId())){
-                    pos = i;
-                    break;
-                }
-            }
-            this.spinnerCidade.setSelection(pos);
-        }
     }
 }

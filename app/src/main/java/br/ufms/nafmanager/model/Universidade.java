@@ -5,12 +5,7 @@ import java.io.Serializable;
 public class Universidade extends CustomObject implements Serializable {
     private String nome;
     private String cidadeId;
-    private String cidadeNome;
-    private String estadoId;
-    private String estadoNome;
-    private String estadoSigla;
     private String unidadeId;
-    private String unidadeNome;
 
     public Universidade() {
         super();
@@ -38,60 +33,12 @@ public class Universidade extends CustomObject implements Serializable {
         this.cidadeId = cidadeId;
     }
 
-    public String getCidadeNome() {
-        return cidadeNome;
-    }
-
-    public void setCidadeNome(String cidadeNome) {
-        this.cidadeNome = cidadeNome;
-    }
-
-    public String getEstadoId() {
-        return estadoId;
-    }
-
-    public void setEstadoId(String estadoId) {
-        this.estadoId = estadoId;
-    }
-
-    public String getEstadoNome() {
-        return estadoNome;
-    }
-
-    public void setEstadoNome(String estadoNome) {
-        this.estadoNome = estadoNome;
-    }
-
-    public String getEstadoSigla() {
-        return estadoSigla;
-    }
-
-    public void setEstadoSigla(String estadoSigla) {
-        this.estadoSigla = estadoSigla;
-    }
-
     public String getUnidadeId() {
         return unidadeId;
     }
 
     public void setUnidadeId(String unidadeId) {
         this.unidadeId = unidadeId;
-    }
-
-    public String getUnidadeNome() {
-        return unidadeNome;
-    }
-
-    public void setUnidadeNome(String unidadeNome) {
-        this.unidadeNome = unidadeNome;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj.getClass().getName().equals(this.getClass().getName()))
-            return true;
-
-        return false;
     }
 
     @Override
@@ -101,6 +48,15 @@ public class Universidade extends CustomObject implements Serializable {
 
     @Override
     public boolean validar() {
+        if (this.getNome() == null || this.getNome().length() <= 0) {
+            this.mensagem = "É necessário selecionar um nome";
+            return false;
+        }
+
+        if (this.getCidadeId() == null || this.getCidadeId().length() <= 0) {
+            this.mensagem = "É necessário selecionar uma cidade";
+            return false;
+        }
         return true;
     }
 

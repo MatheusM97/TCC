@@ -17,7 +17,6 @@ public class RegiaoInserir extends AppCompatActivity{
     private Regiao regiao;
     private Button btnCadastrar;
     private EditText nome;
-    private EditText numero;
     private boolean edicao = false;
 
     @Override
@@ -34,13 +33,13 @@ public class RegiaoInserir extends AppCompatActivity{
         vincularComponentes();
 
         if(edicao && regiao != null){
+            regiao.setEdicao(true);
             carregarTela();
         }
     }
 
     private void vincularComponentes() {
         nome = (EditText) findViewById(R.id.et_regiaoNome);
-        numero = (EditText) findViewById(R.id.et_regiaoNumero);
         btnCadastrar = (Button)findViewById(R.id.btn_criarRegiao);
 
         this.btnCadastrar.setOnClickListener(new View.OnClickListener() {
@@ -64,9 +63,6 @@ public class RegiaoInserir extends AppCompatActivity{
     private void carregarTela() {
         if(regiao.getNome() != null && regiao.getNome().length() >0)
             nome.setText(regiao.getNome());
-
-        if(regiao.getNumero() != null && regiao.getNumero() != 0)
-            numero.setText(regiao.getNumero().toString());
     }
 
     private void copiarTela(){
@@ -75,10 +71,6 @@ public class RegiaoInserir extends AppCompatActivity{
         }
         if (this.nome.getText() != null && this.nome.getText().length() > 0) {
             regiao.setNome(this.nome.getText().toString());
-        }
-
-        if (this.numero.getText() != null && this.numero.getText().length() > 0) {
-            regiao.setNumero(Long.parseLong(this.numero.getText().toString()));
         }
     }
 }

@@ -1,21 +1,27 @@
 package br.ufms.nafmanager.activities.usuario;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+
+import java.util.ArrayList;
 
 import br.ufms.nafmanager.R;
+import br.ufms.nafmanager.activities.CustomActivity;
 import br.ufms.nafmanager.adapters.UsuarioAdapter;
 import br.ufms.nafmanager.model.Usuario;
 import br.ufms.nafmanager.persistencies.Persistencia;
 
-public class UsuarioGerenciar extends AppCompatActivity {
+public class UsuarioGerenciar extends CustomActivity {
     private Usuario usuario;
     private ProgressDialog progressDialog;
     private UsuarioAdapter adp;
@@ -24,33 +30,79 @@ public class UsuarioGerenciar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listagem_gerencial);
 
-        adp = new UsuarioAdapter(this, Persistencia.getInstance().getUsuarios());
+        carregaLista();
+    }
+
+    private void carregaLista(){
+        adp = new UsuarioAdapter(this, getUsuarioAtual());
         ListView list = (ListView) findViewById(R.id.lv_listagemGerencial);
         list.setAdapter(adp);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                usuario = (Usuario) parent.getItemAtPosition(position);
-                Persistencia.getInstance().carregaUsuarioById(usuario.getId());
-
-                showDialog();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        Intent novaIntent = new Intent(getBaseContext(), UsuarioInserir.class);
-                        novaIntent.putExtra("usuario", Persistencia.getInstance().getUsuarioAtual());
-                        startActivity(novaIntent);
-                        progressDialog.dismiss();
-                    }
-                }, 6000);
-            }
+                Persistencia.getInstance().setUsuarioCarregado((Usuario) parent.getItemAtPosition(position));
+                carregaCad();
+           }
         });
+
+        registerForContextMenu(list);
     }
 
-    public void showDialog() {
-        this.progressDialog = new ProgressDialog(this);
-        this.progressDialog.setCancelable(false);
-        this.progressDialog.setContentView(R.layout.layout_carregando);
-        this.progressDialog.show();
+    private void carregaCad() {
+        Intent novaIntent = new Intent(getBaseContext(), UsuarioInserir.class);
+        novaIntent.putExtra("usuario", Persistencia.getInstance().getUsuarioCarregado());
+        startActivity(novaIntent);
+        editando = true;
     }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(editando){
+            adp.atualizarObjeto(Persistencia.getInstance().getUsuarioCarregado());
+            adp.notifyDataSetChanged();
+            editando = !editando;
+        }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        this.marcador = info.position;
+        getMenuInflater().inflate(R.menu.lista, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        final Usuario usr = (Usuario) adp.getObjeto(marcador);
+        new AlertDialog.Builder(UsuarioGerenciar.this)
+                .setIcon(android.R.drawable.ic_delete)
+                .setTitle("Alerta!")
+                .setMessage("Tem certeza que deseja remover o item: " + usr.getNome())
+                .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(usr.remover()) {
+                            adp.remover(marcador);
+                            adp.notifyDataSetChanged();
+                        }
+                    }
+                })
+                .setNegativeButton("Não", null)
+                .show();
+        return true;
+    }
+
+    private ArrayList<Usuario> getUsuarioAtual(){
+        ArrayList<Usuario> usuarios = new ArrayList<>();
+
+        for (Usuario usr: Persistencia.getInstance().getUsuarios()) {
+            if(!usuarios.contains(usr)){
+                usuarios.add(usr);
+            }
+        }
+
+        return usuarios;
+    }
+
 }

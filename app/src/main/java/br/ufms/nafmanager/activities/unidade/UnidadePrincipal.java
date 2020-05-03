@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import br.ufms.nafmanager.R;
 import br.ufms.nafmanager.activities.CustomActivity;
+import br.ufms.nafmanager.model.Acesso;
 import br.ufms.nafmanager.persistencies.Persistencia;
 
 public class UnidadePrincipal extends CustomActivity {
@@ -23,16 +24,18 @@ public class UnidadePrincipal extends CustomActivity {
         btn_inserirUnidade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Persistencia.getInstance().carregaRegioes();
+                Acesso acessoLogado = Persistencia.getInstance().getAcessoAtual();
+
                 showDialog();
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        hideDialog();
-                        iniciarTelas(new UnidadeInserir());
-                    }
-                }, 3000);
+                if(acessoLogado.getNivelAcesso() == 6L){
+                    Persistencia.getInstance().carregaRegiaoById(acessoLogado.getRegiaoId());
+                }
+                else if (acessoLogado.getNivelAcesso() > 6L){
+                    Persistencia.getInstance().carregaRegioes();
+                }
+
+                aguardandoRegioes();
             }
         });
 
@@ -40,18 +43,71 @@ public class UnidadePrincipal extends CustomActivity {
         btn_gerenciarUnidade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Persistencia.getInstance().carregaUnidades();
 
                 showDialog();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        hideDialog();
-                        iniciarTelas(new UnidadeGerenciar());
-                    }
-                }, 6000);
+
+                Acesso acessoLogado = Persistencia.getInstance().getAcessoAtual();
+                if(acessoLogado.getNivelAcesso() == 7L){
+                    Persistencia.getInstance().carregaUnidades();
+                }else if (acessoLogado.getNivelAcesso() == 6L){
+                    Persistencia.getInstance().carregaUnidadesUniversidadesByRegiaoId(acessoLogado.getRegiaoId());
+                }else if (acessoLogado.getNivelAcesso() == 5L){
+                    Persistencia.getInstance().carregaUnidades(acessoLogado);
+                }
+
+                aguardandoUnidades();
             }
         });
+
+        controlaAcesso();
+    }
+
+    private void aguardandoRegioes() {
+        if(Persistencia.getInstance().carregouRegioes){
+            hideDialog();
+            iniciarTelas(new UnidadeInserir());
+        }
+        else{
+            aguardandoCarregarRegioes();
+        }
+    }
+
+    private void aguardandoUnidades() {
+        if(Persistencia.getInstance().carregouUnidades){
+            hideDialog();
+            iniciarTelas(new UnidadeGerenciar());
+        }
+        else{
+            aguardandoCarregarUnidades();
+        }
+    }
+
+    private void aguardandoCarregarUnidades() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                aguardandoUnidades();
+            }
+        }, 6000);
+    }
+
+    private void aguardandoCarregarRegioes() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                aguardandoRegioes();
+            }
+        }, 6000);
+    }
+
+
+    private void controlaAcesso() {
+        Acesso acessoLogado = Persistencia.getInstance().getAcessoAtual();
+
+        btn_inserirUnidade.setVisibility(View.INVISIBLE);
+        if(acessoLogado.getNivelAcesso() >= 6L){
+            btn_inserirUnidade.setVisibility(View.VISIBLE);
+        }
     }
 
     public void iniciarTelas(Object obj) {

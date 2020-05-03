@@ -1,11 +1,11 @@
 package br.ufms.nafmanager.model;
 
-public class Atendido extends CustomObject {
+public class AtendidoTipo extends CustomObject {
     private String nome;
 
-    public Atendido(){super();}
+    public AtendidoTipo(){super();}
 
-    public Atendido(String id, String nome){
+    public AtendidoTipo(String id, String nome){
         this.id = id;
         this.nome = nome;
     }

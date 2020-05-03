@@ -8,11 +8,14 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import br.ufms.nafmanager.R;
+import br.ufms.nafmanager.activities.acesso.AcessoPrincipal;
+import br.ufms.nafmanager.activities.atendimento.AtendimentoActivity;
 import br.ufms.nafmanager.activities.regiao.RegiaoPrincipal;
 import br.ufms.nafmanager.activities.unidade.UnidadePrincipal;
 import br.ufms.nafmanager.activities.universidade.UniversidadePrincipal;
 import br.ufms.nafmanager.activities.usuario.UsuarioPrincipal;
 import br.ufms.nafmanager.model.Acesso;
+import br.ufms.nafmanager.model.AcessoTipoEnum;
 import br.ufms.nafmanager.persistencies.Persistencia;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,44 +32,22 @@ public class MainActivity extends AppCompatActivity {
     private TextView btn_unidadeManager;
     private TextView btn_usuarioManager;
     private TextView btn_universidadeManager;
-//    private TextView btn_iniciarAtendimento;
-//    private TextView btn_acessoManager;
-    private Acesso acessoAtual;
+    private TextView btn_acessoManager;
+    private TextView btn_atendimento;
+    private TextView btn_sair;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            if (extras.getString("acessoId") != null)
-                this.acessoId = extras.getString("acessoId");
+        Persistencia.getInstance().Iniciar();
 
-            if (extras.getString("usuarioId") != null)
-                this.usuarioId = extras.getString("usuarioId");
+        carregaComponentes();
 
-            if (extras.getString("usuarioNome") != null)
-                this.usuarioNome = extras.getString("usuarioNome");
+        controlaAcesso();
+    }
 
-            if (extras.getString("universidadeId") != null)
-                this.universidadeId = extras.getString("universidadeId");
-
-            if (extras.getString("universidadeNome") != null)
-                this.universidadeNome = extras.getString("universidadeNome");
-
-            if (extras.getString("unidadeId") != null)
-                this.unidadeId = extras.getString("unidadeId");
-
-            if (extras.getString("unidadeNome") != null)
-                this.unidadeNome = extras.getString("unidadeNome");
-        }
-
-//        acessoAtual = new Acesso();
-//        acessoAtual = Persistencia.getInstance().getAcessoAtual();
-
-        Persistencia.getInstance().carregaAtendidos();
-
-
+    private void carregaComponentes() {
         btn_unidadeManager = (TextView) findViewById(R.id.btn_unidadeManager);
         btn_unidadeManager.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,60 +80,74 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        btn_acessoManager = (TextView) findViewById(R.id.btn_acessoManager);
-//        btn_acessoManager.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                iniciarTelas(new AcessoManager());
-//            }
-//        });
+        btn_acessoManager = (TextView) findViewById(R.id.btn_acessoManager);
+        btn_acessoManager.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iniciarTelas(new AcessoPrincipal());
+            }
+        });
 
-//        btn_iniciarAtendimento = (TextView) findViewById(R.id.btn_realizarAtendimento);
-//        btn_iniciarAtendimento.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                iniciarTelas(new AtendimentoActivity());
-//            }
-//        });
+        btn_atendimento = findViewById(R.id.btn_atendimento);
+        btn_atendimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iniciarTelas(new AtendimentoActivity());
+            }
+        });
 
-//        if(Persistencia.getInstance().getVersao() > 0){
-//            btn_acessoManager.setVisibility(View.INVISIBLE);
-//            btn_iniciarAtendimento.setVisibility(View.INVISIBLE);
-//            btn_usuarioManager.setVisibility(View.INVISIBLE);
-//            btn_universidadeManager.setVisibility(View.INVISIBLE);
-//            btn_unidadeManager.setVisibility(View.INVISIBLE);
-//
-//            if (acessoAtual.isParticipante() || acessoAtual.isSupervisor() || acessoAtual.isCoordenador() || acessoAtual.isRepresentante()) {
-//                btn_iniciarAtendimento.setVisibility(View.VISIBLE);
-//                btn_usuarioManager.setVisibility(View.VISIBLE);
-//            }
-//
-//            if (acessoAtual.isCoordenador() || acessoAtual.isRepresentante()) {
-//                btn_universidadeManager.setVisibility(View.VISIBLE);
-//            }
-//
-//            if (acessoAtual.isRepresentante()) {
-//                btn_unidadeManager.setVisibility(View.VISIBLE);
-//            }
-//        }
+        btn_sair = (TextView) findViewById(R.id.btn_sair);
+        btn_sair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void controlaAcesso() {
+        btn_regiaoManager.setVisibility(View.INVISIBLE);
+        btn_unidadeManager.setVisibility(View.INVISIBLE);
+        btn_universidadeManager.setVisibility(View.INVISIBLE);
+        btn_atendimento.setVisibility(View.INVISIBLE);
+        btn_acessoManager.setVisibility(View.VISIBLE);
+        btn_usuarioManager.setVisibility(View.VISIBLE);
+
+        Acesso acesso = Persistencia.getInstance().getAcessoAtual();
+
+        if(acesso != null){
+            if((acesso.isModerador() || acesso.isRepresentante()) && acesso.getTipoValor().equals(AcessoTipoEnum.REGIAO.getValor())){
+                btn_regiaoManager.setVisibility(View.VISIBLE);
+                btn_unidadeManager.setVisibility(View.VISIBLE);
+                btn_universidadeManager.setVisibility(View.VISIBLE);
+            }
+            else if(acesso.getTipoValor().equals(AcessoTipoEnum.UNIDADE.getValor()) && acesso.isRepresentante()){
+                btn_unidadeManager.setVisibility(View.VISIBLE);
+                btn_universidadeManager.setVisibility(View.VISIBLE);
+            }else if (acesso.getTipoValor().equals(AcessoTipoEnum.UNIVERSIDADE.getValor()) && (acesso.isRepresentante())) {
+                btn_universidadeManager.setVisibility(View.VISIBLE);
+            }else if (acesso.getTipoValor().equals(AcessoTipoEnum.UNIVERSIDADE.getValor()) && (acesso.isProfessor() || acesso.isAluno())){
+                btn_usuarioManager.setVisibility(View.VISIBLE);
+            }
+
+            if(acesso.isProfessor() || acesso.isAluno()){
+                btn_atendimento.setVisibility(View.VISIBLE);
+            }
+        }
+        else{
+            btn_acessoManager.setVisibility(View.VISIBLE);
+            btn_usuarioManager.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-//        Persistencia.getInstance().carregaUniversidades();
-//        Persistencia.getInstance().carregaUnidades();
-//        Persistencia.getInstance().carregaUsuarios();
     }
 
     public void iniciarTelas(Object obj) {
         Intent novaIntent = new Intent(getBaseContext(), obj.getClass());
-        novaIntent.putExtra("usuarioNome", this.usuarioNome);
-        novaIntent.putExtra("usuarioId", this.usuarioId);
-        novaIntent.putExtra("unidadeId", this.unidadeId);
-        novaIntent.putExtra("unidadeNome", this.unidadeNome);
-        novaIntent.putExtra("universidadeId", this.universidadeId);
-        novaIntent.putExtra("universidadeNome", this.universidadeNome);
         startActivity(novaIntent);
     }
 }

@@ -6,8 +6,8 @@ import java.util.List;
 import br.ufms.nafmanager.model.Cidade;
 
 public class BA {
-    public static List<Cidade> getCidades() {
-        List<Cidade> lista = new ArrayList<Cidade>();
+    public static ArrayList<Cidade> getCidades() {
+        ArrayList<Cidade> lista = new ArrayList<Cidade>();
         lista = new ArrayList<Cidade>();
         lista.add(new Cidade("N7Cj0faiMBcnLGwcIWgB","Abadia","6R8soQpFwwNYRMxhvqVJ", "BA"));
         lista.add(new Cidade("eTA7sbZhbqcG8jaH1Pcq","Abaíra","6R8soQpFwwNYRMxhvqVJ", "BA"));

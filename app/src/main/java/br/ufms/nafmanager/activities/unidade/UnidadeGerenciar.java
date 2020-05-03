@@ -1,7 +1,6 @@
 package br.ufms.nafmanager.activities.unidade;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,13 +16,12 @@ import androidx.annotation.NonNull;
 import br.ufms.nafmanager.R;
 import br.ufms.nafmanager.activities.CustomActivity;
 import br.ufms.nafmanager.adapters.UnidadeAdapter;
+import br.ufms.nafmanager.model.Acesso;
 import br.ufms.nafmanager.model.Unidade;
 import br.ufms.nafmanager.persistencies.Persistencia;
 
 public class UnidadeGerenciar extends CustomActivity {
-
     private Unidade unidade;
-    private ProgressDialog progressDialog;
     private UnidadeAdapter adp;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +54,7 @@ public class UnidadeGerenciar extends CustomActivity {
                 Intent novaIntent = new Intent(getBaseContext(), UnidadeInserir.class);
                 novaIntent.putExtra("unidade", Persistencia.getInstance().getUnidadeAtual());
                 startActivity(novaIntent);
+                editando = true;
                 hideDialog();
             }
         }, 6000);
@@ -73,9 +72,13 @@ public class UnidadeGerenciar extends CustomActivity {
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-        this.marcador = info.position;
-        getMenuInflater().inflate(R.menu.lista, menu);
+        Acesso acessoLogado = Persistencia.getInstance().getAcessoAtual();
+
+        if(acessoLogado.getNivelAcesso() >= 6L){
+            AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+            this.marcador = info.position;
+            getMenuInflater().inflate(R.menu.lista, menu);
+        }
     }
 
     @Override

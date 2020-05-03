@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import br.ufms.nafmanager.R;
 import br.ufms.nafmanager.activities.CustomActivity;
+import br.ufms.nafmanager.model.Acesso;
 import br.ufms.nafmanager.persistencies.Persistencia;
 
 public class RegiaoPrincipal extends CustomActivity {
@@ -31,18 +32,49 @@ public class RegiaoPrincipal extends CustomActivity {
         btn_gerenciarRegiao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Persistencia.getInstance().carregaRegioes();
-
                 showDialog();
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        hideDialog();
-                        iniciarTelas(new RegiaoGerenciar());
-                    }
-                }, 6000);
+                Acesso acessoLogado = Persistencia.getInstance().getAcessoAtual();
+
+                if(acessoLogado.getNivelAcesso() == 7L){
+                    Persistencia.getInstance().carregaRegioes();
+                }
+                else if(acessoLogado.getNivelAcesso() == 6L){
+                        Persistencia.getInstance().carregaRegiaoById(acessoLogado.getRegiaoId());
+                }
+
+                aguardandoRegioes();
             }
         });
+
+        controlaAcesso();
+    }
+
+    private void controlaAcesso() {
+        Acesso acessoLogado = Persistencia.getInstance().getAcessoAtual();
+
+        btn_inserirRegiao.setVisibility(View.INVISIBLE);
+        if(acessoLogado.getNivelAcesso() >= 7L){
+            btn_inserirRegiao.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void aguardandoRegioes() {
+        if(Persistencia.getInstance().carregouRegioes){
+            hideDialog();
+            iniciarTelas(new RegiaoGerenciar());
+        }
+        else{
+            aguardandoCarregarRegioes();
+        }
+    }
+
+    private void aguardandoCarregarRegioes() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                aguardandoRegioes();
+            }
+        }, 6000);
     }
 
     public void iniciarTelas(Object obj) {
