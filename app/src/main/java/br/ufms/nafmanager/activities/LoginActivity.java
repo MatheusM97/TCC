@@ -102,7 +102,7 @@ public class LoginActivity extends CustomActivity {
             this.usuarioAtual.setSenha(this.senha.getText().toString());
 
 //        this.usuarioAtual.setCpf("111.111.111-11");//admin
-//        this.usuarioAtual.setCpf("018.758.051-09");//aluno
+//        this.usuarioAtual.setCpf("018.758.051-09");//aluno    
 //        this.usuarioAtual.setCpf("555.555.555-55"); //Professor
 //        this.usuarioAtual.setCpf("333.333.333-33"); //representante universidade
 //        this.usuarioAtual.setCpf("444.444.444-44"); //representante da regiao
