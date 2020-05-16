@@ -1,5 +1,6 @@
 package br.ufms.nafmanager.activities;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +16,16 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener;
+
+import java.util.List;
+
 import br.ufms.nafmanager.R;
+import br.ufms.nafmanager.activities.relatorios.RelatorioPrincipal;
 import br.ufms.nafmanager.activities.usuario.UsuarioInserir;
 import br.ufms.nafmanager.adapters.AcessoAdapter;
 import br.ufms.nafmanager.adapters.MaskEditUtil;
@@ -28,6 +38,7 @@ public class LoginActivity extends CustomActivity {
     private EditText senha;
     private Button btn_login;
     private Button btn_registrar;
+    private Button btn_relatorios;
     private Usuario usuarioAtual;
     private AcessoAdapter acessoAdapter;
     private int timeout = 0;
@@ -41,7 +52,9 @@ public class LoginActivity extends CustomActivity {
         this.login = (EditText) findViewById(R.id.et_login);
         this.senha = (EditText) findViewById(R.id.et_senha);
         this.btn_login = (Button) findViewById(R.id.btn_login);
+        this.btn_relatorios = findViewById(R.id.btn_relatorios);
         this.btn_registrar = (Button) findViewById(R.id.btn_registrar_se);
+
 
         Persistencia.getInstance().setUsuarioAtual(null);
         Persistencia.getInstance().setAcessoAtual(null);
@@ -86,6 +99,30 @@ public class LoginActivity extends CustomActivity {
                 startActivity(novaIntent);
             }
         });
+
+        this.btn_relatorios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent novaIntent = new Intent(getBaseContext(), RelatorioPrincipal.class);
+                startActivity(novaIntent);
+            }
+        });
+
+
+        Dexter.withActivity(this)
+                .withPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
+                .withListener(new BaseMultiplePermissionsListener(){
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        super.onPermissionsChecked(report);
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        super.onPermissionRationaleShouldBeShown(permissions, token);
+                    }
+                }).check();
+
     }
 
     private void realizarLogin() {

@@ -3,8 +3,11 @@
     package="br.ufms.nafmanager">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
 
     <application
+        android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -36,6 +39,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activities.atendimento.AtendimentoActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".activities.relatorios.RelatorioPrincipal"/>
+        <activity android:name=".activities.relatorios.PdfVisualizador"/>
         <activity android:name=".activities.usuario.UsuarioPrincipal" />
         <activity android:name=".activities.unidade.UnidadePrincipal" />
         <activity android:name=".activities.universidade.UniversidadePrincipal" />
