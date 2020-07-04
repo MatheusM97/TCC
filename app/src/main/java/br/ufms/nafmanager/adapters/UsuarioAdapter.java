@@ -31,7 +31,12 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
         TextView subtitleText = (TextView) rowView.findViewById(R.id.et_listagemSubstitulo);
 
         titleText.setText(lista.get(position).getNome());
-        subtitleText.setText(MaskEditUtil.mask(lista.get(position).getCpfMascarado()) + " - "+ lista.get(position).getEmail());
+
+        String email = "";
+        if(lista.get(position).getEmail()!= null){
+            email = " - " + lista.get(position).getEmail();
+        }
+        subtitleText.setText(MaskEditUtil.mask(lista.get(position).getCpfMascarado()) + email);
 
         return rowView;
     }

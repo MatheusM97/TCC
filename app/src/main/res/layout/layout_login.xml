@@ -10,19 +10,20 @@
         android:text="CPF"
         android:textColor="#000000"
         android:textStyle="normal"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="120dp"
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"
         ></TextView>
+
     <EditText
         android:id="@+id/et_login"
         android:layout_below="@+id/tv_login"
         android:textColor="#000000"
         android:textStyle="normal"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="50dp"
@@ -37,7 +38,7 @@
         android:text="Senha"
         android:textColor="#000000"
         android:textStyle="normal"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="50dp"
@@ -49,7 +50,7 @@
         android:layout_below="@+id/tv_senha"
         android:textColor="#000000"
         android:textStyle="normal"
-        android:textSize="20dp"
+        android:textSize="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginRight="50dp"
@@ -65,13 +66,13 @@
         android:id="@+id/btn_login"
         android:layout_below="@+id/et_senha"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"
         android:background="@drawable/btn_finalizar"
         android:text="Acessar"
         android:textColor="#FFFFFF"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"
         ></Button>
 
@@ -81,13 +82,13 @@
         android:layout_marginTop="10dp"
         android:layout_below="@+id/btn_login"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"
         android:background="@drawable/btn_cancelar"
         android:text="Relatórios"
         android:textColor="@color/colorPrimary"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"
         ></Button>
 
@@ -109,7 +110,7 @@
         android:id="@+id/btn_registrar_se"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_marginRight="50dp"
         android:layout_marginLeft="50dp"
         android:layout_marginBottom="10dp"
@@ -121,7 +122,5 @@
         android:layout_centerVertical="true"
         android:background="@drawable/btn_cancelar"
         />
-
-
 
 </RelativeLayout>

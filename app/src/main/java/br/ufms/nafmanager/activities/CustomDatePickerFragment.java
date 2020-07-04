@@ -24,6 +24,11 @@ public class CustomDatePickerFragment extends DialogFragment {
         this.q = q;
     }
 
+    public CustomDatePickerFragment(TextView tvData, int q) {
+        this.tvData = tvData;
+        this.q = q;
+    }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 

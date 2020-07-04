@@ -9,7 +9,6 @@ import android.widget.TextView;
 import br.ufms.nafmanager.R;
 import br.ufms.nafmanager.activities.CustomActivity;
 import br.ufms.nafmanager.model.Acesso;
-import br.ufms.nafmanager.model.AcessoTipoEnum;
 import br.ufms.nafmanager.persistencies.Persistencia;
 
 public class UniversidadePrincipal extends CustomActivity {
@@ -25,8 +24,9 @@ public class UniversidadePrincipal extends CustomActivity {
         btn_inserirUniversidade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Persistencia.getInstance().carregaUnidadeUniversidadeRegiaoByAcesso(acessoLogado);
                 showDialog();
+                Persistencia.getInstance().carregaUnidadeUniversidadeRegiaoByAcesso(acessoLogado);
+                Persistencia.getInstance().carregaRegioes();
 
                 carregandoInserir();
             }
@@ -36,25 +36,23 @@ public class UniversidadePrincipal extends CustomActivity {
         btn_gerenciarUniversidade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showDialog();
                 Persistencia.getInstance().carregaUnidadeUniversidadeRegiaoByAcesso(acessoLogado);
 
-                showDialog();
                 carregandoGerenciar();
             }
         });
 
         btn_inserirUniversidade.setVisibility(View.INVISIBLE);
         if(acessoLogado != null){
-            if(acessoLogado.getTipoValor().equals(AcessoTipoEnum.UNIDADE.getValor()) || acessoLogado.getTipoValor().equals(AcessoTipoEnum.REGIAO.getValor()) ){
-                if(acessoLogado.isRepresentante() || acessoLogado.isModerador() ){
+            if(acessoLogado.getNivelAcesso() >= 5L){
                   btn_inserirUniversidade.setVisibility(View.VISIBLE);
-                }
             }
         }
     }
 
     private void carregandoInserir(){
-        if(Persistencia.getInstance().carregouUniversidades){
+        if(Persistencia.getInstance().carregouUniversidades && Persistencia.getInstance().carregouRegioes){
             hideDialog();
             iniciarTelas(new UniversidadeInserir());
         }
@@ -64,7 +62,9 @@ public class UniversidadePrincipal extends CustomActivity {
     }
 
     private void carregandoGerenciar(){
-        if(Persistencia.getInstance().carregouUniversidades){
+        if(Persistencia.getInstance().carregouUniversidades &&
+           Persistencia.getInstance().carregouRegioes &&
+           Persistencia.getInstance().carregouUnidades){
             hideDialog();
             iniciarTelas(new UniversidadeGerenciar());
         }

@@ -65,6 +65,10 @@ public class AcessoUsuarioAdapter extends ArrayAdapter<Acesso> {
             subtitleText.setText("Região: " + reg.getNome());
         }
 
+        if (ac.getTipoValor().equals(AcessoTipoEnum.MODERADOR.getValor()) && ac.isModerador()) {
+            subtitleText.setText("Moderador");
+        }
+
         return rowView;
     }
 

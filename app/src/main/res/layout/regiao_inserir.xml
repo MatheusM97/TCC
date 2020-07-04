@@ -1,45 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:background="#F0F0F0"
+    android:id="@+id/layout_1">
 
-    <TextView
-        android:id="@+id/tv_regiaoNome"
+    <LinearLayout
+        android:id="@+id/layout_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
-        android:text="Nome"
-        android:textColor="#000000"
-        android:textSize="20dp"
-        android:textStyle="normal"></TextView>
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/et_regiaoNome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:inputType="text"
-        android:singleLine="true"
-        android:textColor="#000000"
-        android:textSize="20dp"
-        android:textStyle="normal"></EditText>
+        <TextView
+            android:id="@+id/tv_regiaoNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:text="Nome"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:textStyle="normal"></TextView>
 
-    <Button
-        android:id="@+id/btn_criarRegiao"
+        <EditText
+            android:id="@+id/et_regiaoNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_regiaoNome"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:textStyle="normal"></EditText>
+
+        <TextView
+            android:id="@+id/tv_estados"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:text="Estados"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:textStyle="normal"></TextView>
+
+        <ListView
+            android:id="@+id/lv_estados"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="110dp"
+            android:background="#F0F0F0" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/atendimento_layout_btn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/btn_finalizar"
-        android:text="Concluir"
-        android:textColor="#FFFFFF"
-        android:textSize="20dp"
-        android:textStyle="normal"></Button>
+        android:layout_height="wrap_content">
 
-</LinearLayout>
+        <Button
+            android:id="@+id/btn_criarRegiao"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="70dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/btn_finalizar"
+            android:text="concluir"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/atendimento_layout_abtn"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="75dp">
+
+        <TextView
+            android:id="@+id/tv_representante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="15dp"
+            android:layout_centerHorizontal="true"
+            android:text="Representante"/>
+
+        <ListView
+            android:id="@+id/lv_representanteRegiao"
+            android:layout_below="@id/tv_representante"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

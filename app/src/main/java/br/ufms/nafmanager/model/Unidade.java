@@ -1,8 +1,10 @@
 package br.ufms.nafmanager.model;
 
+import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 @IgnoreExtraProperties
 public class Unidade extends CustomObject implements Serializable {
@@ -10,6 +12,23 @@ public class Unidade extends CustomObject implements Serializable {
     private String tipoId;
     private String cidadeId;
     private String regiaoId;
+
+    @Exclude
+    private ArrayList<Usuario> representantes = new ArrayList<>();
+
+    @Exclude
+    public ArrayList<Usuario> getRepresentantes(){
+        return representantes;
+    }
+
+    @Exclude
+    public void addRepresentante(Usuario us){
+        if(this.representantes == null){
+            this.representantes = new ArrayList<>();
+        }
+
+        this.representantes.add(us);
+    }
 
     public Unidade(){super();}
 
@@ -83,11 +102,6 @@ public class Unidade extends CustomObject implements Serializable {
             return false;
         }
 
-        return true;
-    }
-
-    @Override
-    public boolean validarRemocao() {
         return true;
     }
 }

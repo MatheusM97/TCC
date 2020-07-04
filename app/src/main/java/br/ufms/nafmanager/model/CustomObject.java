@@ -70,8 +70,6 @@ public abstract class CustomObject implements Serializable {
 
     public abstract boolean validar();
 
-    public abstract boolean validarRemocao();
-
     public boolean salvar(){
         if(validar()){
 
@@ -93,14 +91,14 @@ public abstract class CustomObject implements Serializable {
         return false;
     }
 
-    public boolean remover(){
-        if(validarRemocao()){
+    public void remover(){
+//        if(validarRemocao()){
             Persistencia.getInstance().removerObjeto(this);
-            this.mensagem = "Registro removido com sucesso!";
-            return true;
-        }
-
-        return false;
+//            this.mensagem = "Registro removido com sucesso!";
+//            return true;
+//        }
+//
+//        return false;
     }
 
     public<T extends CustomObject> T buscaObjetoNaLista(ArrayList<T> lista) {

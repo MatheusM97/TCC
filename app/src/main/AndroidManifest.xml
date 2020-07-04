@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:requestLegacyExternalStorage="true"
@@ -25,7 +25,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.SplashScreen"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,25 +41,84 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activities.atendimento.AtendimentoActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".activities.relatorios.RelatorioPrincipal"/>
-        <activity android:name=".activities.relatorios.PdfVisualizador"/>
-        <activity android:name=".activities.usuario.UsuarioPrincipal" />
-        <activity android:name=".activities.unidade.UnidadePrincipal" />
-        <activity android:name=".activities.universidade.UniversidadePrincipal" />
-        <activity android:name=".activities.regiao.RegiaoPrincipal" />
-        <activity android:name=".activities.unidade.UnidadeInserir" />
-        <activity android:name=".activities.universidade.UniversidadeInserir" />
-        <activity android:name=".activities.usuario.UsuarioInserir"/>
-        <activity android:name=".activities.acesso.AcessoGerenciar" />
-        <activity android:name=".activities.acesso.AcessoPrincipal" />
-        <activity android:name=".activities.acesso.AcessoInserir" />
-        <activity android:name=".activities.acesso.AcessoSolicitar" />
-        <activity android:name=".activities.acesso.AcessoAprovar" />
-        <activity android:name=".activities.unidade.UnidadeGerenciar" />
-        <activity android:name=".activities.universidade.UniversidadeGerenciar" />
-        <activity android:name=".activities.usuario.UsuarioGerenciar" />
-        <activity android:name=".activities.regiao.RegiaoInserir" />
-        <activity android:name=".activities.regiao.RegiaoGerenciar" />
+        <activity android:name=".activities.relatorios.RelatorioPrincipal"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.relatorios.RelatorioParticipante"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.relatorios.RelatorioTempoMedio"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.relatorios.RelatorioCadastro"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.relatorios.RelatorioRepresentanteUniversidade"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.relatorios.RelatorioRepresentanteUnidade"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.relatorios.RelatorioRepresentanteRegiao"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.relatorios.RelatorioRanking"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.relatorios.PdfVisualizador"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.usuario.UsuarioPrincipal"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.unidade.UnidadePrincipal"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.universidade.UniversidadePrincipal"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.regiao.RegiaoPrincipal"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.unidade.UnidadeInserir"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.universidade.UniversidadeInserir"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.usuario.UsuarioInserir"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.acesso.AcessoGerenciar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.acesso.AcessoPrincipal"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.acesso.AcessoInserir"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.acesso.AcessoSolicitar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.acesso.AcessoAprovar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.unidade.UnidadeGerenciar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.universidade.UniversidadeGerenciar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.usuario.UsuarioGerenciar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.regiao.RegiaoInserir"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.regiao.RegiaoGerenciar"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

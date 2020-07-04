@@ -13,7 +13,7 @@
         android:layout_marginRight="50dp"
         android:text="Tipo"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></TextView>
 
     <Spinner
@@ -38,7 +38,7 @@
         android:layout_marginRight="50dp"
         android:text="Universidade"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></TextView>
 
     <Spinner
@@ -64,7 +64,7 @@
         android:layout_marginRight="50dp"
         android:text="Unidade"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></TextView>
 
     <Spinner
@@ -90,7 +90,7 @@
         android:layout_marginRight="50dp"
         android:text="Região"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></TextView>
 
     <Spinner
@@ -115,7 +115,7 @@
         android:layout_marginRight="50dp"
         android:text="Papéis"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></TextView>
 
     <CheckBox
@@ -130,7 +130,7 @@
         android:layout_marginTop="7dp"
         android:layout_marginRight="50dp"
         android:text="Aluno"
-        android:textSize="20dp" />
+        android:textSize="18dp" />
 
     <CheckBox
         android:id="@+id/cb_acesso_professor"
@@ -144,7 +144,7 @@
         android:layout_marginTop="7dp"
         android:layout_marginRight="50dp"
         android:text="Professor"
-        android:textSize="20dp" />
+        android:textSize="18dp" />
 
     <CheckBox
         android:id="@+id/cb_acesso_representanteUniversidade"
@@ -158,7 +158,7 @@
         android:layout_marginTop="7dp"
         android:layout_marginRight="50dp"
         android:text="Representante"
-        android:textSize="20dp" />
+        android:textSize="18dp" />
 
     <CheckBox
         android:id="@+id/cb_acesso_representante"
@@ -172,13 +172,13 @@
         android:layout_marginTop="7dp"
         android:layout_marginRight="50dp"
         android:text="Representante"
-        android:textSize="20dp" />
+        android:textSize="18dp" />
 
     <CheckBox
         android:id="@+id/cb_acesso_master"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cb_acesso_representante"
+        android:layout_below="@id/tv_papeis"
         android:button="@null"
         android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
         android:gravity="center_vertical"
@@ -186,7 +186,7 @@
         android:layout_marginTop="7dp"
         android:layout_marginRight="50dp"
         android:text="Moderador"
-        android:textSize="20dp" />
+        android:textSize="18dp" />
 
     <Button
         android:id="@+id/btn_acesso_inserir"
@@ -196,7 +196,7 @@
         android:layout_margin="5dp"
         android:background="@drawable/btn_finalizar"
         android:gravity="center"
-        android:text="Concluir"
+        android:text="Solicitar"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         android:textStyle="normal"></Button>

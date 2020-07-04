@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 import br.ufms.nafmanager.R;
 import br.ufms.nafmanager.model.Acesso;
+import br.ufms.nafmanager.model.AcessoTipoEnum;
+import br.ufms.nafmanager.model.Regiao;
 import br.ufms.nafmanager.model.Unidade;
 import br.ufms.nafmanager.model.Universidade;
 import br.ufms.nafmanager.persistencies.Persistencia;
@@ -34,32 +36,29 @@ public class AcessoAdapter extends ArrayAdapter<Acesso> {
         TextView subtitleText = (TextView) rowView.findViewById(R.id.et_listagemSubstitulo);
 
         Acesso ac = lista.get(position);
-        if(ac.getUnidadeId() != null && ac.getUnidadeId().length() > 0){
+        if(ac.getTipoValor().equals(AcessoTipoEnum.UNIDADE.getValor()) && ac.getUnidadeId() != null && ac.getUnidadeId().length() > 0){
             Unidade und = new Unidade();
             und.setId(lista.get(position).getUnidadeId());
             und = und.buscaObjetoNaLista(Persistencia.getInstance().getUnidades());
-            titleText.setText("Unidade: " + und.getNome());
-
-//            Cidade cid = new Cidade();
-//            cid.setId(und.getCidadeId());
-//            cid = cid.buscaObjetoNaLista(Persistencia.getInstance().getCidades());
-//            Estado est = Persistencia.getInstance().getEstado(cid.getEstadoId());
-
-//            subtitleText.setText(cid.getNome() +" / " + est.getSigla());
+            titleText.setText("Unidade da Receita: " + und.getNome());
         }
 
-        if(ac.getUniversidadeId() != null && ac.getUniversidadeId().length() > 0){
+        if(ac.getTipoValor().equals(AcessoTipoEnum.UNIVERSIDADE.getValor()) && ac.getUniversidadeId() != null && ac.getUniversidadeId().length() > 0){
             Universidade unv = new Universidade();
             unv.setId(ac.getUniversidadeId());
             unv = unv.buscaObjetoNaLista(Persistencia.getInstance().getUniversidades());
             titleText.setText("Universidade: " + unv.getNome());
+        }
 
-//            Cidade cid = new Cidade();
-//            cid.setId(unv.getCidadeId());
-//            cid = cid.buscaObjetoNaLista(Persistencia.getInstance().getCidades());
-//            Estado est = Persistencia.getInstance().getEstado(cid.getEstadoId());
-//
-//            subtitleText.setText(cid.getNome() + " / " + est.getSigla());
+        if(ac.getTipoValor().equals(AcessoTipoEnum.REGIAO.getValor()) && ac.getRegiaoId() != null && ac.getRegiaoId().length() > 0){
+            Regiao reg= new Regiao();
+            reg.setId(ac.getRegiaoId());
+            reg = reg.buscaObjetoNaLista(Persistencia.getInstance().getRegioes());
+            titleText.setText("Região Fiscal: " + reg.getNome());
+        }
+
+        if(ac.getTipoValor().equals(AcessoTipoEnum.MODERADOR.getValor())){
+            titleText.setText("Moderador");
         }
 
         subtitleText.setText(ac.listaPapeisAtivos());

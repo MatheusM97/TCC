@@ -11,6 +11,12 @@ public class Cidade extends CustomObject {
         super();
     }
 
+    public Cidade(String id, String nome) {
+        super();
+        this.id = id;
+        this.nome = nome;
+    }
+
     public Cidade(String id, String nome, String estadoId, String estadoSigla) {
         super();
         this.id = id;
@@ -41,11 +47,6 @@ public class Cidade extends CustomObject {
 
     @Override
     public boolean validar() {
-        return true;
-    }
-
-    @Override
-    public boolean validarRemocao() {
         return true;
     }
 }

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_relatorioParticipante"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_cancelar"
+            android:text="Participante"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18dp"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/btn_relatorioTempoMedio"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_cancelar"
+            android:text="Tempo médio de atendimento"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18dp"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/btn_relatorioCadastro"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_cancelar"
+            android:text="Estatísticas cadastrais"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18dp"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/btn_relatorioRanking"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_cancelar"
+            android:text="Ranking de atendimentos"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18dp"
+            android:textStyle="normal" />
+
+
+        <Button
+            android:id="@+id/btn_relatorioRepresentanteUniversidade"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_cancelar"
+            android:text="Representante da Universidade"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18dp"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/btn_relatorioRepresentanteUnidade"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_cancelar"
+            android:text="Representante da Unidade"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18dp"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/btn_relatorioRepresentanteRegiao"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_cancelar"
+            android:text="Representante da Região Fiscal"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18dp"
+            android:textStyle="normal" />
+    </LinearLayout>
+</RelativeLayout>

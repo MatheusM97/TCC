@@ -12,8 +12,11 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
+import br.ufms.nafmanager.activities.relatorios.FiltroRanking;
+import br.ufms.nafmanager.activities.relatorios.RelatorioObjeto;
 import br.ufms.nafmanager.adapters.StatusEnum;
 import br.ufms.nafmanager.model.Acesso;
 import br.ufms.nafmanager.model.AcessoTipoEnum;
@@ -23,7 +26,9 @@ import br.ufms.nafmanager.model.AtendimentoTipo;
 import br.ufms.nafmanager.model.Cidade;
 import br.ufms.nafmanager.model.CustomObject;
 import br.ufms.nafmanager.model.Estado;
+import br.ufms.nafmanager.model.Participante;
 import br.ufms.nafmanager.model.Regiao;
+import br.ufms.nafmanager.model.Relatorios;
 import br.ufms.nafmanager.model.Unidade;
 import br.ufms.nafmanager.model.UnidadeTipo;
 import br.ufms.nafmanager.model.Universidade;
@@ -44,6 +49,7 @@ public class Persistencia {
     public boolean carregouAcessosPossiveis = false;
     public boolean carregouRegioes = false;
     public boolean carregouUnidades = false;
+    public boolean carregouAtendimentos = false;
 
     private FirebaseFirestore firebaseFirestore;
     private ArrayList<UnidadeTipo> unidadeTipos = new ArrayList<>();
@@ -52,11 +58,12 @@ public class Persistencia {
     private ArrayList<Cidade> cidadePorEstado = new ArrayList<>();
     private Estado estadoAtual;
     private Cidade cidadeAtual;
-    private List<AtendimentoTipo> atendimentos = new ArrayList<>();
-    private List<AtendidoTipo> atendidoTipos = new ArrayList<>();
+    private ArrayList<AtendimentoTipo> atendimentosTipo = new ArrayList<>();
+    private ArrayList<AtendidoTipo> atendidoTipos = new ArrayList<>();
     private ArrayList<Cidade> cidades = new ArrayList<>();
     private ArrayList<Unidade> unidades = new ArrayList<>();
     private ArrayList<Usuario> usuarios = new ArrayList<>();
+    private ArrayList<Acesso> participantesRelatorio = new ArrayList<>();
     private ArrayList<Acesso> acessos = new ArrayList<>();
     private ArrayList<Acesso> acessosRegistrados = new ArrayList<>();
     private ArrayList<Usuario> usuariosComAcesso = new ArrayList<>();
@@ -78,6 +85,25 @@ public class Persistencia {
     private Usuario usuarioVerificado;
     private Acesso acessoBanco;
     private List<String> usuariosIds = new ArrayList<>();
+    private ArrayList<Atendimento> atendimentosLista = new ArrayList<>();
+    private ArrayList<Relatorios> relatorios = new ArrayList<>();
+    private RelatorioObjeto relatorio = new RelatorioObjeto();
+
+    public RelatorioObjeto getRelatorio() {
+        return relatorio;
+    }
+
+    public void setRelatorio(RelatorioObjeto relatorio) {
+        this.relatorio = relatorio;
+    }
+
+    public ArrayList<Relatorios> getRelatorios() {
+        return relatorios;
+    }
+
+    public void setRelatorios(ArrayList<Relatorios> relatorios) {
+        this.relatorios = relatorios;
+    }
 
     //endregion
 
@@ -199,6 +225,7 @@ public class Persistencia {
     public void carregaRegiaoById(String id) {
         this.regioes = new ArrayList<>();
         this.carregouRegioes = false;
+        this.regiaoAtual = new Regiao();
 
         DocumentReference dr =
                 firebaseFirestore.collection("regiao").document(id);
@@ -211,12 +238,16 @@ public class Persistencia {
                     if(!regioes.contains(reg)){
                         regioes.add(reg);
                     }
+
+                    regiaoAtual = reg;
+                    carregaRepresentanteRegiao();
                 }
 
                 carregouRegioes = true;
             }
         });
     }
+
     //endregion
 
     //region Unidade
@@ -297,6 +328,7 @@ public class Persistencia {
                                     unidades.add(und);
                             }
                         }
+                        carregouUnidades = true;
                     }
                 });
             }
@@ -370,29 +402,34 @@ public class Persistencia {
 
                     carregouUnidades = true;
 
-                    firebaseFirestore.collection("universidade").orderBy("nome")
-                            .whereEqualTo("status", StatusEnum.ATIVO)
-                            .whereIn("unidadeId", unidadesIds)
-                            .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                universidades = new ArrayList<>();
-                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                    Universidade unv = (Universidade) document.toObject(Universidade.class);
-                                    universidades.add(unv);
+                    if(unidadesIds.size() >0){
+                        firebaseFirestore.collection("universidade").orderBy("nome")
+                                .whereEqualTo("status", StatusEnum.ATIVO)
+                                .whereIn("unidadeId", unidadesIds)
+                                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    universidades = new ArrayList<>();
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        Universidade unv = (Universidade) document.toObject(Universidade.class);
+                                        universidades.add(unv);
+                                    }
                                 }
-                            }
 
-                            carregouUniversidades = true;
-                        }
-                    });
+                                carregouUniversidades = true;
+                            }
+                        });
+                    }else{
+                        carregouUniversidades = true;
+                    }
                 }
             }
         });
     }
 
     public void carregaUnidadeById(String id) {
+        carregouUnidades = false;
         this.unidadeAtual = new Unidade();
         DocumentReference dr =
                 firebaseFirestore.collection("unidade").document(id);
@@ -402,7 +439,9 @@ public class Persistencia {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
                     unidadeAtual = (Unidade) document.toObject(Unidade.class);
+                    carregaRepresentanteUnidade();
                 }
+                carregouUnidades = true;
             }
         });
     }
@@ -438,7 +477,8 @@ public class Persistencia {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     DocumentSnapshot document = task.getResult();
-                    universidadeAtual = (Universidade) document.toObject(Universidade.class);
+                    universidadeAtual = document.toObject(Universidade.class);
+                    carregaRepresentanteUniversidade();
                 }
             }
         });
@@ -462,6 +502,161 @@ public class Persistencia {
                 carregouUniversidades = true;
             }
         });
+    }
+
+    public boolean carregouRepresentantes = false;
+
+    public void carregaRepresentanteUniversidade(){
+        carregouRepresentantes = false;
+
+        if(universidadeAtual != null && universidadeAtual.getId() != null)
+        firebaseFirestore.collection("acesso")
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereEqualTo("universidadeId", universidadeAtual.getId())
+                .whereEqualTo("representante", true)
+                .whereEqualTo("tipo", AcessoTipoEnum.UNIVERSIDADE)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Acesso ac = document.toObject(Acesso.class);
+                        universidadeAtual.addRepresentante(new Usuario(ac.getUsuarioId(), ""));
+                        DocumentReference dr =
+                                firebaseFirestore.collection("usuario").document(ac.getUsuarioId());
+                        dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    Usuario usr = document.toObject(Usuario.class);
+                                    for(Usuario usuario: universidadeAtual.getRepresentantes()){
+                                        if(usr.getId().equals(usuario.getId())){
+                                            usuario.setNome(usr.getNome());
+                                            usuario.setTelefone(usr.getTelefone());
+                                            usuario.setCpf(usr.getCpf());
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    carregouRepresentantes = true;
+                }
+            }
+        });
+    }
+
+    public void carregaRepresentanteUnidade(){
+        carregouRepresentantes = false;
+
+        if(unidadeAtual != null && unidadeAtual.getId() != null)
+            firebaseFirestore.collection("acesso")
+                    .whereEqualTo("status", StatusEnum.ATIVO)
+                    .whereEqualTo("unidadeId", unidadeAtual.getId())
+                    .whereEqualTo("representante", true)
+                    .whereEqualTo("tipo", AcessoTipoEnum.UNIDADE)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Acesso ac = document.toObject(Acesso.class);
+                            unidadeAtual.addRepresentante(new Usuario(ac.getUsuarioId(), ""));
+                            DocumentReference dr =
+                                    firebaseFirestore.collection("usuario").document(ac.getUsuarioId());
+                            dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        Usuario usr = document.toObject(Usuario.class);
+                                        for(Usuario usuario: unidadeAtual.getRepresentantes()){
+                                            if(usr.getId().equals(usuario.getId())){
+                                                usuario.setNome(usr.getNome());
+                                                usuario.setTelefone(usr.getTelefone());
+                                                usuario.setCpf(usr.getCpf());
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                        carregouRepresentantes = true;
+                    }
+                }
+            });
+    }
+
+    public void carregaRepresentanteRegiao(){
+        carregouRepresentantes = false;
+
+        if(regiaoAtual != null && regiaoAtual.getId() != null)
+            firebaseFirestore.collection("acesso")
+                    .whereEqualTo("status", StatusEnum.ATIVO)
+                    .whereEqualTo("regiaoId", regiaoAtual.getId())
+                    .whereEqualTo("representante", true)
+                    .whereEqualTo("tipo", AcessoTipoEnum.REGIAO)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Acesso ac = document.toObject(Acesso.class);
+                            regiaoAtual.addRepresentante(new Usuario(ac.getUsuarioId(), ""));
+                            DocumentReference dr =
+                                    firebaseFirestore.collection("usuario").document(ac.getUsuarioId());
+                            dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        Usuario usr = document.toObject(Usuario.class);
+                                        for(Usuario usuario: regiaoAtual.getRepresentantes()){
+                                            if(usr.getId().equals(usuario.getId())){
+                                                usuario.setNome(usr.getNome());
+                                                usuario.setTelefone(usr.getTelefone());
+                                                usuario.setCpf(usr.getCpf());
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                        carregouRepresentantes = true;
+                    }
+                }
+            });
+    }
+
+    public boolean carregouRepresentantesUniversidade(){
+       for(Usuario usuario: universidadeAtual.getRepresentantes()){
+           if(usuario.getNome() == null || usuario.getNome().length() == 0){
+               return false;
+           }
+       }
+
+       return true;
+    }
+
+    public boolean carregouRepresentantesUnidade(){
+        for(Usuario usuario: unidadeAtual.getRepresentantes()){
+            if(usuario.getNome() == null || usuario.getNome().length() == 0){
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean carregouRepresentantesRegiao(){
+        for(Usuario usuario: regiaoAtual.getRepresentantes()){
+            if(usuario.getNome() == null || usuario.getNome().length() == 0){
+                return false;
+            }
+        }
+
+        return true;
     }
 
     //endregion
@@ -804,50 +999,6 @@ public class Persistencia {
         });
     }
 
-    public void aprovarAcesso(Acesso acesso){
-        podeFinalizarTela = false;
-        final Acesso acessoSolicitado = acesso;
-
-        firebaseFirestore.collection("acesso")
-                .whereEqualTo("usuarioId", acesso.getUsuarioId())
-                .whereEqualTo("unidadeId", acesso.getUnidadeId())
-                .whereEqualTo("universidadeId", acesso.getUniversidadeId())
-                .whereEqualTo("regiaoId", acesso.getRegiaoId())
-                .whereEqualTo("status", StatusEnum.ATIVO)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    if (task.getResult().getDocuments().size() > 0) {
-                        DocumentSnapshot doc = task.getResult().getDocuments().get(0);
-                        Acesso ac = (Acesso) doc.toObject(Acesso.class);
-
-                        if(acessoSolicitado.getNivelAcesso() > ac.getNivelAcesso()) {
-                            if (acessoSolicitado.isAluno())
-                                ac.setAluno(true);
-
-                            if (acessoSolicitado.isProfessor())
-                                ac.setProfessor(true);
-
-                            if (acessoSolicitado.isRepresentante())
-                                ac.setRepresentante(true);
-
-                            if (acessoSolicitado.isModerador())
-                                ac.setModerador(true);
-                        }
-
-                        persistirObjeto(ac);
-                        removerAcesso(acessoSolicitado);
-                    }else{
-                        acessoSolicitado.setStatus(StatusEnum.ATIVO);
-                        persistirObjeto(acessoSolicitado);
-                    }
-                    podeFinalizarTela = true;
-                }
-            }
-        });
-    }
-
     private void removerAcesso(Acesso ac) {
         firebaseFirestore.collection("acesso").document(ac.getId()).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -859,40 +1010,8 @@ public class Persistencia {
         });
     }
 
-    public void validarAcessoMenor(final Acesso acesso){
-        final Acesso acessoSolicitado = acesso;
-        podeGravarAcesso = true;
+    public void verificarAcessoSolicitado(final Acesso acesso){
         pesquisouAcessoJahCadastrado = false;
-
-        firebaseFirestore.collection("acesso")
-                .whereEqualTo("usuarioId", acesso.getUsuarioId())
-                .whereEqualTo("unidadeId", acesso.getUnidadeId())
-                .whereEqualTo("universidadeId", acesso.getUniversidadeId())
-                .whereEqualTo("regiaoId", acesso.getRegiaoId())
-                .whereEqualTo("status", StatusEnum.ATIVO)
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    if (task.getResult().getDocuments().size() > 0) {
-                        DocumentSnapshot doc = task.getResult().getDocuments().get(0);
-                        Acesso ac = (Acesso) doc.toObject(Acesso.class);
-                        if(ac.getNivelAcesso() >= acessoSolicitado.getNivelAcesso()){
-                            podeGravarAcesso = false;
-                            acesso.setMensagem("Acesso maior ou igual já cadastrado!");
-                        }
-                    }
-                }
-
-                pesquisouAcessoJahCadastrado = true;
-            }
-        });
-
-    }
-
-    public void verificarAcessoDuplicado(final Acesso acesso, final StatusEnum status){
-        pesquisouAcessoJahCadastrado = false;
-        pesquisouAcessoJahSolicitado = false;
         podeGravarAcesso = true;
         acessoBanco = acesso;
 
@@ -901,7 +1020,12 @@ public class Persistencia {
                 .whereEqualTo("unidadeId", acesso.getUnidadeId())
                 .whereEqualTo("universidadeId", acesso.getUniversidadeId())
                 .whereEqualTo("regiaoId", acesso.getRegiaoId())
-                .whereEqualTo("status", status)
+                .whereEqualTo("status", StatusEnum.RASCUNHO)
+                .whereEqualTo("aluno", acesso.isAluno())
+                .whereEqualTo("professor", acesso.isProfessor())
+                .whereEqualTo("representante", acesso.isRepresentante())
+                .whereEqualTo("moderador", acesso.isModerador())
+                .whereEqualTo("tipo", acesso.getTipo())
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -911,19 +1035,48 @@ public class Persistencia {
                                 Acesso ac = (Acesso) doc.toObject(Acesso.class);
                                 if (!ac.getId().equals(acessoBanco.getId())) {
                                     podeGravarAcesso = false;
-
-                                    if(status.equals(StatusEnum.RASCUNHO)){
-                                        acesso.setMensagem("Acesso já SOLICITADO!");
-                                    }
                                 }
                             }
                         }
-                        pesquisouAcessoJahCadastrado = true;
                         pesquisouAcessoJahSolicitado = true;
                     }
                 }
             });
 //        }
+    }
+
+    public void verificarAcessoExistente(final Acesso acesso){
+        pesquisouAcessoJahCadastrado = false;
+        podeGravarAcesso = true;
+        acessoBanco = acesso;
+
+        firebaseFirestore.collection("acesso")
+                .whereEqualTo("usuarioId", acesso.getUsuarioId())
+                .whereEqualTo("unidadeId", acesso.getUnidadeId())
+                .whereEqualTo("universidadeId", acesso.getUniversidadeId())
+                .whereEqualTo("regiaoId", acesso.getRegiaoId())
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereEqualTo("aluno", acesso.isAluno())
+                .whereEqualTo("professor", acesso.isProfessor())
+                .whereEqualTo("representante", acesso.isRepresentante())
+                .whereEqualTo("moderador", acesso.isModerador())
+                .whereEqualTo("tipo", acesso.getTipo())
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if (task.getResult().getDocuments().size() > 0) {
+                        for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                            Acesso ac = (Acesso) doc.toObject(Acesso.class);
+                            if (!ac.getId().equals(acessoBanco.getId())) {
+                                podeGravarAcesso = false;
+                            }
+                        }
+                    }
+                    pesquisouAcessoJahCadastrado = true;
+                }
+            }
+        });
     }
 
     private void carregaAcessos(StatusEnum status){
@@ -1012,15 +1165,16 @@ public class Persistencia {
                 else
                     this.carregouUsuariosAcesso = true;
         }
-        else if (acessoLogado.getTipoValor().equals(AcessoTipoEnum.REGIAO.getValor())){
-            if(acessoLogado.isRepresentante()){
+        else if (acessoLogado.getTipoValor().equals(AcessoTipoEnum.REGIAO.getValor())) {
+            if (acessoLogado.isRepresentante()) {
                 carregaAcessosByRegiaoId(acessoLogado.getRegiaoId(), StatusEnum.ATIVO);
             }
-            else if (acessoLogado.isModerador()){
-                carregaAcessos(StatusEnum.ATIVO);
-            }
-            else
-                this.carregouUsuariosAcesso = true;
+        }
+        else if (acessoLogado.isModerador() && acessoLogado.getTipoValor().equals(AcessoTipoEnum.MODERADOR.getValor())){
+            carregaAcessos(StatusEnum.ATIVO);
+        }
+        else{
+            this.carregouUsuariosAcesso = true;
         }
     }
 
@@ -1039,16 +1193,19 @@ public class Persistencia {
                 carregaAcessosByUnidadeId(Arrays.asList(acessoLogado.getUnidadeId()), StatusEnum.RASCUNHO);
             }
         }
-        else if (acessoLogado.getTipoValor().equals(AcessoTipoEnum.REGIAO.getValor())){
-            if(acessoLogado.isRepresentante()){
+        else if (acessoLogado.getTipoValor().equals(AcessoTipoEnum.REGIAO.getValor())) {
+            if (acessoLogado.isRepresentante()) {
                 carregaAcessosByRegiaoId(acessoLogado.getRegiaoId(), StatusEnum.RASCUNHO);
             }
-            else if (acessoLogado.isModerador()){
+        }
+        else if (acessoLogado.getTipoValor().equals(AcessoTipoEnum.MODERADOR.getValor())) {
+            if (acessoLogado.isModerador()){
                 carregaAcessos(StatusEnum.RASCUNHO);
             }
-            else
-                this.carregouUsuariosAcesso = true;
         }
+        else
+            this.carregouUsuariosAcesso = true;
+
     }
 
     public void carregaAcessosByRegiaoId(String regiaoId, StatusEnum status){
@@ -1221,6 +1378,1214 @@ public class Persistencia {
         });
     }
 
+    private boolean validouInserirRegiao = false;
+    public boolean isValidouInserirRegiao() {
+        return validouInserirRegiao;
+    }
+
+    private boolean podeInserirRegiao = false;
+    public boolean isPodeInserirRegiao() {
+        return podeInserirRegiao;
+    }
+
+    public void validarInserirRegiao(final Regiao regiao){
+        podeInserirRegiao = true;
+        validouInserirRegiao = false;
+
+        firebaseFirestore.collection("regiao")
+                .whereArrayContainsAny("estados", regiao.getEstados())
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Regiao reg = document.toObject(Regiao.class);
+                        if(!reg.getId().equals(regiao.getId()))
+                            podeInserirRegiao = false;
+                    }
+                }
+
+                validouInserirRegiao = true;
+            }
+        });
+    }
+
+    //endregion
+
+    //region Relatorios
+    public void carregaAtendimentos(String acessoId, Date dataInicial, Date dataFinal){
+        dataFinal.setHours(23);
+        dataFinal.setMinutes(59);
+        dataFinal.setSeconds(59);
+
+        atendimentosLista = new ArrayList<>();
+        carregouAtendimentos = false;
+
+        firebaseFirestore.collection("atendimento")
+                .whereEqualTo("acessoId", acessoId )
+                .whereGreaterThanOrEqualTo("dataAtendimento", dataInicial)
+                .whereLessThan("dataAtendimento",dataFinal)
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Atendimento atendimento = document.toObject(Atendimento.class);
+                        atendimentosLista.add(atendimento);
+                    }
+                    carregouAtendimentos = true;
+                }
+            }
+        });
+    }
+
+    public void carregaAtendimentosTempoMedio(final Date dataInicial, final Date dataFinal, final String atendidoTipoId, final String universidadeId) {
+        dataFinal.setHours(23);
+        dataFinal.setMinutes(59);
+        dataFinal.setSeconds(59);
+        final ArrayList<String> acessos = new ArrayList<>();
+
+        carregouAtendimentos = false;
+        relatorios = new ArrayList<>();
+
+        if (universidadeId != null && universidadeId.length() > 0) {// com filtro de universidade
+            firebaseFirestore.collection("acesso")
+                    .whereEqualTo("universidadeId", universidadeId)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Acesso ac = document.toObject(Acesso.class);
+                            acessos.add(ac.getId());
+                        }
+
+                        if (atendidoTipoId != null && atendidoTipoId.length() > 0) {
+                            firebaseFirestore.collection("atendimento")
+                                    .whereIn("acessoId", acessos)
+                                    .whereArrayContains("atendimentoTipoId", atendidoTipoId)
+                                    .whereGreaterThanOrEqualTo("dataAtendimento", dataInicial)
+                                    .whereLessThan("dataAtendimento", dataFinal)
+                                    .whereEqualTo("retroativo", false)
+                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    Participante part = new Participante();
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            Atendimento at = document.toObject(Atendimento.class);
+                                            part.addAtendimento(at);
+                                        }
+                                        if (part.getAtendimentos().size() > 0) {
+                                            Relatorios relatorio = new Relatorios();
+                                            relatorio.addParticipante(part);
+                                            relatorios.add(relatorio);
+                                        }
+
+                                        carregouAtendimentos = true;
+                                    }
+                                }
+                            });
+                        } else {
+                            firebaseFirestore.collection("atendimento")
+                                    .whereIn("acessoId", acessos)
+                                    .whereGreaterThanOrEqualTo("dataAtendimento", dataInicial)
+                                    .whereLessThan("dataAtendimento", dataFinal)
+                                    .whereEqualTo("retroativo", false)
+                                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    Participante part = new Participante();
+                                    if (task.isSuccessful()) {
+                                        for (QueryDocumentSnapshot document : task.getResult()) {
+                                            Atendimento at = document.toObject(Atendimento.class);
+                                            part.addAtendimento(at);
+                                        }
+                                        if (part.getAtendimentos().size() > 0) {
+                                            Relatorios relatorio = new Relatorios();
+                                            relatorio.addParticipante(part);
+                                            relatorios.add(relatorio);
+                                        }
+
+                                        carregouAtendimentos = true;
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        } else { // Sem filtro de universidade
+            if (atendidoTipoId != null && atendidoTipoId.length() > 0) {
+                firebaseFirestore.collection("atendimento")
+                        .whereArrayContains("atendimentoTipoId", atendidoTipoId)
+                        .whereGreaterThanOrEqualTo("dataAtendimento", dataInicial)
+                        .whereLessThan("dataAtendimento", dataFinal)
+                        .whereEqualTo("retroativo", false)
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        Participante part = new Participante();
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Atendimento at = document.toObject(Atendimento.class);
+                                part.addAtendimento(at);
+                            }
+                            if (part.getAtendimentos().size() > 0) {
+                                Relatorios relatorio = new Relatorios();
+                                relatorio.addParticipante(part);
+                                relatorios.add(relatorio);
+                            }
+
+                            carregouAtendimentos = true;
+                        }
+                    }
+                });
+            } else {
+                firebaseFirestore.collection("atendimento")
+                        .whereGreaterThanOrEqualTo("dataAtendimento", dataInicial)
+                        .whereLessThan("dataAtendimento", dataFinal)
+                        .whereEqualTo("retroativo", false)
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        Participante part = new Participante();
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Atendimento at = document.toObject(Atendimento.class);
+                                part.addAtendimento(at);
+                            }
+                            if (part.getAtendimentos().size() > 0) {
+                                Relatorios relatorio = new Relatorios();
+                                relatorio.addParticipante(part);
+                                relatorios.add(relatorio);
+                            }
+
+                            carregouAtendimentos = true;
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    private ArrayList<RelatorioObjeto> regiaoObjeto = new ArrayList<>();
+    private ArrayList<RelatorioObjeto> unidadeObjeto = new ArrayList<>();
+    private ArrayList<RelatorioObjeto> universidadeObjeto = new ArrayList<>();
+    private ArrayList<RelatorioObjeto> unidadeRepresentanteObjeto = new ArrayList<>();
+
+    private boolean estatisticasUniversidade = false;
+    private boolean estatisticasRegiao = false;
+    private boolean estatisticasUsuario = false;
+    private boolean estatisticarepresentanteUnidade = false;
+    private boolean estatisticasAcesso = false;
+    private boolean estatisticasByCidadeCarregadas = false;
+
+    public boolean isEstatisticasByCidadeCarregadas() {
+        return estatisticasByCidadeCarregadas;
+    }
+
+    public boolean isEstatisticasUniversidade() {
+        return estatisticasUniversidade;
+    }
+    public boolean isEstatisticasRegiao() {
+        return estatisticasRegiao;
+    }
+    public boolean isEstatisticasUsuario() {
+        return estatisticasUsuario;
+    }
+    public boolean isEstatisticasAcesso() {
+        return estatisticasAcesso;
+    }
+
+    public ArrayList<RelatorioObjeto> getUniversidadeObjeto() {
+        return universidadeObjeto;
+    }
+
+    public boolean estatisticasUsuarioComAcesso(){
+        for(RelatorioObjeto universidade: universidadeObjeto){
+            for(RelatorioObjeto usuario: universidade.getDetalhe()){
+                if(usuario.getNome() == null || usuario.getNome().length() == 0 ){
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public void instanciarEstatisticas(){
+        estatisticasUniversidade = false;
+        estatisticasRegiao = false;
+        estatisticasUsuario = false;
+        estatisticarepresentanteUnidade = false;
+
+        cadastralRegiao = false;
+        cadastralUnidade = false;
+        cadastralUniversidade = false;
+
+        regiaoObjeto = new ArrayList<>();
+        unidadeObjeto = new ArrayList<>();
+        universidadeObjeto = new ArrayList<>();
+        unidadeRepresentanteObjeto = new ArrayList<>();
+    }
+
+    private boolean cadastralRegiao = false;
+    private boolean cadastralUnidade = false;
+    private boolean cadastralUniversidade = false;
+
+    public boolean isCadastralRegiao() {
+        return cadastralRegiao;
+    }
+    public boolean isCadastralUnidade() {
+        return cadastralUnidade;
+    }
+    public boolean isCadastralUniversidade() {
+        return cadastralUniversidade;
+    }
+
+    //region Relatorio Cadastral
+    public void relatorioCadastralByRegiao(String regiaoId){
+        if(regiaoId != null){
+            for(Unidade unidade: unidades){
+                if(unidade.getRegiaoId().equals(regiaoId)){
+                    RelatorioObjeto un = new RelatorioObjeto(unidade.getId(), unidade.getNome());
+                    un.setValor1(unidade.getRegiaoId());
+                    for(Universidade universidade: universidades){
+                        if(universidade.getUnidadeId().equals(un.getId())){
+                            RelatorioObjeto uni = new RelatorioObjeto(universidade.getId(), universidade.getNome());
+                            uni.setValor1(un.getId());
+                            cadastralBuscarParticipantes(uni);
+                            un.addDetalhe(uni);
+                        }
+                    }
+
+                unidadeObjeto.add(un);
+                }
+            }
+        }
+        else {
+            for (Unidade unidade : unidades) {
+                RelatorioObjeto un = new RelatorioObjeto(unidade.getId(), unidade.getNome());
+                un.setValor1(unidade.getRegiaoId());
+                for (Universidade universidade : universidades) {
+                    if (universidade.getUnidadeId().equals(un.getId())) {
+                        RelatorioObjeto uni = new RelatorioObjeto(universidade.getId(), universidade.getNome());
+                        uni.setValor1(un.getId());
+                        cadastralBuscarParticipantes(uni);
+                        un.addDetalhe(uni);
+                    }
+                }
+
+                unidadeObjeto.add(un);
+            }
+        }
+
+        relatorio = new RelatorioObjeto();
+        for(RelatorioObjeto unidade: unidadeObjeto){
+            relatorio.addDetalhe(unidade);
+        }
+    }
+
+    private void cadastralBuscarParticipantes(final RelatorioObjeto universidade) {
+        firebaseFirestore.collection("acesso")
+                .whereEqualTo("universidadeId", universidade.getId())
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Acesso acesso = document.toObject(Acesso.class);
+
+                        if(acesso.getNivelAcesso() <= 2L){
+                            RelatorioObjeto ac = new RelatorioObjeto(acesso.getId(), "");
+                            ac.setValor1(universidade.getId());
+                            ac.marcarDetalhesFinalizados();
+                            universidade.addDetalhe(ac);
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    public boolean isMarcarFinalizada(){
+        for(RelatorioObjeto unidade: unidadeObjeto) {
+            if (!unidade.isDetalhesFinalizados()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void cadastralMarcarFinalizadaReflexiva(){
+        for(RelatorioObjeto unidade: unidadeObjeto){
+            for(RelatorioObjeto universidade: unidade.getDetalhe()){
+                for(RelatorioObjeto participante: universidade.getDetalhe()){
+                    if(!participante.isDetalhesFinalizados()){
+                        return;
+                    }
+
+                    participante.marcarDetalhesFinalizados();
+                }
+
+                universidade.marcarDetalhesFinalizados();
+            }
+
+            unidade.marcarDetalhesFinalizados();
+        }
+    }
+
+    public void relatorioCadastralByEstado(String estadoId){
+        ArrayList<Cidade> cidadesFiltradas = getCidadesLocal(estadoId);
+
+        for(Unidade unidade: unidades){
+            for(Cidade cidade: cidadesFiltradas) {
+                if(cidade.getId().equals(unidade.getCidadeId())) {
+                    RelatorioObjeto un = new RelatorioObjeto(unidade.getId(), unidade.getNome());
+                    un.setValor1(unidade.getRegiaoId());
+                    for (Universidade universidade : universidades) {
+                        if (universidade.getUnidadeId().equals(un.getId())) {
+                            RelatorioObjeto uni = new RelatorioObjeto(universidade.getId(), universidade.getNome());
+                            uni.setValor1(un.getId());
+                            cadastralBuscarParticipantes(uni);
+                            un.addDetalhe(uni);
+                        }
+                    }
+
+                    unidadeObjeto.add(un);
+                }
+            }
+        }
+
+        relatorio = new RelatorioObjeto();
+        for(RelatorioObjeto unidade: unidadeObjeto){
+            relatorio.addDetalhe(unidade);
+        }
+    }
+
+    public void relatorioCadastralByCidade(String cidadeId){
+
+        ArrayList<String> unidadeIds = new ArrayList<>();
+
+        for(Unidade unidade: unidades){
+           if(unidade.getCidadeId().equals(cidadeId)){
+                RelatorioObjeto unid = new RelatorioObjeto(unidade.getId(), unidade.getNome());
+                unidadeObjeto.add(unid);
+                unidadeIds.add(unidade.getId());
+           }
+        }
+
+        RelatorioObjeto naoRelacionado = new RelatorioObjeto(null, "Unidades não relacionadas no filtro");
+
+        for(Universidade universidade: universidades){
+            if(universidade.getCidadeId().equals(cidadeId)){
+                RelatorioObjeto uni = new RelatorioObjeto(universidade.getId(), universidade.getNome());
+                cadastralBuscarParticipantes(uni);
+
+                if(!unidadeIds.contains(universidade.getUnidadeId())){
+                    uni.setValor1(universidade.getUnidadeId());
+                    naoRelacionado.addDetalhe(uni);
+                }
+                else{
+                    for(RelatorioObjeto unidade: unidadeObjeto){
+                        if(unidade.getId().equals(universidade.getUnidadeId())){
+                            unidade.addDetalhe(uni);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        if(naoRelacionado.getDetalhe().size() > 0){
+            unidadeObjeto.add(naoRelacionado);
+        }
+
+        relatorio = new RelatorioObjeto();
+        for(RelatorioObjeto unidade: unidadeObjeto){
+            relatorio.addDetalhe(unidade);
+        }
+    }
+
+    //endregion
+
+    //relatorio cadastro
+    public void estatisticaUniversidadeByCidadeId(String cidadeId) {
+        firebaseFirestore.collection("universidade")
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereEqualTo("cidadeId", cidadeId)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {// inserindo universidades na unidade
+                        Universidade uni = document.toObject(Universidade.class);
+                        RelatorioObjeto obj = new RelatorioObjeto(uni.getId(), uni.getNome());
+                        obj.setValor1(uni.getUnidadeId());
+                        if(!universidadeObjeto.contains(obj)){
+                            universidadeObjeto.add(obj);
+                        }
+                    }
+                }
+
+                estatisticasUniversidade = true;
+                carregaEstatisticaParticipantes();
+            }
+        });
+    }
+
+    private void carregaEstatisticaParticipantes(){
+        for(final RelatorioObjeto universidade: universidadeObjeto){
+            firebaseFirestore.collection("acesso")
+                    .whereEqualTo("status", StatusEnum.ATIVO)
+                    .whereEqualTo("universidadeId", universidade.getId())
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {// inserindo universidades na unidade
+                            Acesso acesso = document.toObject(Acesso.class);
+                            RelatorioObjeto part = new RelatorioObjeto(acesso.getId(), "");
+                            if(acesso.getNivelAcesso() <= 2 && !universidade.existeDetalhe(part.getId())){
+                                universidade.addDetalhe(part);
+                            }
+                        }
+                    }
+                estatisticasAcesso = true;
+                universidade.marcarDetalhesFinalizados();
+                }
+            });
+        }
+    }
+
+    public void carregaEstatisticaUnidades(){
+        final ArrayList<String> unidadesId = new ArrayList<>();
+        for(final RelatorioObjeto universidade: universidadeObjeto){
+            if(!unidadesId.contains(universidade.getValor1())){
+                unidadesId.add(universidade.getValor1());//unidade Id
+            }
+        }
+
+        if(unidadesId.size() > 0){
+            firebaseFirestore.collection("unidade")
+                    .whereEqualTo("status", StatusEnum.ATIVO)
+                    .whereIn("id", unidadesId)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {// inserindo universidades na unidade
+                            Unidade un = document.toObject(Unidade.class);
+                            RelatorioObjeto obj = new RelatorioObjeto(un.getId(), un.getNome());
+                            obj.setValor1(un.getRegiaoId());
+                            if(!unidadeObjeto.contains(obj)){
+                                unidadeObjeto.add(obj);
+                            }
+                        }
+                    }
+
+                    carregaEstatisticaRegiao();
+                }
+            });
+        }
+        else{
+            carregaEstatisticaRegiao();
+        }
+    }
+
+    private void carregaEstatisticaRegiao() {
+        final ArrayList<String> regioesId = new ArrayList<>();
+        for(final RelatorioObjeto unidade: unidadeObjeto){
+            if(!regioesId.contains(unidade.getValor1())){
+                regioesId.add(unidade.getValor1());//regiao id
+            }
+        }
+
+        if(regioesId.size()> 0 ){
+            firebaseFirestore.collection("regiao")
+                    .whereEqualTo("status", StatusEnum.ATIVO)
+                    .whereIn("id", regioesId)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {// inserindo universidades na unidade
+                            Regiao reg = document.toObject(Regiao.class);
+                            RelatorioObjeto obj = new RelatorioObjeto(reg.getId(), reg.getNome());
+                            if(!regiaoObjeto.contains(obj)){
+                                regiaoObjeto.add(obj);
+                            }
+                        }
+                    }
+                    estatisticasRegiao = true;
+                    ajustarDados();
+                }
+            });
+        }
+        else{
+            estatisticasRegiao = true;
+            ajustarDados();
+        }
+    }
+
+    private void ajustarDados() {
+        for(RelatorioObjeto universidade: universidadeObjeto){
+            for(RelatorioObjeto unidade: unidadeObjeto){
+                if(unidade.getId().equals(universidade.getValor1())){
+                    unidade.addDetalhe(universidade);
+                }
+            }
+        }
+
+        for(RelatorioObjeto unidade: unidadeObjeto){
+            for(RelatorioObjeto regiao: regiaoObjeto){
+                if(regiao.getId().equals(unidade.getValor1())){
+                    regiao.addDetalhe(unidade);
+                }
+            }
+        }
+
+        relatorio = new RelatorioObjeto();
+        for(RelatorioObjeto regiao: regiaoObjeto){
+            relatorio.addDetalhe(regiao);
+            regiao.marcarDetalhesFinalizados();
+        }
+    }
+
+    public void ajustarDadosRegiao() {
+        relatorio = new RelatorioObjeto();
+        for(RelatorioObjeto unidade: unidadeObjeto){
+            relatorio.addDetalhe(unidade);
+            for(RelatorioObjeto universidade: universidadeObjeto){
+                if(unidade.getId().equals(universidade.getValor1())){
+                    unidade.addDetalhe(universidade);
+                    universidade.marcarDetalhesFinalizados();
+                }
+            }
+        }
+
+    }
+
+    public void ajustarDadosUniversidade() {
+        relatorio = new RelatorioObjeto();
+        for(RelatorioObjeto universidade: universidadeObjeto){
+            relatorio.addDetalhe(universidade);
+            universidade.marcarDetalhesFinalizados();
+        }
+    }
+
+    public boolean estatisticaUniversidadesCarregada(){
+        if(estatisticasUniversidade){
+            for(RelatorioObjeto universidade: universidadeObjeto){
+                if(!universidade.isDetalhesFinalizados()){
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean estatisticaRegioesCarregada(){
+        if(estatisticasRegiao){
+            for(RelatorioObjeto regiao: regiaoObjeto){
+                if(!regiao.isDetalhesFinalizados()){
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public void estatisticaUniversidadeByEstadoId(String estadoId) {
+        final ArrayList<String> cidadesId = new ArrayList<>();
+
+        Estado estado = new Estado();
+        estado.setId(estadoId);
+
+        for(Cidade cidade: getCidades(estado)){
+            cidadesId.add(cidade.getId());
+        }
+
+        for(String cidade: cidadesId){
+            estatisticaUniversidadeByCidadeId(cidade);
+        }
+    }
+
+    public void estatisticaUnidadeByRegiaoId(final String regiaoId) {
+        relatorio = new RelatorioObjeto();
+        regiaoObjeto.add(new RelatorioObjeto(regiaoId, ""));
+
+        firebaseFirestore.collection("unidade")
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereEqualTo("regiaoId", regiaoId)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Unidade un = document.toObject(Unidade.class);
+                        RelatorioObjeto obj = new RelatorioObjeto(un.getId(), un.getNome());
+                        obj.setValor1(un.getRegiaoId());
+                        if(!unidadeObjeto.contains(obj)){
+                            unidadeObjeto.add(obj);
+                        }
+                    }
+                    estatisticaUniversidadeByUnidade();
+                }
+            }
+        });
+    }
+
+    private void estatisticaUniversidadeByUnidade() {
+        for(RelatorioObjeto unidade: unidadeObjeto){
+            firebaseFirestore.collection("universidade")
+                    .whereEqualTo("status", StatusEnum.ATIVO)
+                    .whereEqualTo("unidadeId", unidade.getId())
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Universidade un = document.toObject(Universidade.class);
+                            RelatorioObjeto obj = new RelatorioObjeto(un.getId(), un.getNome());
+                            obj.setValor1(un.getUnidadeId());
+                            if(!universidadeObjeto.contains(obj)){
+                                universidadeObjeto.add(obj);
+                                estatisticaParticipanteByUniversidade(obj);
+                            }
+                        }
+                        estatisticasUniversidade = true;
+                    }
+                }
+            });
+        }
+    }
+
+    private void estatisticaParticipanteByUniversidade(final RelatorioObjeto universidade) {
+        firebaseFirestore.collection("acesso")
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereEqualTo("universidadeId", universidade.getId())
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Acesso ac = document.toObject(Acesso.class);
+                        RelatorioObjeto obj = new RelatorioObjeto(ac.getId(),"");
+                        obj.setValor1(ac.getUniversidadeId());
+                        if(ac.getNivelAcesso() <= 2 && !universidade.existeDetalhe(obj.getId())){
+                            universidade.addDetalhe(obj);
+                        }
+                    }
+                }
+                estatisticasAcesso = true;
+            }
+        });
+    }
+
+    //relatorio cadastro
+    public void estatisticaRegiaoByUnidade() {
+        for(final RelatorioObjeto regiao: regiaoObjeto){
+            firebaseFirestore.collection("regiao")
+                    .whereEqualTo("status", StatusEnum.ATIVO)
+                    .whereEqualTo("id", regiao.getId())
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Regiao reg = document.toObject(Regiao.class);
+                            regiao.setNome(reg.getNome());
+                        }
+                    }
+                    estatisticasRegiao = true;
+                    ajustarDados();
+                }
+            });
+        }
+    }
+
+    public void estatisticaGeral() {
+        firebaseFirestore.collection("universidade")
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Universidade un = document.toObject(Universidade.class);
+                        RelatorioObjeto obj = new RelatorioObjeto(un.getId(), un.getNome());
+                        obj.setValor1(un.getUnidadeId());
+                        if(!universidadeObjeto.contains(obj)){
+                            universidadeObjeto.add(obj);
+                            estatisticaParticipanteByUniversidade(obj);
+                        }
+                    }
+                    estatisticasUniversidade = true;
+                }
+            }
+        });
+    }
+
+    //region  relatorios representantes
+    //relatorio Representante regiao
+    public void estatisticaRegiao(String regiaoId, final Date dataInicial, final Date dataFinal){
+        if(regiaoId!= null){
+            firebaseFirestore.collection("unidade")
+                    .whereEqualTo("status", StatusEnum.ATIVO)
+                    .whereEqualTo("regiaoId", regiaoId)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Unidade un = document.toObject(Unidade.class);
+                            RelatorioObjeto obj = new RelatorioObjeto(un.getId(),un.getNome());
+                            obj.setValor1(un.getRegiaoId());
+                            if(!unidadeObjeto.contains(obj)){
+                                unidadeObjeto.add(obj);
+                                buscarRepresentanteUnidade(obj);
+                                estatisticaUnidade(obj.getId(), dataInicial, dataFinal);
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    public void buscarRepresentanteUnidade(RelatorioObjeto unidade){
+        firebaseFirestore.collection("acesso")
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereEqualTo("unidadeId", unidade.getId())
+                .whereEqualTo("representante", true)
+                .whereEqualTo("tipo", AcessoTipoEnum.UNIDADE)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Acesso ac = document.toObject(Acesso.class);
+                        RelatorioObjeto obj = new RelatorioObjeto();
+                        obj.setId(ac.getUsuarioId());
+                        obj.setValor2(ac.getUnidadeId());
+                        buscarUsuarioRepresentante(obj);
+                    }
+                }
+                estatisticarepresentanteUnidade = true;
+            }
+        });
+    }
+
+    public void buscarUsuarioRepresentante(final RelatorioObjeto usuario){
+        firebaseFirestore.collection("usuario")
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereEqualTo("id", usuario.getId())
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Usuario usr = document.toObject(Usuario.class);
+                        usuario.setNome(usr.getNome());
+                        if(usr.getId().equals(usuario.getId())){
+                            for(RelatorioObjeto unidade:unidadeObjeto){
+                                if(unidade.getId().equals(usuario.getValor2()) && !unidade.existeDetalhe2(usr.getId())){
+                                    unidade.addDetalhe2(usuario);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    public boolean representantesTraduzidos(){
+        if(estatisticarepresentanteUnidade){
+            for(RelatorioObjeto representante: unidadeRepresentanteObjeto){
+                if(representante.getNome() == null || representante.getNome().length() == 0){
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    //Relatorio Representante unidade
+    public void estatisticaUnidade(String unidadeId, final Date dataInicial, final Date dataFinal){
+        if(unidadeId!= null){
+            firebaseFirestore.collection("universidade")
+                    .whereEqualTo("status", StatusEnum.ATIVO)
+                    .whereEqualTo("unidadeId", unidadeId)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Universidade un = document.toObject(Universidade.class);
+                            RelatorioObjeto obj = new RelatorioObjeto(un.getId(),un.getNome());
+//                            if(!unidadeObjeto.contains(obj)){
+//                                unidadeObjeto.add(obj);
+                                estatisticaUniversidade(obj.getId(), dataInicial, dataFinal);
+//                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    // relatorio representante universidade
+    public void estatisticaUniversidade(String universidadeId, final Date dataInicial, final Date dataFinal){
+        if(universidadeId!= null){
+            firebaseFirestore.collection("universidade")
+                    .whereEqualTo("status", StatusEnum.ATIVO)
+                    .whereEqualTo("id", universidadeId)
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Universidade un = document.toObject(Universidade.class);
+                            RelatorioObjeto obj = new RelatorioObjeto(un.getId(),un.getNome());
+                            obj.setValor1(un.getUnidadeId());
+                            if(!universidadeObjeto.contains(obj)){
+                                universidadeObjeto.add(obj);
+                                estatisticaAcesso(obj, dataInicial, dataFinal);
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    public void estatisticaAcesso(final RelatorioObjeto universidade, final Date dataInicial, final Date dataFinal){
+        firebaseFirestore.collection("acesso")
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereEqualTo("universidadeId", universidade.getId())
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Acesso acesso = document.toObject(Acesso.class);
+                        RelatorioObjeto participante = new RelatorioObjeto();
+                        participante.setValor2(acesso.getUsuarioId());
+                        participante.setValor1(acesso.getUniversidadeId());
+                        participante.setValor3(acesso.getNivelAcesso().toString());
+                        participante.setId(acesso.getId());
+
+                        universidade.addDetalhe(participante);
+                    }
+                }
+
+                for(RelatorioObjeto participante: universidade.getDetalhe()){
+                    estatisticaAtendimentos(participante, dataInicial, dataFinal);
+                }
+              }
+        });
+    }
+
+    public void estatisticaAtendimentos(final RelatorioObjeto acesso, Date dataInicial, Date dataFinal){
+        dataFinal.setHours(23);
+        dataFinal.setMinutes(59);
+        dataFinal.setSeconds(59);
+
+        firebaseFirestore.collection("atendimento")
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereEqualTo("acessoId", acesso.getId())
+                .whereGreaterThanOrEqualTo("dataAtendimento", dataInicial)
+                .whereLessThan("dataAtendimento",dataFinal)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Atendimento at = document.toObject(Atendimento.class);
+                        acesso.addDetalhe(new RelatorioObjeto(at.getId(), ""));
+                    }
+                }
+                estatisticasUniversidade = true;
+                acesso.marcarDetalhesFinalizados();
+            }
+        });
+    }
+
+    public void estatisticaUsuarios(RelatorioObjeto universidade){
+        for(final RelatorioObjeto acesso: universidade.getDetalhe()){
+            firebaseFirestore.collection("usuario")
+                    .whereEqualTo("status", StatusEnum.ATIVO)
+                    .whereEqualTo("id", acesso.getValor2())
+                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Usuario us = document.toObject(Usuario.class);
+                            acesso.setNome(us.getNome());
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    public boolean estatisticaAcessoCompleta(){
+        if(estatisticasUniversidade) {
+            for (RelatorioObjeto universidade : universidadeObjeto) {
+                for (RelatorioObjeto acesso : universidade.getDetalhe()) {
+                    if (!acesso.isDetalhesFinalizados()) {
+                        return false;
+                    }
+                }
+
+            }
+            return true;
+        }
+        return false;
+    }
+
+    private ArrayList<Atendimento> relatorioRanking = new ArrayList<>();
+    private boolean carregouRanking = false;
+    private RelatorioObjeto estruturaRanking = new RelatorioObjeto();
+
+    public boolean verificarRankingFoiFinalizado(){
+        for(RelatorioObjeto rel: estruturaRanking.getDetalhe()){
+            if(!rel.isDetalhesFinalizados())
+                return false;
+        }
+
+        return true;
+    }
+
+    public void rankingMarcacaoReflexiva(){
+        for(RelatorioObjeto rel: estruturaRanking.getDetalhe()){
+           for(RelatorioObjeto filho: rel.getDetalhe()){
+               if(!filho.isDetalhesFinalizados())
+                   return;
+           }
+           rel.marcarDetalhesFinalizados();
+        }
+        estruturaRanking.marcarDetalhesFinalizados();
+    }
+
+    public void rankingAtendimentos(FiltroRanking filtro) {
+        relatorioRanking = new ArrayList<>();
+
+        if("Participante".equals(filtro.getTipo())){
+            RelatorioObjeto rel = new RelatorioObjeto();
+            estruturaRanking.addDetalhe(rel);
+            rankingParticipante(filtro, rel);
+        }
+        else if ("Universidade".equals(filtro.getTipo())){
+            RelatorioObjeto rel = new RelatorioObjeto();
+            rel.setId(filtro.getUniversidadeId());
+            estruturaRanking.addDetalhe(rel);
+            rankingUniversidade(filtro, rel);
+        }
+        else if ("Unidade".equals(filtro.getTipo())){
+            RelatorioObjeto rel = new RelatorioObjeto();
+            rel.setId(filtro.getUnidadeId());
+            estruturaRanking.addDetalhe(rel);
+            rankingUnidade(filtro, rel);
+        }
+        else if ("Regiao".equals(filtro)){
+            RelatorioObjeto rel = new RelatorioObjeto();
+            rel.setId(filtro.getRegiaoId());
+            estruturaRanking.addDetalhe(rel);
+            rankingRegiao(filtro,rel);
+        }
+    }
+
+    private void rankingParticipante(final FiltroRanking filtro, final RelatorioObjeto estrutura){
+        firebaseFirestore.collection("atendimento")
+                .whereEqualTo("acessoId", filtro.getParticipanteId())
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereGreaterThanOrEqualTo("dataAtendimento", filtro.getDataInicial())
+                .whereLessThan("dataAtendimento", filtro.getDataFinal())
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Atendimento at = document.toObject(Atendimento.class);
+                        if(!relatorioRanking.contains(at))
+                            relatorioRanking.add(at);
+                    }
+                }
+
+                RelatorioObjeto rel = new RelatorioObjeto(filtro.getParticipanteId(), "");
+                rel.marcarDetalhesFinalizados();
+                if(!estrutura.existeDetalhe(filtro.getParticipanteId()))
+                    estrutura.addDetalhe(rel);
+            }
+        });
+    }
+
+    private void rankingUniversidade(final FiltroRanking filtro, final RelatorioObjeto relatorio){
+        final ArrayList<String> participanteId = new ArrayList<>();
+
+        firebaseFirestore.collection("acesso")
+                .whereEqualTo("universidadeId", filtro.getUniversidadeId())
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Acesso ac = document.toObject(Acesso.class);
+                        if(!participanteId.contains(ac.getId()))
+                            participanteId.add(ac.getId());
+                    }
+                }
+
+                for(String part: participanteId){
+                    FiltroRanking filtroPart = new FiltroRanking();
+                    filtroPart.setDataInicial(filtro.getDataInicial());
+                    filtroPart.setDataFinal(filtro.getDataFinal());
+                    filtroPart.setParticipanteId(part);
+
+                    RelatorioObjeto rel = new RelatorioObjeto();
+                    rel.setId(part);
+                    relatorio.addDetalhe(rel);
+
+                    rankingParticipante(filtroPart, rel);
+                }
+            }
+        });
+    }
+
+    private void rankingUnidade(final FiltroRanking filtro, final RelatorioObjeto relatorio){
+        final ArrayList<String> universidadeId = new ArrayList<>();
+
+        firebaseFirestore.collection("universidade")
+                .whereEqualTo("unidadeId", filtro.getUnidadeId())
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Universidade un  = document.toObject(Universidade.class);
+                        if(!universidadeId.contains(un.getId()))
+                            universidadeId.add(un.getId());
+                    }
+                }
+
+                for(String univ: universidadeId){
+                    FiltroRanking filtroPart = new FiltroRanking();
+                    filtroPart.setDataInicial(filtro.getDataInicial());
+                    filtroPart.setDataFinal(filtro.getDataFinal());
+                    filtroPart.setUniversidadeId(univ);
+
+                    RelatorioObjeto rel = new RelatorioObjeto();
+                    rel.setId(univ);
+                    relatorio.addDetalhe(rel);
+                    rankingUniversidade(filtroPart, rel);
+                }
+            }
+        });
+    }
+
+    private void rankingRegiao(final FiltroRanking filtro, final RelatorioObjeto relatorio){
+        final ArrayList<String> unidadeId = new ArrayList<>();
+
+        firebaseFirestore.collection("unidade")
+                .whereEqualTo("regiaoId", filtro.getRegiaoId())
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Unidade un = document.toObject(Unidade.class);
+                        if(!unidadeId.contains(un.getId()))
+                            unidadeId.add(un.getId());
+                    }
+                }
+
+                for(String uni: unidadeId){
+                    FiltroRanking filtroPart = new FiltroRanking();
+                    filtroPart.setDataInicial(filtro.getDataInicial());
+                    filtroPart.setDataFinal(filtro.getDataFinal());
+                    filtroPart.setUnidadeId(uni);
+
+
+                    RelatorioObjeto rel = new RelatorioObjeto();
+                    rel.setId(uni);
+                    relatorio.addDetalhe(rel);
+
+                    rankingUnidade(filtroPart, rel);
+                }
+            }
+        });
+    }
+
+
+    public void filtrarRanking(FiltroRanking filtro){
+        ArrayList<Atendimento> relatorioFiltrado = new ArrayList<>();
+        for(Atendimento at: relatorioRanking){
+            if(filtrar(filtro, at))
+                relatorioFiltrado.add(at);
+        }
+
+        carregouRanking = true;
+    }
+
+    private boolean filtrar(FiltroRanking filtro, Atendimento at) {
+        if (filtro.getTipoDocumento() != null) {
+            if (!filtro.getTipoDocumento().equals(at.getAtendidoTipoDocumento()))
+                return false;
+        }
+
+        if (filtro.getConclusivo() != null){
+            if ("Sim".equals(filtro.getConclusivo()) && !at.getConclusivo())
+                return false;
+
+            if ("Não".equals(filtro.getConclusivo()) && at.getConclusivo())
+                return false;
+        }
+
+        if (filtro.getAtendimentoTipo() != null)
+            if(!filtro.getAtendimentoTipo().getId().equals(at.getAtendidoTipoId()))
+                return false;
+
+        return true;
+    }
+
+    //endregion
+
     //endregion
 
     //region Getters
@@ -1256,11 +2621,11 @@ public class Persistencia {
     }
 
     public void carregaUnidadesTipo() {
-        if (versao == 0) {
+//        if (versao == 0) {
             getUnidadesTipoLocal();
-        } else {
-            getUnidadesTipoBanco();
-        }
+//        } else {
+//            getUnidadesTipoBanco();
+//        }
     }
 
     public ArrayList<UnidadeTipo> getUnidadesTipo() {
@@ -1289,6 +2654,16 @@ public class Persistencia {
         return cidadesLista;
     }
 
+    public ArrayList<Estado> getEstadosByRegiao(Regiao regiao) {
+        ArrayList<Estado> estadosLista = new ArrayList<>();
+        for(Estado estado: estados){
+            if(regiao.getEstados().contains(estado.getId()))
+                estadosLista.add(estado);
+        }
+
+        return estadosLista;
+    }
+
     public Unidade getUnidadeById(String unidadeId) {
         for(Unidade und: unidades){
             if(und.getId().equals(unidadeId))
@@ -1298,8 +2673,8 @@ public class Persistencia {
         return null;
     }
 
-    public List<AtendimentoTipo> getAtendimentos() {
-        return this.atendimentos;
+    public ArrayList<AtendimentoTipo> getAtendimentosTipo() {
+        return this.atendimentosTipo;
     }
 
     public ArrayList<Universidade> getUniversidades() {
@@ -1370,15 +2745,15 @@ public class Persistencia {
         this.cidadeAtual = cidadeAtual;
     }
 
-    public void setAtendimentos(List<AtendimentoTipo> atendimentos) {
-        this.atendimentos = atendimentos;
+    public void setAtendimentos(ArrayList<AtendimentoTipo> atendimentos) {
+        this.atendimentosTipo = atendimentos;
     }
 
-    public List<AtendidoTipo> getAtendidoTipos() {
+    public ArrayList<AtendidoTipo> getAtendidoTipos() {
         return atendidoTipos;
     }
 
-    public void setAtendidoTipos(List<AtendidoTipo> atendidoTipos) {
+    public void setAtendidoTipos(ArrayList<AtendidoTipo> atendidoTipos) {
         this.atendidoTipos = atendidoTipos;
     }
 
@@ -1506,6 +2881,14 @@ public class Persistencia {
         this.pesquisouAcessoJahSolicitado = pesquisouAcessoJahSolicitado;
     }
 
+    public ArrayList<Atendimento> getAtendimentosLista() {
+        return atendimentosLista;
+    }
+
+    public void setAtendimentosLista(ArrayList<Atendimento> atendimentosLista) {
+        this.atendimentosLista = atendimentosLista;
+    }
+
     //endregion
 
     public String getNomeColecaoByObjeto(Object obj) {
@@ -1537,6 +2920,7 @@ public class Persistencia {
     //region Local
     private void getUnidadesTipoLocal() {
         ArrayList<UnidadeTipo> lista = new ArrayList<UnidadeTipo>();
+        unidadeTipos = new ArrayList<>();
         lista.add(new UnidadeTipo("2fc6E3rkAkZcFKHpF9Eh", "Superintendência"));
         lista.add(new UnidadeTipo("G6WLURVH2Cd7TG4ACCD4", "Inspetoria"));
         lista.add(new UnidadeTipo("O6GnqBBkJZLJhIlzHycq", "Agência"));
@@ -1544,18 +2928,15 @@ public class Persistencia {
         lista.add(new UnidadeTipo("mLoI8CgDXH8WtVEcsC1j", "Alfandega"));
         lista.add(new UnidadeTipo("plFhYkxaF1eJq5VHtE5v", "Delegacia de Julgamento"));
         lista.add(new UnidadeTipo("usk8AUmOGY2nTu9mcV2c", "Posto"));
-        lista.add(new UnidadeTipo("2fc6E3rkAkZcFKHpF9Eh", "Superintendência"));
-        lista.add(new UnidadeTipo("G6WLURVH2Cd7TG4ACCD4", "Inspetoria"));
-        lista.add(new UnidadeTipo("O6GnqBBkJZLJhIlzHycq", "Agência"));
-        lista.add(new UnidadeTipo("TFN0ALlaiOwCc2paZkY0", "Delegacia"));
-        lista.add(new UnidadeTipo("mLoI8CgDXH8WtVEcsC1j", "Alfandega"));
-        lista.add(new UnidadeTipo("plFhYkxaF1eJq5VHtE5v", "Delegacia de Julgamento"));
-        lista.add(new UnidadeTipo("usk8AUmOGY2nTu9mcV2c", "Posto"));
-        this.unidadeTipos = lista;
+        for(UnidadeTipo uni: lista){
+            if(!unidadeTipos.contains(uni)){
+                unidadeTipos.add(uni);
+            }
+        }
     }
 
     private void getAtendidosLocal() {
-        List<AtendidoTipo> lista = new ArrayList<AtendidoTipo>();
+        ArrayList<AtendidoTipo> lista = new ArrayList<AtendidoTipo>();
         lista.add(new AtendidoTipo("eJBYdgN73UduYpr3464P", "Pessoa Física"));
         lista.add(new AtendidoTipo("kbU2kPG0ki2EZh68VNmy", "Microempreendedor Individual(MEI)"));
         lista.add(new AtendidoTipo("mtjSYNphM6pfp3Zn7uOB", "Microempresa optante pelo Simples Nacional"));
@@ -1605,14 +2986,14 @@ public class Persistencia {
     }
 
     public void getAtendimentoTipoLocal() {
-        List<AtendimentoTipo> lista = new ArrayList<AtendimentoTipo>();
+        ArrayList<AtendimentoTipo> lista = new ArrayList<AtendimentoTipo>();
         lista.add(new AtendimentoTipo("BFUw5tuJHZPmcKwb2u4f", "Auxílio à elaboração e orientações sobre a Declaração de Ajuste Anual do IRPF"));
         lista.add(new AtendimentoTipo("m7pHX9YXcasc4NCnLF83", "Auxílio à inscrição e Informações cadastrais de CPF"));
         lista.add(new AtendimentoTipo("efE4yAzydBFpPYEOhP46", "Auxílio à inscrição e Informações cadastrais do CNPJ"));
         lista.add(new AtendimentoTipo("eX4ddhUEeVkcgS4gIuo8", "Auxílio à emissão e informações sobre Certidões Negativas de Débitos PF e PJ"));
         lista.add(new AtendimentoTipo("wbLxjD9kU0nQGTZEDfp4", "Auxílio à consulta à situação fiscal"));
         lista.add(new AtendimentoTipo("4oTugvnwxE17vcHsMzO8", "Agendamento on-line de s na RFB"));
-        lista.add(new AtendimentoTipo("4oTugvnwxE17vcHsMzO8", "Informações e auxílio à regularização de CPF Suspenso"));
+        lista.add(new AtendimentoTipo("4oTugnWwxE17vcHsMzO8", "Informações e auxílio à regularização de CPF Suspenso"));
         lista.add(new AtendimentoTipo("67zNThARxUzayOvgiIjP", "Informações e auxílio à elaboração de pedido de isenção de IRPF para portadores de moléstias graves"));
         lista.add(new AtendimentoTipo("EkOhufIPvpQDGn1U1y6S", "Orientações e auxílio à elaboração de pedidos de isenção de IPI/IOF na compra de veículos por portadores de deficiência física, mental ou visual"));
         lista.add(new AtendimentoTipo("NBHGbyhivHfcLWwsktO4", "Auxílio à apresentação de pedidos de restituição de pagamentos indevidos e/ou a maior (Perdcomps)"));
@@ -1628,8 +3009,9 @@ public class Persistencia {
         lista.add(new AtendimentoTipo("IWoDGO6nZEBju6LHVj8K", "Auxílio à habilitação nos sistemas RADAR e Siscomex"));
         lista.add(new AtendimentoTipo("AiEwDKQQvGhp2dXPwNkm", "Informações sobre regras de importação e exportação através dos Correios"));
         lista.add(new AtendimentoTipo("xGYylzx84CdVzI6duIHy", "Informações sobre Regras de Bagagem"));
-        this.atendimentos = lista;
+        this.atendimentosTipo = lista;
     }
+
 
     public ArrayList<Cidade> getCidadesLocal(Estado estado) {
         if ("AC".equals(estado.getSigla())) {
@@ -1690,5 +3072,243 @@ public class Persistencia {
         return null;
     }
 
-    //endregion
+    public ArrayList<Cidade> getCidadesLocal(String estadoId) {
+        if ("YOHaadyseN9LJy6v2wzQ".equals(estadoId)) {
+            return AC.getCidades();
+        } else if ("M5R8LCulJcMtwd9jH2T2".equals(estadoId)) {
+            return AL.getCidades();
+        } else if ("U4socdTZxzTDU8WB6fIY".equals(estadoId)) {
+            return AM.getCidades();
+        } else if ("8rK4E9CTuN3YhwbCr9GL".equals(estadoId)) {
+            return AP.getCidades();
+        } else if ("6R8soQpFwwNYRMxhvqVJ".equals(estadoId)) {
+            return BA.getCidades();
+        } else if ("19LMXJKf2gQhrwvFKpCG".equals(estadoId)) {
+            return CE.getCidades();
+        } else if ("URuENL5wManmASqNRZlE".equals(estadoId)) {
+            return DF.getCidades();
+        } else if ("yTgVVuT0uf8wT03omvWX".equals(estadoId)) {
+            return ES.getCidades();
+        } else if ("vp6JrzOjGLJ1BUkxrUjo".equals(estadoId)) {
+            return GO.getCidades();
+        } else if ("pHJjtnzuXeDQ7bqmJItp".equals(estadoId)) {
+            return MA.getCidades();
+        } else if ("18adfRUvWf5yNxfV3zG3".equals(estadoId)) {
+            return MG.getCidades();
+        } else if ("82bo5VcIUDbVhAiiWKE0".equals(estadoId)) {
+            return MS.getCidades();
+        } else if ("bSVpIP0ywsHAwNpWWJWT".equals(estadoId)) {
+            return MT.getCidades();
+        } else if ("ItdD34xP0a63qxRmw2P0".equals(estadoId)) {
+            return PA.getCidades();
+        } else if ("h5RRp13ofgAMn9v37Ln8".equals(estadoId)) {
+            return PB.getCidades();
+        } else if ("YS1okckJJhDXNtmcKS9b".equals(estadoId)) {
+            return PE.getCidades();
+        } else if ("n30NTxhAuxqCa6OMcR42".equals(estadoId)) {
+            return PI.getCidades();
+        } else if ("ExaDaauaC2Jwt6W9rT8Y".equals(estadoId)) {
+            return PR.getCidades();
+        } else if ("piIRsvy9nHTMzBq3lRU0".equals(estadoId)) {
+            return RJ.getCidades();
+        } else if ("hVaznHuTvMcaCVJKgZjk".equals(estadoId)) {
+            return RN.getCidades();
+        } else if ("s1YxDxTODBAl79sFMfIs".equals(estadoId)) {
+            return RO.getCidades();
+        } else if ("xS8wVdtWmIj134cTBLTC".equals(estadoId)) {
+            return RR.getCidades();
+        } else if ("XE0DpyxK9DOXBlSqfma6".equals(estadoId)) {
+            return RS.getCidades();
+        } else if ("4niJNacnYflWAk7B2yA4".equals(estadoId)) {
+            return SC.getCidades();
+        } else if ("S2KhrsFJMDoPxfZc91tr".equals(estadoId)) {
+            return SE.getCidades();
+        } else if ("RhxB7uMtgwpjGI8ZCc69".equals(estadoId)) {
+            return SP.getCidades();
+        } else if ("3Y8KZ4fEQRlMakrppPfa".equals(estadoId)) {
+            return TO.getCidades();
+        }
+        return null;
+    }
+
+    private boolean participantesRelatorioCarregado = false;
+
+    public boolean isParticipantesRelatorioCarregado() {
+        return participantesRelatorioCarregado;
+    }
+
+    public void carregaParticipantes() {
+        participantesRelatorioCarregado = false;
+        participantesRelatorio = new ArrayList<>();
+
+        firebaseFirestore.collection("acesso")
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereEqualTo("tipo", AcessoTipoEnum.UNIVERSIDADE)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Acesso ac = document.toObject(Acesso.class);
+                        if(ac.getNivelAcesso() <= 2L){
+                            participantesRelatorio.add(ac);
+                            traduzirNomeParticipantes(ac);
+                        }
+                    }
+                }
+                participantesRelatorioCarregado = true;
+            }
+        });
+
+    }
+
+    private void traduzirNomeParticipantes(final Acesso acesso){
+        DocumentReference dr =
+                firebaseFirestore.collection("usuario").document(acesso.getUsuarioId());
+        dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    Usuario usr =  document.toObject(Usuario.class);
+                    acesso.setNome(usr.getNome());
+                }
+            }
+        });
+    }
+
+    public boolean traduziuNomesParticipantes(){
+        for(Acesso acesso: participantesRelatorio){
+            if(acesso.getNome() == null || acesso.getNome().length() == 0){
+                return false;
+            }
+        }
+
+        return true;
+     }
+
+    public ArrayList<Acesso> getParticipantesRelatorio() {
+        return participantesRelatorio;
+    }
+
+    private boolean verificouExclusao = false;
+    private boolean podeExcluir = false;
+    public boolean isVerificouExclusao() {
+        return verificouExclusao;
+    }
+    public boolean isPodeExcluir() {
+        return podeExcluir;
+    }
+
+    public void validarRemocaoRegiao(String id) {
+        verificouExclusao = false;
+        podeExcluir = false;
+
+        firebaseFirestore.collection("unidade")
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereEqualTo("regiaoId", id)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if(task.getResult().size() > 0)
+                        podeExcluir = false;
+                    else
+                        podeExcluir = true;
+                }
+
+                verificouExclusao = true;
+            }
+        });
+    }
+
+    public void validarRemocaoUnidade(String id) {
+        verificouExclusao = false;
+        podeExcluir = false;
+
+        firebaseFirestore.collection("universidade")
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereEqualTo("unidadeId", id)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if(task.getResult().size() > 0)
+                        podeExcluir = false;
+                    else
+                        podeExcluir = true;
+                }
+
+                verificouExclusao = true;
+            }
+        });
+    }
+
+    public void validarRemocaoUniversidade(String id) {
+        verificouExclusao = false;
+        podeExcluir = false;
+
+        firebaseFirestore.collection("acesso")
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereEqualTo("universidadeId", id)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if(task.getResult().size() > 0)
+                        podeExcluir = false;
+                    else
+                        podeExcluir = true;
+                }
+
+                verificouExclusao = true;
+            }
+        });
+    }
+
+    public void validarRemocaoParticipante(String id) {
+        verificouExclusao = false;
+        podeExcluir = false;
+
+        firebaseFirestore.collection("atendimento")
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereEqualTo("acessoId", id)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if(task.getResult().size() > 0)
+                        podeExcluir = false;
+                    else
+                        podeExcluir = true;
+                }
+
+                verificouExclusao = true;
+            }
+        });
+    }
+
+    public void validarRemocaoUsuario(String id) {
+        verificouExclusao = false;
+        podeExcluir = false;
+
+        firebaseFirestore.collection("acesso")
+                .whereEqualTo("status", StatusEnum.ATIVO)
+                .whereEqualTo("usuarioId", id)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    if(task.getResult().size() > 0)
+                        podeExcluir = false;
+                    else
+                        podeExcluir = true;
+                }
+
+                verificouExclusao = true;
+            }
+        });
+    }
+
+//endregion
 }

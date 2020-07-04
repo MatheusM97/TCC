@@ -55,20 +55,20 @@ public class AcessoPrincipal extends CustomActivity {
         btn_solicitarAcesso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Persistencia.getInstance().carregouUniversidades = false;
+                showDialog();
+
                 Persistencia.getInstance().carregaRegioes();
                 Persistencia.getInstance().carregaUnidades();
                 Persistencia.getInstance().carregaUniversidades();
 
-                showDialog();
-                aguardandoUniversidades();
+                aguardando();
             }
         });
         
         btn_aprovarAcesso = findViewById(R.id.btn_aprovarAcesso);
         btn_aprovarAcesso.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {// todo: aqui
+            public void onClick(View v) {
                 Persistencia.getInstance().carregaSolicitacoes(Persistencia.getInstance().getAcessoAtual());
 
                 showDialog();
@@ -77,6 +77,24 @@ public class AcessoPrincipal extends CustomActivity {
         });
         
         controlaAcesso();
+    }
+    private void aguardando(){
+        if(Persistencia.getInstance().carregouUniversidades && Persistencia.getInstance().carregouUnidades && Persistencia.getInstance().carregouRegioes){
+            hideDialog();
+            iniciarTelas(new AcessoSolicitar());
+        }
+        else{
+            aguardandoCarregamento();
+        }
+    }
+
+    private void aguardandoCarregamento() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                aguardando();
+            }
+        }, 500);
     }
 
     private void controlaAcesso() {

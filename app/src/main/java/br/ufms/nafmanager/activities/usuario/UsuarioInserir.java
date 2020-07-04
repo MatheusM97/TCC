@@ -133,13 +133,14 @@ public class UsuarioInserir extends CustomActivity {
 
         if(!auto && !edicao) {
             usuario.setSenha(usuario.getCpfSomenteDigitos());
-            usuarioSenha2.setText(usuario.getCpfSomenteDigitos());
+            usuario.setSenha2(usuario.getCpfSomenteDigitos());
         }
     }
 
     public void preValidar() {
         this.copiarTela();
         this.usuario.validarSenhas();
+
 
         if(usuario.getMensagem() != null && usuario.getMensagem().trim().length() > 0){
             inserir();
@@ -192,6 +193,6 @@ public class UsuarioInserir extends CustomActivity {
             public void run() {
                 verificaUsuario();
             }
-        },1000);
+        },100);
     }
 }

@@ -29,6 +29,7 @@ public class AcessoAprovar extends CustomActivity {
             finish();
         }
     }
+
     public void carregaLista(){
         adp = new AcessoUsuarioAdapter(this, Persistencia.getInstance().getAcessosRegistrados());
         ListView list = (ListView) findViewById(R.id.lv_listagemGerencial);

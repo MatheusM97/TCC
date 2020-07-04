@@ -3,7 +3,8 @@ package br.ufms.nafmanager.model;
 public enum AcessoTipoEnum {
     UNIDADE(0L, "Unidade"),
     UNIVERSIDADE(1L, "Universidade"),
-    REGIAO(2L, "Região");
+    REGIAO(2L, "Região"),
+    MODERADOR(3L, "Moderador");
 
     private Long valor;
     private String label;
@@ -27,6 +28,8 @@ public enum AcessoTipoEnum {
                 return AcessoTipoEnum.UNIVERSIDADE;
             case ("Região"):
                 return AcessoTipoEnum.REGIAO;
+            case ("Moderador"):
+                return AcessoTipoEnum.MODERADOR;
         }
         return null;
     }

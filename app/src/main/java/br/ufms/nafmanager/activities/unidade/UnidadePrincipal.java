@@ -88,7 +88,7 @@ public class UnidadePrincipal extends CustomActivity {
             public void run() {
                 aguardandoUnidades();
             }
-        }, 6000);
+        }, 100);
     }
 
     private void aguardandoCarregarRegioes() {
@@ -97,7 +97,7 @@ public class UnidadePrincipal extends CustomActivity {
             public void run() {
                 aguardandoRegioes();
             }
-        }, 6000);
+        }, 100);
     }
 
 

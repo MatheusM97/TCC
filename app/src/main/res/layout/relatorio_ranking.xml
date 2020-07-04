@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/layout_0"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/layout_5">
+
+            <TextView
+                android:id="@+id/tv_participanteInicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="20dp"
+                android:textColor="#000000"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="Data início:"
+                android:textSize="18dp"
+                android:textStyle="normal"/>
+
+            <TextView
+                android:id="@+id/et_rankingInicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="1dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="01/01/2000"
+                android:textSize="18dp"
+                android:textStyle="normal"/>
+
+            <TextView
+                android:id="@+id/tv_participanteFim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="5dp"
+                android:textColor="#000000"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="Data fim:"
+                android:textSize="18dp"
+                android:textStyle="normal"/>
+
+            <TextView
+                android:id="@+id/et_rankingFim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="1dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:text="01/01/2000"
+                android:textSize="18dp"
+                android:textStyle="normal"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/layout_5"
+            android:id="@+id/layout_6">
+
+            <TextView
+                android:id="@+id/tv_atendimentoConclusivo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:text="Atendimento conclusivo: "
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="normal">
+            </TextView>
+
+            <Spinner
+                android:id="@+id/sp_atendimentoConclusivo"
+                android:layout_width="match_parent"
+                android:layout_height="23dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_toRightOf="@id/tv_tipoAtendimentoId"
+                android:spinnerMode="dialog">
+            </Spinner>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_6"
+            android:orientation="horizontal"            
+            android:id="@+id/layout_3">
+
+            <TextView
+                android:id="@+id/tv_tipoAtendimento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="20dp"
+                android:text="Tipo de Serviço: "
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="normal">
+            </TextView>
+
+            <Spinner
+                android:id="@+id/sp_tipoAtendimentoId"
+                android:layout_width="match_parent"
+                android:layout_height="23dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_toRightOf="@id/tv_tipoAtendimentoId"
+                android:spinnerMode="dialog">
+            </Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/layout_3"
+            android:id="@+id/layout_4">
+
+            <TextView
+                android:id="@+id/tv_tipoPessoa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginLeft="20dp"
+                android:text="Tipo de documento: "
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="normal">
+            </TextView>
+
+            <Spinner
+                android:id="@+id/sp_tipoPessoa"
+                android:layout_width="match_parent"
+                android:layout_height="23dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="2dp"
+                android:layout_toRightOf="@id/tv_tipoAtendimentoId"
+                android:spinnerMode="dialog">
+            </Spinner>
+        </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_1"
+        android:layout_below="@id/layout_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_tipoRelatorio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="20dp"
+            android:text="Filtrado por:"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:textStyle="normal"></TextView>
+
+        <Spinner
+            android:id="@+id/sp_tipoRelatorio"
+            android:layout_toRightOf="@id/tv_tipoRelatorio"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="match_parent"
+            android:layout_height="23dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="20dp"
+            android:spinnerMode="dialog">
+        </Spinner>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_2"
+        android:layout_below="@id/layout_1"
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_regiao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Região Fiscal"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:textStyle="normal"></TextView>
+
+        <Spinner
+            android:id="@+id/sp_regiao"
+            android:layout_below="@id/tv_regiao"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:spinnerMode="dialog">
+        </Spinner>
+
+        <TextView
+            android:id="@+id/tv_unidade"
+            android:layout_below="@id/sp_regiao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Unidade da Receita"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:textStyle="normal"
+            ></TextView>
+
+        <Spinner
+            android:id="@+id/sp_unidade"
+            android:layout_below="@id/tv_unidade"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:spinnerMode="dialog">
+        </Spinner>
+
+        <TextView
+            android:id="@+id/tv_universidade"
+            android:layout_below="@id/sp_unidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Universidade"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:textStyle="normal"
+            ></TextView>
+
+        <Spinner
+            android:id="@+id/sp_universidade"
+            android:layout_below="@id/tv_universidade"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:spinnerMode="dialog">
+        </Spinner>
+
+        <TextView
+            android:id="@+id/tv_participante"
+            android:layout_below="@id/sp_universidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:text="Participante"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:textStyle="normal"
+            ></TextView>
+
+        <Spinner
+            android:id="@+id/sp_participante"
+            android:layout_below="@id/tv_participante"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:spinnerMode="dialog">
+        </Spinner>
+
+        <Button
+            android:id="@+id/btn_gerarRelatorioRanking"
+            android:layout_below="@id/sp_participante"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_finalizar"
+            android:text="Gerar"
+            android:textColor="#FFFFFF"
+            android:textSize="18dp"
+            android:textStyle="normal"/>
+    </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

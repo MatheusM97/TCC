@@ -8,57 +8,46 @@
         android:id="@+id/tv_acesso_usuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:text="Usuário"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></TextView>
 
     <EditText
         android:id="@+id/sp_acesso_usuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:layout_below="@+id/tv_acesso_usuario"
         android:focusableInTouchMode="false"
         android:focusable="false"
         ></EditText>
-
-<!--    <Spinner-->
-<!--        android:id="@+id/sp_acesso_usuario"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginLeft="50dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:layout_marginRight="50dp"-->
-<!--        android:layout_below="@+id/tv_acesso_usuario"-->
-<!--        android:focusable="true"-->
-<!--        android:focusableInTouchMode="true"></Spinner>-->
 
     <TextView
         android:id="@+id/tv_acessoTipo"
         android:layout_below="@id/sp_acesso_usuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:text="Tipo"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></TextView>
 
     <Spinner
         android:id="@+id/sp_acessoTipo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:layout_below="@+id/tv_acessoTipo"
         android:focusable="true"
         android:focusableInTouchMode="true"></Spinner>
@@ -69,12 +58,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/sp_acessoTipo"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:text="Universidade"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></TextView>
 
     <Spinner
@@ -82,9 +71,9 @@
         android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:layout_below="@+id/tv_acesso_universidade"
         android:focusable="true"
         android:focusableInTouchMode="true"></Spinner>
@@ -95,12 +84,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/sp_acessoTipo"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:text="Unidade"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></TextView>
 
     <Spinner
@@ -108,9 +97,9 @@
         android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:layout_below="@id/tv_acesso_unidade"
         android:focusable="true"
         android:focusableInTouchMode="true"></Spinner>
@@ -121,12 +110,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/sp_acessoTipo"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:text="Região"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></TextView>
 
     <Spinner
@@ -134,9 +123,9 @@
         android:visibility="invisible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:layout_below="@id/tv_acesso_regiao"
         android:focusable="true"
         android:focusableInTouchMode="true"></Spinner>
@@ -146,14 +135,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/sp_acesso_unidade"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:text="Papéis"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></TextView>
-
 
     <CheckBox
         android:id="@+id/cb_acesso_participante"
@@ -163,11 +151,11 @@
         android:button="@null"
         android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
         android:gravity="center_vertical"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="7dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:text="Aluno"
-        android:textSize="20dp" />
+        android:textSize="18dp" />
 
     <CheckBox
         android:id="@+id/cb_acesso_professor"
@@ -177,11 +165,11 @@
         android:button="@null"
         android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
         android:gravity="center_vertical"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="7dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:text="Professor"
-        android:textSize="20dp" />
+        android:textSize="18dp" />
 
     <CheckBox
         android:id="@+id/cb_acesso_representanteUniversidade"
@@ -191,11 +179,11 @@
         android:button="@null"
         android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
         android:gravity="center_vertical"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="7dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:text="Representante"
-        android:textSize="20dp" />
+        android:textSize="18dp" />
 
     <CheckBox
         android:id="@+id/cb_acesso_representante"
@@ -205,50 +193,54 @@
         android:button="@null"
         android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
         android:gravity="center_vertical"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="7dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:text="Representante"
-        android:textSize="20dp" />
+        android:textSize="18dp" />
 
     <CheckBox
         android:id="@+id/cb_acesso_master"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cb_acesso_representante"
+        android:layout_below="@id/tv_papeis"
         android:button="@null"
         android:drawableRight="?android:attr/listChoiceIndicatorMultiple"
         android:gravity="center_vertical"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="7dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginRight="30dp"
         android:text="Moderador"
-        android:textSize="20dp" />
+        android:textSize="18dp" />
 
     <Button
         android:id="@+id/btn_acesso_inserir"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_alignParentBottom="true"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/btn_finalizar"
         android:gravity="center"
         android:text="Concluir"
         android:textColor="#FFFFFF"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></Button>
 
     <Button
         android:id="@+id/btn_acesso_aprovar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_alignParentBottom="true"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="5dp"
         android:background="@drawable/btn_finalizar"
         android:gravity="center"
         android:text="Aprovar"
         android:textColor="#FFFFFF"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></Button>
 
 </RelativeLayout>

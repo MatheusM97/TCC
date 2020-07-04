@@ -35,9 +35,4 @@ public class AtendidoTipo extends CustomObject {
     public boolean validar() {
         return true;
     }
-
-    @Override
-    public boolean validarRemocao() {
-        return true;
-    }
 }

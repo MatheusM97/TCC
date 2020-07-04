@@ -9,44 +9,66 @@
         android:id="@+id/tv_universidade_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:text="Nome da universidade"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="Nome"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></TextView>
 
     <EditText
         android:id="@+id/et_universidade_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:singleLine="true"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"
         android:maxLines="1"
         android:imeOptions="actionNext"
         android:nextFocusForward="@id/sp_universidade_estado_nome"></EditText>
 
     <TextView
+        android:id="@+id/tv_unidade_vinculada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="Unidade da Receita vinculada"
+        android:textColor="#000000"
+        android:textSize="18dp"
+        android:textStyle="normal"
+        ></TextView>
+
+    <Spinner
+        android:id="@+id/sp_universidade_unidade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:spinnerMode="dialog"></Spinner>
+
+    <TextView
         android:id="@+id/tv_universidade_estado_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:text="Estado"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></TextView>
 
     <Spinner
         android:id="@+id/sp_universidade_estado_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:spinnerMode="dialog">
@@ -56,42 +78,19 @@
         android:id="@+id/tv_universidade_cidade_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:text="Cidade"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></TextView>
 
     <Spinner
         android:id="@+id/sp_universidade_cidade_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:spinnerMode="dialog"
-        ></Spinner>
-
-    <TextView
-        android:id="@+id/tv_unidade_vinculada"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:text="Unidade vinculada"
-        android:textColor="#000000"
-        android:textSize="20dp"
-        android:textStyle="normal"
-        ></TextView>
-
-    <Spinner
-        android:id="@+id/sp_universidade_unidade"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:spinnerMode="dialog"
@@ -101,12 +100,36 @@
         android:id="@+id/btn_inserirUniversidade"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_height="35dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="30dp"
         android:background="@drawable/btn_finalizar"
         android:text="Concluir"
         android:textColor="#FFFFFF"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></Button>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tv_representante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#000000"
+        android:textSize="18dp"
+        android:layout_centerHorizontal="true"
+        android:text="Representante"/>
+
+    <ListView
+        android:id="@+id/lv_representanteUniversidade"
+        android:layout_below="@id/tv_representante"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
+    </RelativeLayout>
+
 </LinearLayout>

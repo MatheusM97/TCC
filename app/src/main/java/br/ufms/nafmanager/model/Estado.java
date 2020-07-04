@@ -9,6 +9,12 @@ public class Estado extends CustomObject {
 
     public Estado(){super();}
 
+    public Estado(String id, String nome) {
+        super();
+        this.id = id;
+        this.nome = nome;
+    }
+
     public Estado(String id, String nome, String sigla){
         super();
         this.id = id;
@@ -39,11 +45,6 @@ public class Estado extends CustomObject {
 
     @Override
     public boolean validar() {
-        return true;
-    }
-
-    @Override
-    public boolean validarRemocao() {
         return true;
     }
 }

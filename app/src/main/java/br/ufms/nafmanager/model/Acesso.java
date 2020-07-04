@@ -2,7 +2,6 @@ package br.ufms.nafmanager.model;
 
 import com.google.firebase.firestore.Exclude;
 
-import br.ufms.nafmanager.adapters.StatusEnum;
 import br.ufms.nafmanager.persistencies.Persistencia;
 
 public class Acesso extends CustomObject {
@@ -16,6 +15,9 @@ public class Acesso extends CustomObject {
     private boolean representante = false;
     private boolean moderador = false;
     private String supervisorId;
+
+    @Exclude
+    private String nome;
 
     @Exclude
     private boolean solicitando = false;
@@ -124,7 +126,12 @@ public class Acesso extends CustomObject {
 
     @Override
     public String toString(){
-        return "ACESSO [ usuarioId: " + usuarioId + ", papeis: " + listaPapeisAtivos() + "]";
+        if(this.nome != null){
+            return this.nome;
+        }
+        else{
+            return "ACESSO [ usuarioId: " + usuarioId + ", papeis: " + listaPapeisAtivos() + "]";
+        }
     }
 
     @Override
@@ -156,12 +163,7 @@ public class Acesso extends CustomObject {
     }
 
     public void validarDuplicidade(){
-        Persistencia.getInstance().verificarAcessoDuplicado(this, StatusEnum.ATIVO);
-    }
-
-    @Override
-    public boolean validarRemocao() {
-        return true;
+        Persistencia.getInstance().verificarAcessoExistente(this);
     }
 
     public String listaPapeisAtivos(){
@@ -203,5 +205,15 @@ public class Acesso extends CustomObject {
             return 1L;
 
         return 0L;
+    }
+
+    @Exclude
+    public String getNome(){
+        return nome;
+    }
+
+    @Exclude
+    public void setNome(String nome){
+        this.nome = nome;
     }
 }

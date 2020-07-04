@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -23,7 +24,7 @@ import br.ufms.nafmanager.persistencies.Persistencia;
 public class UnidadeGerenciar extends CustomActivity {
     private Unidade unidade;
     private UnidadeAdapter adp;
-
+    private Unidade und;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listagem_gerencial);
@@ -37,17 +38,55 @@ public class UnidadeGerenciar extends CustomActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showDialog();
                 unidade = (Unidade) parent.getItemAtPosition(position);
                 Persistencia.getInstance().carregaUnidadeById(unidade.getId());
-                carregaCad();
+                aguardaRepresentante();
             }
         });
 
         registerForContextMenu(list);
     }
 
+
+    private void aguardaRepresentante() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                carregouRepresentante();
+            }
+        }, 500);
+    }
+
+    private void carregouRepresentante(){
+        if(Persistencia.getInstance().carregouRepresentantes){
+            aguardaResolverNome();
+        }
+        else{
+            aguardaRepresentante();
+        }
+    }
+
+    private void aguardaResolverNome() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                carregouNome();
+            }
+        }, 100);
+    }
+
+    private void carregouNome(){
+        if(Persistencia.getInstance().carregouRepresentantesUnidade()){
+            carregaCad();
+        }
+        else{
+            aguardaResolverNome();
+        }
+    }
+
+
     private void carregaCad() {
-        showDialog();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -57,7 +96,7 @@ public class UnidadeGerenciar extends CustomActivity {
                 editando = true;
                 hideDialog();
             }
-        }, 6000);
+        }, 100);
     }
 
     @Override
@@ -83,7 +122,7 @@ public class UnidadeGerenciar extends CustomActivity {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        final Unidade und = (Unidade) adp.getObjeto(marcador);
+        und = (Unidade) adp.getObjeto(marcador);
         new AlertDialog.Builder(UnidadeGerenciar.this)
                 .setIcon(android.R.drawable.ic_delete)
                 .setTitle("Alerta!")
@@ -91,14 +130,36 @@ public class UnidadeGerenciar extends CustomActivity {
                 .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(und.remover()) {
-                            adp.remover(marcador);
-                            adp.notifyDataSetChanged();
-                        }
+                        Persistencia.getInstance().validarRemocaoUnidade(und.getId());
+                        aguardandoValidacao();
                     }
                 })
                 .setNegativeButton("Não", null)
                 .show();
         return true;
+    }
+
+    public void validou(){
+        if(Persistencia.getInstance().isVerificouExclusao()){
+            if(Persistencia.getInstance().isPodeExcluir()){
+                und.remover();
+                adp.remover(marcador);
+                adp.notifyDataSetChanged();
+            }else{
+                Toast.makeText(this, "Existem Universidades vinculadas a esta Unidade da Receita", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            aguardandoValidacao();
+        }
+    }
+
+    private void aguardandoValidacao() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                validou();
+            }
+        }, 500);
     }
 }

@@ -13,7 +13,7 @@ android:orientation="vertical">
     <Button
         android:id="@+id/btn_inserirUniversidades"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_margin="10dp"
         android:layout_marginTop="50dp"
         android:background="@drawable/btn_cancelar"
@@ -25,7 +25,7 @@ android:orientation="vertical">
     <Button
         android:id="@+id/btn_gerenciarUniversidades"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_margin="10dp"
         android:background="@drawable/btn_cancelar"
         android:text="Gerenciar universidade"

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -23,7 +24,7 @@ import br.ufms.nafmanager.persistencies.Persistencia;
 public class UniversidadeGerenciar extends CustomActivity {
     private Universidade universidade;
     private UniversidadeAdapter adp;
-
+    private Universidade unv;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listagem_gerencial);
@@ -37,17 +38,54 @@ public class UniversidadeGerenciar extends CustomActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showDialog();
                 universidade = (Universidade) parent.getItemAtPosition(position);
                 Persistencia.getInstance().carregaUniversidadeById(universidade.getId());
-                carregaCad();
+                Persistencia.getInstance().carregaUnidadeById(universidade.getUnidadeId());
+                aguardaRepresentante();
             }
         });
 
         registerForContextMenu(list);
     }
 
+    private void aguardaRepresentante() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                carregouRepresentante();
+            }
+        }, 500);
+    }
+
+    private void carregouRepresentante(){
+        if(Persistencia.getInstance().carregouRepresentantes && Persistencia.getInstance().carregouUnidades){
+            aguardaResolverNome();
+        }
+        else{
+            aguardaRepresentante();
+        }
+    }
+
+    private void aguardaResolverNome() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                carregouNome();
+            }
+        }, 100);
+    }
+
+    private void carregouNome(){
+        if(Persistencia.getInstance().carregouRepresentantesUniversidade()){
+            carregaCad();
+        }
+        else{
+            aguardaResolverNome();
+        }
+    }
+
     private void carregaCad() {
-        showDialog();
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -57,7 +95,7 @@ public class UniversidadeGerenciar extends CustomActivity {
                 editando = true;
                 hideDialog();
             }
-        }, 6000);
+        }, 500);
     }
 
     @Override
@@ -83,7 +121,7 @@ public class UniversidadeGerenciar extends CustomActivity {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        final Universidade unv = (Universidade) adp.getObjeto(marcador);
+        unv = (Universidade) adp.getObjeto(marcador);
         new AlertDialog.Builder(UniversidadeGerenciar.this)
                 .setIcon(android.R.drawable.ic_delete)
                 .setTitle("Alerta!")
@@ -91,14 +129,36 @@ public class UniversidadeGerenciar extends CustomActivity {
                 .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(unv.remover()) {
-                            adp.remover(marcador);
-                            adp.notifyDataSetChanged();
-                        }
+                        Persistencia.getInstance().validarRemocaoUniversidade(unv.getId());
+                        aguardandoValidacao();
                     }
                 })
                 .setNegativeButton("Não", null)
                 .show();
         return true;
+    }
+
+    public void validou(){
+        if(Persistencia.getInstance().isVerificouExclusao()){
+            if(Persistencia.getInstance().isPodeExcluir()){
+                unv.remover();
+                adp.remover(marcador);
+                adp.notifyDataSetChanged();
+            }else{
+                Toast.makeText(this, "Existem Participantes vinculadas a esta Universidade", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            aguardandoValidacao();
+        }
+    }
+
+    private void aguardandoValidacao() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                validou();
+            }
+        }, 500);
     }
 }

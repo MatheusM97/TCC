@@ -66,33 +66,59 @@ public class AcessoSolicitar extends CustomActivity {
         showDialog();
 
         acesso.setSolicitando(true);
-        Persistencia.getInstance().verificarAcessoDuplicado(acesso, StatusEnum.RASCUNHO);
-        Persistencia.getInstance().validarAcessoMenor(acesso);
-
-        controlaInsercao();
+        Persistencia.getInstance().verificarAcessoExistente(acesso);
+        aguardaValidarCadastroExistente();
     }
 
-    private void controlaInsercao() {
-        if(Persistencia.getInstance().isPesquisouAcessoJahCadastrado() && Persistencia.getInstance().isPesquisouAcessoJahSolicitado()){
+    private void verificaCadastroExistente() {
+        if(Persistencia.getInstance().isPesquisouAcessoJahCadastrado()){
             if(Persistencia.getInstance().isPodeGravarAcesso()){
-                if(acesso.salvar()){
-                    finish();
-                }
+                Persistencia.getInstance().verificarAcessoSolicitado(acesso);
+                aguardaValidarCadastroJaSolicitado();
             }
-
-            hideDialog();
-            Toast.makeText(this, acesso.getMensagem(), Toast.LENGTH_LONG).show();
+            else{
+                Toast.makeText(this, "Acesso já existente", Toast.LENGTH_SHORT).show();
+                hideDialog();
+            }
         }
         else{
-            aguardandoValidarAcessoMenor();
+            aguardaValidarCadastroExistente();
         }
     }
 
-    private void aguardandoValidarAcessoMenor() {
+    public void aguardaValidarCadastroExistente(){
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                controlaInsercao();
+                verificaCadastroExistente();
+            }
+        }, 500);
+    }
+
+    private void verificaCadastroJaSoliciado() {
+        if(Persistencia.getInstance().isPesquisouAcessoJahSolicitado()){
+            if(Persistencia.getInstance().isPodeGravarAcesso()){
+                if(acesso.salvar()){
+                    hideDialog();
+                    Toast.makeText(this, "Solicitação efetuada com sucesso", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+            }
+            else{
+                Toast.makeText(this, "Acesso já solicitado", Toast.LENGTH_SHORT).show();
+                hideDialog();
+            }
+        }
+        else{
+            aguardaValidarCadastroJaSolicitado();
+        }
+    }
+
+    public void aguardaValidarCadastroJaSolicitado(){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                verificaCadastroJaSoliciado();
             }
         }, 500);
     }
@@ -131,10 +157,12 @@ public class AcessoSolicitar extends CustomActivity {
         acesso.setProfessor(false);
         acesso.setAluno(false);
 
-        if(acesso.getTipoValor().equals(AcessoTipoEnum.REGIAO.getValor())){
-            if(cbModerador.isChecked())
+        if(acesso.getTipoValor().equals(AcessoTipoEnum.MODERADOR.getValor())) {
+            if (cbModerador.isChecked())
                 acesso.setModerador(true);
+        }
 
+        if(acesso.getTipoValor().equals(AcessoTipoEnum.REGIAO.getValor())){
             if(cbRepresentante.isChecked())
                 acesso.setRepresentante(true);
         }
@@ -191,6 +219,20 @@ public class AcessoSolicitar extends CustomActivity {
             spnRegiao.setVisibility(View.VISIBLE);
             tvRegiao.setVisibility(View.VISIBLE);
         }
+        else if(spnTipo.getSelectedItem().toString().equals(AcessoTipoEnum.MODERADOR.toString())){
+            tvUniversidade.setVisibility(View.INVISIBLE);
+            spnUniversidade.setVisibility(View.INVISIBLE);
+            spnUniversidade.setSelection(0);
+
+            tvUnidade.setVisibility(View.INVISIBLE);
+            spnUnidade.setVisibility(View.INVISIBLE);
+            spnUnidade.setSelection(0);
+
+            spnRegiao.setVisibility(View.INVISIBLE);
+            tvRegiao.setVisibility(View.INVISIBLE);
+            spnRegiao.setSelection(0);
+        }
+
 
         controlaAcesso();
     }
@@ -210,18 +252,22 @@ public class AcessoSolicitar extends CustomActivity {
             cbProfessor.setChecked(false);
             cbAluno.setChecked(false);
 
-            if (spnTipo.getSelectedItem().toString().equals(AcessoTipoEnum.REGIAO.getLabel())) {
+            if(spnTipo.getSelectedItem().toString().equals(AcessoTipoEnum.MODERADOR.getLabel())){
+                cbModerador.setVisibility(View.VISIBLE);
+                cbRepresentanteUniversidade.setChecked(false);
+                cbRepresentante.setChecked(false);
+            }
+            else if (spnTipo.getSelectedItem().toString().equals(AcessoTipoEnum.REGIAO.getLabel())) {
                 cbRepresentanteUniversidade.setChecked(false);
                 cbRepresentante.setVisibility(View.VISIBLE);
-                cbModerador.setVisibility(View.VISIBLE);
             }else if (spnTipo.getSelectedItem().toString().equals(AcessoTipoEnum.UNIDADE.getLabel())) {
                 cbRepresentanteUniversidade.setChecked(false);
                 cbRepresentante.setVisibility(View.VISIBLE);
             }else if (spnTipo.getSelectedItem().toString().equals(AcessoTipoEnum.UNIVERSIDADE.getLabel())){
                 cbRepresentante.setChecked(false);
                 cbRepresentanteUniversidade.setVisibility(View.VISIBLE);
-                 cbProfessor.setVisibility(View.VISIBLE);
-                 cbAluno.setVisibility(View.VISIBLE);
+                cbProfessor.setVisibility(View.VISIBLE);
+                cbAluno.setVisibility(View.VISIBLE);
           }
         }
     }
@@ -236,9 +282,35 @@ public class AcessoSolicitar extends CustomActivity {
         tvRegiao = findViewById(R.id.tv_acesso_regiao);
 
         cbAluno = findViewById(R.id.cb_acesso_participante);
+        cbAluno.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(cbAluno.isChecked()){
+                    cbRepresentanteUniversidade.setChecked(false);
+                    cbProfessor.setChecked(false);
+                }
+            }
+        });
+
         cbProfessor = findViewById(R.id.cb_acesso_professor);
+        cbProfessor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(cbProfessor.isChecked()) {
+                    cbAluno.setChecked(false);
+                    cbRepresentanteUniversidade.setChecked(false);
+                }
+            }
+        });
 
         cbRepresentanteUniversidade = findViewById(R.id.cb_acesso_representanteUniversidade);
+        cbRepresentanteUniversidade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cbAluno.setChecked(false);
+                cbProfessor.setChecked(false);
+            }
+        });
 
         cbRepresentante = findViewById(R.id.cb_acesso_representante);
 
@@ -251,6 +323,7 @@ public class AcessoSolicitar extends CustomActivity {
         acessoTipo.add(AcessoTipoEnum.UNIDADE);
         acessoTipo.add(AcessoTipoEnum.UNIVERSIDADE);
         acessoTipo.add(AcessoTipoEnum.REGIAO);
+        acessoTipo.add(AcessoTipoEnum.MODERADOR);
 
         ArrayAdapter<AcessoTipoEnum> acessoAdp = new ArrayAdapter<AcessoTipoEnum>(this, android.R.layout.simple_spinner_dropdown_item, acessoTipo);
         this.spnTipo.setAdapter(acessoAdp);

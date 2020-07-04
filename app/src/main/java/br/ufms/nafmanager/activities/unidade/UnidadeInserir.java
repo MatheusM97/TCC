@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufms.nafmanager.R;
+import br.ufms.nafmanager.adapters.UsuarioAdapter;
 import br.ufms.nafmanager.model.Acesso;
 import br.ufms.nafmanager.model.Cidade;
 import br.ufms.nafmanager.model.Estado;
@@ -37,6 +39,7 @@ public class UnidadeInserir extends AppCompatActivity {
     private Spinner spinnerCidade;
     private Spinner spinnerRegiao;
     private Button btn_inserirUnidade;
+    private ArrayList<Estado> estadoLista;
     private ArrayList<Cidade> cidadeLista;
     private ArrayList<Regiao> regiaoLista;
     private boolean edicao = false;
@@ -47,6 +50,10 @@ public class UnidadeInserir extends AppCompatActivity {
     private ArrayAdapter<UnidadeTipo> adp;
     private ArrayAdapter<Regiao> regAdp;
     private boolean copiandoTela = false;
+
+    private ListView lvRepresentantes;
+    private UsuarioAdapter usuarioAdapter;
+    private TextView tvRepresentante;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,10 +86,10 @@ public class UnidadeInserir extends AppCompatActivity {
 
     private void vincularComponentes() {
         tipoLista = new ArrayList<>();
-        List<Estado> estadoLista = new ArrayList<>();
-        cidadeLista = new ArrayList<Cidade>();
+        estadoLista = Persistencia.getInstance().getEstados();
+        cidadeLista = new ArrayList<>();
 
-        this.unidadeNome = (EditText) findViewById(R.id.et_unidadeNome);
+        this.unidadeNome = findViewById(R.id.et_unidadeNome);
         this.unidadeNome.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
@@ -96,7 +103,36 @@ public class UnidadeInserir extends AppCompatActivity {
             }
         });
 
-        this.btn_inserirUnidade = (Button) findViewById(R.id.btn_inserirUnidade);
+
+        regiaoLista = Persistencia.getInstance().getRegioes();
+        spinnerRegiao = (Spinner) findViewById(R.id.sp_regiaoFiscal);
+
+        regAdp = new ArrayAdapter<Regiao>(this, android.R.layout.simple_spinner_dropdown_item, this.regiaoLista);
+        regAdp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerRegiao.setAdapter(regAdp);
+        spinnerRegiao.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                spinnerRegiao.requestFocusFromTouch();
+                hideKeyboard();
+                return false;
+            }
+        });
+
+        spinnerRegiao.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!copiandoTela){
+                    estadoLista = Persistencia.getInstance().getEstadosByRegiao((Regiao) parent.getSelectedItem());
+                    setAdapterEstado();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
 
         spinnerTipo = (Spinner) findViewById(R.id.sp_unidadeTipo);
         tipoLista = Persistencia.getInstance().getUnidadesTipo();
@@ -115,12 +151,6 @@ public class UnidadeInserir extends AppCompatActivity {
         });
 
         spinnerEstado = (Spinner) findViewById(R.id.sp_estadoNome);
-        estadoLista = Persistencia.getInstance().getEstados();
-
-        estAdp = new ArrayAdapter<Estado>(this, android.R.layout.simple_spinner_dropdown_item, estadoLista);
-        estAdp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinnerEstado.setAdapter(estAdp);
         spinnerEstado.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -157,28 +187,20 @@ public class UnidadeInserir extends AppCompatActivity {
             }
         });
 
-        this.regiaoLista = Persistencia.getInstance().getRegioes();
-        this.spinnerRegiao = (Spinner) findViewById(R.id.sp_regiaoFiscal);
 
-        regAdp = new ArrayAdapter<Regiao>(this, android.R.layout.simple_spinner_dropdown_item, this.regiaoLista);
-        regAdp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerRegiao.setAdapter(regAdp);
-
-        this.spinnerRegiao.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                spinnerRegiao.requestFocusFromTouch();
-                hideKeyboard();
-                return false;
-            }
-        });
-
+        this.btn_inserirUnidade = (Button) findViewById(R.id.btn_inserirUnidade);
         this.btn_inserirUnidade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 inserir();
             }
         });
+
+        this.lvRepresentantes = findViewById(R.id.lv_representanteUnidade);
+        this.lvRepresentantes.setVisibility(View.INVISIBLE);
+
+        this.tvRepresentante = findViewById(R.id.tv_representante);
+        this.tvRepresentante.setVisibility(View.INVISIBLE);
     }
 
     private void inserir(){
@@ -200,6 +222,11 @@ public class UnidadeInserir extends AppCompatActivity {
 
         this.spinnerTipo.setSelection(adp.getPosition(uTipo));
 
+        Regiao reg = new Regiao();
+        reg.setId(unidade.getRegiaoId());
+        reg = reg.buscaObjetoNaLista(Persistencia.getInstance().getRegioes());
+        this.spinnerRegiao.setSelection(regAdp.getPosition(reg));
+
         Cidade cid = new Cidade();
         cid.setId(unidade.getCidadeId());
         cid = cid.buscaObjetoNaLista(Persistencia.getInstance().getCidades());
@@ -207,17 +234,20 @@ public class UnidadeInserir extends AppCompatActivity {
         Estado est = new Estado();
         est.setId(cid.getEstadoId());
         est = est.buscaObjetoNaLista(Persistencia.getInstance().getEstados());
+        this.estadoLista = Persistencia.getInstance().getEstadosByRegiao(reg);
+        this.setAdapterEstado();
         this.spinnerEstado.setSelection(estAdp.getPosition(est));
-
-        Regiao reg = new Regiao();
-        reg.setId(unidade.getRegiaoId());
-        reg = reg.buscaObjetoNaLista(Persistencia.getInstance().getRegioes());
-        this.spinnerRegiao.setSelection(regAdp.getPosition(reg));
 
         this.cidadeLista = Persistencia.getInstance().getCidades(est);
         this.setAdapterCidade();
         this.spinnerCidade.setSelection(cidadeAdptr.getPosition(Persistencia.getInstance().getCidade(unidade.getCidadeId())));
         this.copiandoTela = true;
+
+        usuarioAdapter = new UsuarioAdapter(this, Persistencia.getInstance().getUnidadeAtual().getRepresentantes());
+        lvRepresentantes.setAdapter(usuarioAdapter);
+
+        lvRepresentantes.setVisibility(View.VISIBLE);
+        tvRepresentante.setVisibility(View.VISIBLE);
     }
 
     private void copiarTela() {
@@ -248,6 +278,12 @@ public class UnidadeInserir extends AppCompatActivity {
     private void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+    }
+
+    private void setAdapterEstado() {
+        estAdp = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, estadoLista);
+        estAdp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerEstado.setAdapter(estAdp);
     }
 
     private void setAdapterCidade() {

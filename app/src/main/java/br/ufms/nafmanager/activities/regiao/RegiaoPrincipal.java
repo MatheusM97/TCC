@@ -74,7 +74,7 @@ public class RegiaoPrincipal extends CustomActivity {
             public void run() {
                 aguardandoRegioes();
             }
-        }, 6000);
+        }, 100);
     }
 
     public void iniciarTelas(Object obj) {

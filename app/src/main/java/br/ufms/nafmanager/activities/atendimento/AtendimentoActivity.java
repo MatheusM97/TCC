@@ -80,8 +80,8 @@ public class AtendimentoActivity extends AppCompatActivity {
         spnAtendido = (Spinner) findViewById(R.id.sp_atendido);
         atendidoTipoList = Persistencia.getInstance().getAtendido();
 
-        etCpf = findViewById(R.id.et_cpf);
-        etCnpj = findViewById(R.id.et_cnpj);
+        etCpf = findViewById(R.id.et_cpfAtendimento);
+        etCnpj = findViewById(R.id.et_cnpjAtendimento);
 
         etCpf.addTextChangedListener(MaskEditUtil.mask(etCpf, MaskEditUtil.FORMAT_CPF));
         etCnpj.addTextChangedListener(MaskEditUtil.mask(etCnpj, MaskEditUtil.FORMAT_CNPJ));
@@ -127,18 +127,16 @@ public class AtendimentoActivity extends AppCompatActivity {
         etTelefone = findViewById(R.id.et_telefone);
         etTelefone.addTextChangedListener(MaskEditUtil.mask(etTelefone, MaskEditUtil.FORMAT_FONE));
 
-        atendimentoConclusivo.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        atendimentoConclusivo.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(hasFocus){
-                    hideKeyboard();
-                }
+            public void onClick(View v) {
+                hideKeyboard();
             }
         });
     }
 
     public void carregarAtendimentoTipoLocal() {
-        atendimentoTipoLista = Persistencia.getInstance().getAtendimentos();
+        atendimentoTipoLista = Persistencia.getInstance().getAtendimentosTipo();
         atendimentoTipoAdapter = new ArrayAdapter<AtendimentoTipo>(getBaseContext(),
                                      R.layout.layout_atendimento_tipo,
                                      R.id.ctvAtendimentoTipo,
@@ -148,6 +146,7 @@ public class AtendimentoActivity extends AppCompatActivity {
         lvAtendimentoTipo.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                hideKeyboard();
                 AtendimentoTipo at = (AtendimentoTipo) parent.getItemAtPosition(position);
                 if (atendimentoTipoIds.contains(at.getId())) {
                     atendimentoTipoIds.remove(at.getId());
@@ -239,7 +238,9 @@ public class AtendimentoActivity extends AppCompatActivity {
     }
 
     private void hideKeyboard() {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        if(getSystemService(Context.INPUT_METHOD_SERVICE)!= null && getCurrentFocus()!= null && getCurrentFocus().getWindowToken() != null){
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
 }

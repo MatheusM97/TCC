@@ -4,11 +4,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -21,7 +23,7 @@ import br.ufms.nafmanager.persistencies.Persistencia;
 
 public class AcessoGerenciar extends CustomActivity {
     private AcessoUsuarioAdapter adp;
-
+    private Acesso ac;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listagem_gerencial);
@@ -69,7 +71,7 @@ public class AcessoGerenciar extends CustomActivity {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        final Acesso ac = (Acesso) adp.getObjeto(marcador);
+        ac = (Acesso) adp.getObjeto(marcador);
         Usuario usr = new Usuario();
         usr.setId(ac.getUsuarioId());
         usr = usr.buscaObjetoNaLista(Persistencia.getInstance().getUsuariosComAcesso());
@@ -81,14 +83,36 @@ public class AcessoGerenciar extends CustomActivity {
                 .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(ac.remover()) {
-                            adp.remover(marcador);
-                            adp.notifyDataSetChanged();
-                        }
+                        Persistencia.getInstance().validarRemocaoParticipante(ac.getId());
+                        aguardandoValidacao();
                     }
                 })
                 .setNegativeButton("Não", null)
                 .show();
         return true;
+    }
+
+    public void validou(){
+        if(Persistencia.getInstance().isVerificouExclusao()){
+            if(Persistencia.getInstance().isPodeExcluir()){
+                ac.remover();
+                adp.remover(marcador);
+                adp.notifyDataSetChanged();
+            }else{
+                Toast.makeText(this, "Existem Atendimentos vinculadas a este Acesso", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            aguardandoValidacao();
+        }
+    }
+
+    private void aguardandoValidacao() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                validou();
+            }
+        }, 500);
     }
 }

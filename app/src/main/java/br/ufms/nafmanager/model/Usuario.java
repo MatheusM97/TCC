@@ -86,6 +86,27 @@ public class Usuario extends CustomObject implements Searchable {
         this.acessos = acessos;
     }
 
+    @Exclude
+    public boolean possuiAcesso(Acesso acesso){
+        if(acesso.getId() != null){
+            for(Acesso ac: acessos){
+                if(ac.getId().equals(acesso.getId())){
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    @Exclude
+    public void addAcesso(Acesso acesso){
+        if(this.acessos == null){
+            this.acessos = new ArrayList<>();
+        }
+        this.acessos.add(acesso);
+    }
+
     @Override
     public String toString(){
         return nome;
@@ -152,6 +173,7 @@ public class Usuario extends CustomObject implements Searchable {
 
     public void realizarLogin(){
         Persistencia.getInstance().getAutenticar(this);
+        Persistencia.getInstance().carregaRegioes();
         Persistencia.getInstance().carregaUnidades();
         Persistencia.getInstance().carregaUniversidades();
     }
@@ -173,27 +195,37 @@ public class Usuario extends CustomObject implements Searchable {
         return false;
     }
 
-    @Override
-    public boolean validarRemocao() {
-        return true;
-    }
-
-
-    public boolean isValidCPF(String cpf){
+    public static boolean isValidCPF(String cpf){
         String cpfDigitos = cpf.replaceAll("[^0-9]","");
+        if(cpfDigitos.length() ==11){
+            if(" 11111111111".equals(cpfDigitos) ||
+                "22222222222".equals(cpfDigitos) ||
+                "33333333333".equals(cpfDigitos) ||
+                "44444444444".equals(cpfDigitos) ||
+                "55555555555".equals(cpfDigitos) ||
+                "66666666666".equals(cpfDigitos) ||
+                "77777777777".equals(cpfDigitos) ||
+                "88888888888".equals(cpfDigitos) ||
+                "99999999999".equals(cpfDigitos) ||
+                "00000000000".equals(cpfDigitos)  )
+                return false;
 
-        int digito1 = Integer.parseInt(cpfDigitos.substring(9,10));
-        int digito2 = Integer.parseInt(cpfDigitos.substring(10,11));
+            int digito1 = Integer.parseInt(cpfDigitos.substring(9,10));
+            int digito2 = Integer.parseInt(cpfDigitos.substring(10,11));
 
-        int digito1Calculado = calculoModulo(cpfDigitos, 9, 10);
-        int digito2Calculado = calculoModulo(cpfDigitos, 10, 11);
+            int digito1Calculado = calculoModulo(cpfDigitos, 9, 10);
+            int digito2Calculado = calculoModulo(cpfDigitos, 10, 11);
 
-        if(digito1 != digito1Calculado || digito2 != digito2Calculado)
+            if(digito1 != digito1Calculado || digito2 != digito2Calculado)
+                return false;
+            return true;
+        }
+        else{
             return false;
-        return true;
+        }
     }
 
-    public int calculoModulo(String valor, int quantidadeDigitos, int peso){
+    public static int calculoModulo(String valor, int quantidadeDigitos, int peso){
         String digitos = valor.replaceAll("[^0-9]", "");
 
         int soma = 0;
@@ -209,6 +241,59 @@ public class Usuario extends CustomObject implements Searchable {
             return resto;
 
         return 0;
+    }
+
+    public static boolean isValidCNPJ(String cnpj){
+        String cnpjDigitos = cnpj.replaceAll("[^0-9]","");
+        if(cnpjDigitos.length() == 14){
+            if("11111111111111".equals(cnpjDigitos) ||
+               "22222222222222".equals(cnpjDigitos) ||
+               "33333333333333".equals(cnpjDigitos) ||
+               "44444444444444".equals(cnpjDigitos) ||
+               "55555555555555".equals(cnpjDigitos) ||
+               "66666666666666".equals(cnpjDigitos) ||
+               "77777777777777".equals(cnpjDigitos) ||
+               "88888888888888".equals(cnpjDigitos) ||
+               "99999999999999".equals(cnpjDigitos) ||
+               "00000000000000".equals(cnpjDigitos)  )
+                return false;
+
+            int digito1 = Integer.parseInt(cnpjDigitos.substring(12,13));
+            int digito2 = Integer.parseInt(cnpjDigitos.substring(13,14));
+
+            int digito1Calculado = calculoModulo11(cnpjDigitos,12);
+            int digito2Calculado = calculoModulo11(cnpjDigitos,13);
+
+            if(digito1 != digito1Calculado || digito2 != digito2Calculado)
+                return false;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public static int calculoModulo11(String cnpj, int quantidadeDigitos){
+        String digitos = cnpj.replaceAll("[^0-9]", "");
+
+        int soma = 0;
+        int peso = 2;
+        for(int i = quantidadeDigitos; i > 0; i--){
+            if(peso == 10)
+                peso = 2;
+
+            int valorInteiro = Integer.parseInt(digitos.substring(i-1, i));
+            soma += peso * valorInteiro;
+
+            peso++;
+        }
+
+        int resto = (soma % 11);
+
+        if(resto <= 1)
+            return 0;
+
+        return 11 - resto;
     }
 
     @Override

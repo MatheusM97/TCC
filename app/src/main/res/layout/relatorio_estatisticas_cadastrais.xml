@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_centerInParent="true"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_regiao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:text="Região Fiscal"
+        android:textColor="#000000"
+        android:textSize="18dp"
+        android:textStyle="normal"></TextView>
+
+    <Spinner
+        android:id="@+id/sp_regiao"
+        android:layout_below="@id/tv_regiao"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:spinnerMode="dialog">
+    </Spinner>
+
+    <TextView
+        android:id="@+id/tv_estado"
+        android:layout_below="@id/sp_regiao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:text="Estado"
+        android:textColor="#000000"
+        android:textSize="18dp"
+        android:textStyle="normal"></TextView>
+
+    <Spinner
+        android:id="@+id/sp_estado"
+        android:layout_below="@id/tv_estado"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:spinnerMode="dialog">
+    </Spinner>
+
+    <TextView
+        android:id="@+id/tv_cidade"
+        android:layout_below="@id/sp_estado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:text="Cidade"
+        android:textColor="#000000"
+        android:textSize="18dp"
+        android:textStyle="normal"></TextView>
+
+    <Spinner
+        android:id="@+id/sp_cidade"
+        android:layout_below="@id/tv_cidade"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:spinnerMode="dialog">
+    </Spinner>
+
+    <Button
+        android:id="@+id/btn_gerarRelatorioEstatisticasCadastrais"
+        android:layout_below="@id/sp_cidade"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:background="@drawable/btn_finalizar"
+        android:text="Gerar"
+        android:textColor="#FFFFFF"
+        android:textSize="18dp"
+        android:textStyle="normal"/>
+</RelativeLayout>
+</RelativeLayout>

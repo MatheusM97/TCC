@@ -27,7 +27,6 @@ public class UsuarioPrincipal extends CustomActivity {
         btn_inserirUsuario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                showDialog();
                 iniciarTelas(new UsuarioInserir());
             }
         });

@@ -8,12 +8,12 @@
         android:id="@+id/tv_unidade_Nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
-        android:text="Nome da unidade"
+        android:text="Nome"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal">
     </TextView>
 
@@ -21,11 +21,11 @@
         android:id="@+id/et_unidadeNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:singleLine="true"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"
         android:maxLines="1"
         android:imeOptions="actionNext"
@@ -33,26 +33,25 @@
     </EditText>
 
     <TextView
-        android:id="@+id/tv_unidade_tipo_nome"
+        android:id="@+id/tv_regiaoFiscal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
         android:layout_marginTop="10dp"
-        android:text="Tipo"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="Região Fiscal"
         android:textColor="#000000"
-        android:textSize="20dp"
-        android:textStyle="normal">
-    </TextView>
+        android:textSize="18dp"
+        android:textStyle="normal"></TextView>
 
     <Spinner
-        android:id="@+id/sp_unidadeTipo"
+        android:id="@+id/sp_regiaoFiscal"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:spinnerMode="dialog">
     </Spinner>
 
@@ -60,12 +59,12 @@
         android:id="@+id/tv_estadoNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
         android:text="Estado"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal">
     </TextView>
 
@@ -73,8 +72,8 @@
         android:id="@+id/sp_estadoNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:spinnerMode="dialog"
@@ -86,11 +85,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:text="Cidade"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal">
     </TextView>
 
@@ -98,47 +97,72 @@
         android:id="@+id/sp_cidadeNome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:spinnerMode="dialog"
-        android:nextFocusDown="@id/btn_inserirUnidade">
+        android:nextFocusDown="@id/sp_unidadeTipo">
     </Spinner>
 
     <TextView
-        android:id="@+id/tv_regiaoFiscal"
+        android:id="@+id/tv_unidade_tipo_nome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:text="Região fiscal"
+        android:text="Tipo"
         android:textColor="#000000"
-        android:textSize="20dp"
-        android:textStyle="normal"></TextView>
+        android:textSize="18dp"
+        android:textStyle="normal">
+    </TextView>
 
     <Spinner
-        android:id="@+id/sp_regiaoFiscal"
+        android:id="@+id/sp_unidadeTipo"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:spinnerMode="dialog">
     </Spinner>
+
 
     <Button
         android:id="@+id/btn_inserirUnidade"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:background="@drawable/btn_finalizar"
         android:text="Concluir"
         android:textColor="#FFFFFF"
-        android:textSize="20dp"
+        android:textSize="18dp"
         android:textStyle="normal"></Button>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_representante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:layout_centerHorizontal="true"
+            android:text="Representante"/>
+
+        <ListView
+            android:id="@+id/lv_representanteUnidade"
+            android:layout_below="@id/tv_representante"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
+    </RelativeLayout>
+
 </LinearLayout>

@@ -11,6 +11,7 @@ import br.ufms.nafmanager.R;
 import br.ufms.nafmanager.activities.acesso.AcessoPrincipal;
 import br.ufms.nafmanager.activities.atendimento.AtendimentoActivity;
 import br.ufms.nafmanager.activities.regiao.RegiaoPrincipal;
+import br.ufms.nafmanager.activities.relatorios.RelatorioPrincipal;
 import br.ufms.nafmanager.activities.unidade.UnidadePrincipal;
 import br.ufms.nafmanager.activities.universidade.UniversidadePrincipal;
 import br.ufms.nafmanager.activities.usuario.UsuarioPrincipal;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView btn_universidadeManager;
     private TextView btn_acessoManager;
     private TextView btn_atendimento;
+    private TextView btn_relatorio;
     private TextView btn_sair;
 
     @Override
@@ -96,6 +98,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btn_relatorio = findViewById(R.id.btn_relatorioMain);
+        btn_relatorio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iniciarTelas(new RelatorioPrincipal());
+            }
+        });
+
         btn_sair = (TextView) findViewById(R.id.btn_sair);
         btn_sair.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +126,12 @@ public class MainActivity extends AppCompatActivity {
         Acesso acesso = Persistencia.getInstance().getAcessoAtual();
 
         if(acesso != null){
-            if((acesso.isModerador() || acesso.isRepresentante()) && acesso.getTipoValor().equals(AcessoTipoEnum.REGIAO.getValor())){
+            if(acesso.isModerador() && acesso.getTipoValor().equals(AcessoTipoEnum.MODERADOR.getValor())){
+                btn_regiaoManager.setVisibility(View.VISIBLE);
+                btn_unidadeManager.setVisibility(View.VISIBLE);
+                btn_universidadeManager.setVisibility(View.VISIBLE);
+            }
+            else if(acesso.isRepresentante() && acesso.getTipoValor().equals(AcessoTipoEnum.REGIAO.getValor())){
                 btn_regiaoManager.setVisibility(View.VISIBLE);
                 btn_unidadeManager.setVisibility(View.VISIBLE);
                 btn_universidadeManager.setVisibility(View.VISIBLE);
@@ -138,7 +153,6 @@ public class MainActivity extends AppCompatActivity {
             btn_acessoManager.setVisibility(View.VISIBLE);
             btn_usuarioManager.setVisibility(View.VISIBLE);
         }
-
     }
 
     @Override

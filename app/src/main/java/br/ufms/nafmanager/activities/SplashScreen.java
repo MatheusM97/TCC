@@ -17,7 +17,6 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.layout_splash);
         Persistencia.getInstance().buscaVersao();
 
-//        Persistencia.getInstance().inserirDadosDefault();
         Persistencia.getInstance().carregaRegioes();
         Persistencia.getInstance().carregaUniversidades();
         Persistencia.getInstance().carregaUnidades();

@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,9 +22,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.ufms.nafmanager.R;
+import br.ufms.nafmanager.adapters.UsuarioAdapter;
 import br.ufms.nafmanager.model.Acesso;
 import br.ufms.nafmanager.model.Cidade;
 import br.ufms.nafmanager.model.Estado;
+import br.ufms.nafmanager.model.Regiao;
 import br.ufms.nafmanager.model.Unidade;
 import br.ufms.nafmanager.model.Universidade;
 import br.ufms.nafmanager.persistencies.Persistencia;
@@ -44,6 +47,9 @@ public class UniversidadeInserir extends AppCompatActivity {
     private boolean edicao = false;
     private Universidade universidade;
     private boolean copiandoTela = false;
+    private ListView lvRepresentantes;
+    private UsuarioAdapter usuarioAdapter;
+    private TextView tvRepresentante;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +83,12 @@ public class UniversidadeInserir extends AppCompatActivity {
         List<Estado> estadoLista = new ArrayList<>();
         cidadeLista = new ArrayList<Cidade>();
 
-        this.universidadeNome = (EditText) findViewById(R.id.et_universidade_nome);
+        universidadeNome = (EditText) findViewById(R.id.et_universidade_nome);
+        spinnerUnidades = (Spinner) findViewById(R.id.sp_universidade_unidade);
+        spinnerEstado = (Spinner) findViewById(R.id.sp_universidade_estado_nome);
+        spinnerCidade = (Spinner) findViewById(R.id.sp_universidade_cidade_nome);
+        btn_inserirUniversidade = (Button) findViewById(R.id.btn_inserirUniversidade);
+
         this.universidadeNome.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
@@ -91,8 +102,29 @@ public class UniversidadeInserir extends AppCompatActivity {
             }
         });
 
-        spinnerEstado = (Spinner) findViewById(R.id.sp_universidade_estado_nome);
-        estadoLista = Persistencia.getInstance().getEstados();
+        this.unidadeLista = Persistencia.getInstance().getUnidades();
+
+        undAdp = new ArrayAdapter<Unidade>(this, android.R.layout.simple_spinner_dropdown_item, unidadeLista);
+        undAdp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUnidades.setAdapter(undAdp);
+
+        this.spinnerUnidades.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                spinnerUnidades.requestFocusFromTouch();
+                hideKeyboard();
+                return false;
+            }
+        });
+        Regiao reg = new Regiao();
+
+        estadoLista = new ArrayList<>();
+
+        if(unidadeLista.size() >0){
+            reg.setId(unidadeLista.get(0).getRegiaoId());
+            reg = reg.buscaObjetoNaLista(Persistencia.getInstance().getRegioes());
+            estadoLista = Persistencia.getInstance().getEstadosByRegiao(reg);
+        }
 
         estAdp = new ArrayAdapter<Estado>(this, android.R.layout.simple_spinner_dropdown_item, estadoLista);
         estAdp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -124,29 +156,10 @@ public class UniversidadeInserir extends AppCompatActivity {
             }
         });
 
-        btn_inserirUniversidade = (Button) findViewById(R.id.btn_inserirUniversidade);
-        this.spinnerUnidades = (Spinner) findViewById(R.id.sp_universidade_unidade);
-
-        this.spinnerCidade = (Spinner) findViewById(R.id.sp_universidade_cidade_nome);
         this.spinnerCidade.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 spinnerCidade.requestFocusFromTouch();
-                hideKeyboard();
-                return false;
-            }
-        });
-
-        this.unidadeLista = Persistencia.getInstance().getUnidades();
-
-        undAdp = new ArrayAdapter<Unidade>(this, android.R.layout.simple_spinner_dropdown_item, unidadeLista);
-        undAdp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerUnidades.setAdapter(undAdp);
-
-        this.spinnerUnidades.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                spinnerUnidades.requestFocusFromTouch();
                 hideKeyboard();
                 return false;
             }
@@ -158,6 +171,12 @@ public class UniversidadeInserir extends AppCompatActivity {
                 inserir();
             }
         });
+
+        this.lvRepresentantes = findViewById(R.id.lv_representanteUniversidade);
+        this.lvRepresentantes.setVisibility(View.INVISIBLE);
+
+        this.tvRepresentante = findViewById(R.id.tv_representante);
+        this.tvRepresentante.setVisibility(View.INVISIBLE);
     }
 
     private void inserir() {
@@ -173,6 +192,8 @@ public class UniversidadeInserir extends AppCompatActivity {
     private void carregarTela() {
         this.universidadeNome.setText(universidade.getNome());
 
+        this.spinnerUnidades.setSelection(undAdp.getPosition(Persistencia.getInstance().getUnidadeById(universidade.getUnidadeId())));
+
         Cidade cid = new Cidade();
         cid.setId(universidade.getCidadeId());
         cid = cid.buscaObjetoNaLista(Persistencia.getInstance().getCidades());
@@ -187,7 +208,12 @@ public class UniversidadeInserir extends AppCompatActivity {
         this.spinnerCidade.setSelection(cidAdp.getPosition(Persistencia.getInstance().getCidade(universidade.getCidadeId())));
         this.copiandoTela = true;
 
-        this.spinnerUnidades.setSelection(undAdp.getPosition(Persistencia.getInstance().getUnidadeById(universidade.getUnidadeId())));
+        usuarioAdapter = new UsuarioAdapter(this, Persistencia.getInstance().getUniversidadeAtual().getRepresentantes());
+        lvRepresentantes = findViewById(R.id.lv_representanteUniversidade);
+        lvRepresentantes.setAdapter(usuarioAdapter);
+
+        lvRepresentantes.setVisibility(View.VISIBLE);
+        tvRepresentante.setVisibility(View.VISIBLE);
     }
 
     private void copiarTela(){

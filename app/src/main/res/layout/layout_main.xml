@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    android:orientation="vertical">
+
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
     <Button
         android:id="@+id/btn_regiaoManager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:background="@drawable/btn_cancelar"
-        android:text="Região"
+        android:text="Região Fiscal"
         android:textColor="@color/colorPrimary"
         android:textSize="18dp"
         android:textStyle="normal" />
@@ -21,12 +26,12 @@
     <Button
         android:id="@+id/btn_unidadeManager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_below="@+id/btn_regiaoManager"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:background="@drawable/btn_cancelar"
-        android:text="Unidade"
+        android:text="Unidade da Receita"
         android:textColor="@color/colorPrimary"
         android:textSize="18dp"
         android:textStyle="normal" />
@@ -34,7 +39,7 @@
     <Button
         android:id="@+id/btn_universidadeManager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_below="@+id/btn_unidadeManager"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -48,7 +53,7 @@
     <Button
         android:id="@+id/btn_usuarioManager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_below="@+id/btn_universidadeManager"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -62,7 +67,7 @@
     <Button
         android:id="@+id/btn_acessoManager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_below="@+id/btn_usuarioManager"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
@@ -72,11 +77,25 @@
         android:textSize="18dp"
         android:textStyle="normal" />
 
+
+    <Button
+        android:id="@+id/btn_relatorioMain"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@+id/btn_acessoManager"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/btn_cancelar"
+        android:text="Relatórios"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18dp"
+        android:textStyle="normal" />
+
     <Button
         android:id="@+id/btn_atendimento"
-        android:layout_below="@id/btn_acessoManager"
+        android:layout_below="@id/btn_relatorioMain"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:background="@drawable/btn_cancelar"
@@ -89,7 +108,7 @@
         android:id="@+id/btn_sair"
         android:layout_below="@id/btn_atendimento"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="35dp"
         android:layout_centerHorizontal="true"
         android:layout_margin="10dp"
         android:background="@drawable/btn_cancelar"
@@ -97,5 +116,6 @@
         android:textColor="@color/colorPrimary"
         android:textSize="18dp"
         android:textStyle="normal" />
+    </LinearLayout>
 
 </RelativeLayout>

@@ -5,11 +5,13 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -25,7 +27,7 @@ public class UsuarioGerenciar extends CustomActivity {
     private Usuario usuario;
     private ProgressDialog progressDialog;
     private UsuarioAdapter adp;
-
+    private Usuario usr;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listagem_gerencial);
@@ -74,7 +76,7 @@ public class UsuarioGerenciar extends CustomActivity {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        final Usuario usr = (Usuario) adp.getObjeto(marcador);
+        usr = (Usuario) adp.getObjeto(marcador);
         new AlertDialog.Builder(UsuarioGerenciar.this)
                 .setIcon(android.R.drawable.ic_delete)
                 .setTitle("Alerta!")
@@ -82,10 +84,8 @@ public class UsuarioGerenciar extends CustomActivity {
                 .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(usr.remover()) {
-                            adp.remover(marcador);
-                            adp.notifyDataSetChanged();
-                        }
+                        Persistencia.getInstance().validarRemocaoUsuario(usr.getId());
+                        aguardandoValidacao();
                     }
                 })
                 .setNegativeButton("Não", null)
@@ -105,4 +105,27 @@ public class UsuarioGerenciar extends CustomActivity {
         return usuarios;
     }
 
+    public void validou(){
+        if(Persistencia.getInstance().isVerificouExclusao()){
+            if(Persistencia.getInstance().isPodeExcluir()){
+                usr.remover();
+                adp.remover(marcador);
+                adp.notifyDataSetChanged();
+            }else{
+                Toast.makeText(this, "Existem Acessos vinculadas a este Usuário", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            aguardandoValidacao();
+        }
+    }
+
+    private void aguardandoValidacao() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                validou();
+            }
+        }, 500);
+    }
 }

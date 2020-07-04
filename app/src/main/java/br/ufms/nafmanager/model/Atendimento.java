@@ -26,9 +26,16 @@ public class Atendimento extends CustomObject {
     @Exclude
     private Date atendimentoInicio;
 
-    public Atendimento(){
+    public Atendimento() {
         super();
         this.atendimentoInicio = new Date();
+    }
+
+    public Atendimento(String tipo, Date data, String atendido, boolean conclusivo ) {
+        setAtendidoTipoId(tipo);
+        setDataAtendimento(data);
+        setAtendidoNome(atendido);
+        setConclusivo(conclusivo);
     }
 
     public Date getDataAtendimento() {
@@ -43,11 +50,15 @@ public class Atendimento extends CustomObject {
         return this.tempoAtendimento;
     }
 
-    public void setTempoAtendimento(Long tempoAtendimento) {
-        Long minuto = tempoAtendimento /60L;
-        Long segundo = tempoAtendimento %60L;
+    public void setTempoAtendimentoLong(Long tempoAtendimento) {
+        Long minuto = tempoAtendimento / 60L;
+        Long segundo = tempoAtendimento % 60L;
 
-       this.tempoAtendimento =  String.format("%02d:%02d", minuto, segundo);
+        this.tempoAtendimento = String.format("%02d:%02d", minuto, segundo);
+    }
+
+    public void setTempoAtendimento(String tempoAtendimento) {
+        this.tempoAtendimento = tempoAtendimento;
     }
 
     public ArrayList<String> getAtendimentoTipoId() {
@@ -83,46 +94,70 @@ public class Atendimento extends CustomObject {
     }
 
     @Override
-    public boolean equals(Object obj){
-        if(obj.getClass().getName().equals(this.getClass().getName()))
-        return true;
+    public boolean equals(Object obj) {
+        if (obj.getClass().getName().equals(this.getClass().getName()))
+            return true;
 
         return false;
     }
 
     @Override
     public boolean validar() {
-        if(atendimentoTipoId == null || atendimentoTipoId.size() == 0){
+        if (atendimentoTipoId == null || atendimentoTipoId.size() == 0) {
             setMensagem("É necessário informar ao menos um atendimento!");
             return false;
         }
 
-        if(acessoId == null || acessoId.trim().length() == 0){
+        if (acessoId == null || acessoId.trim().length() == 0) {
             setMensagem("Houve um problema ao vincular o acesso no atendimento!");
             return false;
         }
 
-        if(atendidoTipoId == null || atendidoTipoId.trim().length() == 0){
+        if (atendidoTipoId == null || atendidoTipoId.trim().length() == 0) {
             setMensagem("É necessário informar tipo do atendido!");
             return false;
         }
+
+        if(dataAtendimento.after(new Date())){
+            setMensagem("A data de atendimento não pode ser futura!");
+            return false;
+        }
+
+        if(TipoDocumentoEnum.CPF.equals(atendidoTipoDocumento)){
+            if(!Usuario.isValidCPF(atendidoDocumento)){
+                setMensagem("CPF inválido!");
+                return false;
+            }
+        }
+        else if (TipoDocumentoEnum.CNPJ.equals(atendidoTipoDocumento)){
+            if(!Usuario.isValidCNPJ(atendidoDocumento)){
+                setMensagem("CNPJ inválido!");
+                return false;
+            }
+        }
+
         return true;
     }
 
     @Override
-    public boolean salvar(){
+    public boolean salvar() {
         long diferenca = Math.abs(new Date().getTime() - atendimentoInicio.getTime());
-        this.setTempoAtendimento(TimeUnit.SECONDS.convert(diferenca, TimeUnit.MILLISECONDS));
+        this.setTempoAtendimentoLong(TimeUnit.SECONDS.convert(diferenca, TimeUnit.MILLISECONDS));
 
         Date data = new Date();
         data.setHours(00);
         data.setMinutes(00);
 
-        if(dataAtendimento.compareTo(data) < 1){
+        if (dataAtendimento.compareTo(data) < 1) {
             retroativo = true;
         }
 
         return super.salvar();
+    }
+
+    @Override
+    public String toString() {
+        return "" + dataAtendimento + " " + conclusivo + " " + atendimentoTipoId;
     }
 
     public String getAtendidoNome() {
@@ -157,16 +192,21 @@ public class Atendimento extends CustomObject {
         this.atendidoFone = atendidoFone;
     }
 
-    @Override
-    public boolean validarRemocao() {
-        return true;
-    }
-
     public boolean isRetroativo() {
         return retroativo;
     }
 
     public void setRetroativo(boolean retroativo) {
         this.retroativo = retroativo;
+    }
+
+    @Exclude
+    public String getConclusivoString(){
+        if(conclusivo != null && conclusivo == true){
+            return "Sim";
+        }
+        else{
+            return "Não";
+        }
     }
 }

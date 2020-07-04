@@ -14,11 +14,11 @@
         <Button
             android:id="@+id/btn_inserirUnidades"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_margin="10dp"
             android:layout_marginTop="50dp"
             android:background="@drawable/btn_cancelar"
-            android:text="Inserir unidade"
+            android:text="Inserir Unidade da Receita"
             android:textColor="@color/colorPrimary"
             android:textSize="18dp"
             android:textStyle="normal" />
@@ -26,10 +26,10 @@
         <Button
             android:id="@+id/btn_gerenciarUnidades"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_margin="10dp"
             android:background="@drawable/btn_cancelar"
-            android:text="Gerenciar unidade"
+            android:text="Gerenciar Unidade da Receita"
             android:textColor="@color/colorPrimary"
             android:textSize="18dp"
             android:textStyle="normal" />

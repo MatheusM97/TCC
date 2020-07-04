@@ -122,7 +122,6 @@ public class LoginActivity extends CustomActivity {
                         super.onPermissionRationaleShouldBeShown(permissions, token);
                     }
                 }).check();
-
     }
 
     private void realizarLogin() {
@@ -139,7 +138,7 @@ public class LoginActivity extends CustomActivity {
             this.usuarioAtual.setSenha(this.senha.getText().toString());
 
 //        this.usuarioAtual.setCpf("111.111.111-11");//admin
-//        this.usuarioAtual.setCpf("018.758.051-09");//aluno    
+//        this.usuarioAtual.setCpf("018.758.051-09");//aluno
 //        this.usuarioAtual.setCpf("555.555.555-55"); //Professor
 //        this.usuarioAtual.setCpf("333.333.333-33"); //representante universidade
 //        this.usuarioAtual.setCpf("444.444.444-44"); //representante da regiao
@@ -216,7 +215,7 @@ public class LoginActivity extends CustomActivity {
     }
 
     private void checkUnivs() {
-        if(!Persistencia.getInstance().carregouUniversidades){
+        if(!Persistencia.getInstance().carregouUniversidades || !Persistencia.getInstance().carregouUnidades || !Persistencia.getInstance().carregouRegioes){
             aguardaCarregarUnivs();
         }
 
@@ -224,7 +223,7 @@ public class LoginActivity extends CustomActivity {
             selecionaAcessos();
         }
 
-        if(timeout == 40){
+        if(timeout == 1200){
             mensagemTimeout();
         }
     }

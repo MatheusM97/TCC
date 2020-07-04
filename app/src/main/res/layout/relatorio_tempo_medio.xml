@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/relative_lay1"
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_participanteInicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000000"
+            android:padding="3dp"
+            android:text="Data início"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/et_participanteInicio"
+            android:layout_below="@id/tv_participanteInicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:padding="3dp"
+            android:text="${01/01/2000}"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_participanteFim"
+            android:layout_below="@id/et_participanteInicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000000"
+            android:padding="3dp"
+            android:text="Data fim"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/et_participanteFim"
+            android:layout_below="@id/tv_participanteFim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:padding="3dp"
+            android:text="${01/01/2000}"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/et_participanteFim"
+            android:id="@+id/layout_2">
+
+            <TextView
+                android:id="@+id/tv_tipoAtendimentoId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Tipo de serviço:"
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold">
+            </TextView>
+
+            <Spinner
+                android:id="@+id/sp_tipoAtendimentoId"
+                android:layout_width="match_parent"
+                android:layout_height="23dp"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/tv_tipoAtendimentoId"
+                android:spinnerMode="dialog">
+            </Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/layout_2"
+            android:id="@+id/layout_3">
+
+            <TextView
+                android:id="@+id/tv_universidadeId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="Universidade:    "
+                android:textColor="#000000"
+                android:textSize="18dp"
+                android:textStyle="bold">
+            </TextView>
+
+            <Spinner
+                android:id="@+id/sp_universidadeId"
+                android:layout_width="match_parent"
+                android:layout_height="23dp"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@id/tv_universidadeId"
+                android:spinnerMode="dialog">
+            </Spinner>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_gerarRelatorioAtendimento"
+        android:layout_below="@id/relative_lay1"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/btn_finalizar"
+        android:text="Gerar"
+        android:textColor="#FFFFFF"
+        android:textSize="18dp"
+        android:textStyle="normal"/>
+</RelativeLayout>

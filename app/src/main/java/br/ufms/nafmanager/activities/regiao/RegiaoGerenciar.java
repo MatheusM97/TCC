@@ -4,11 +4,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -21,7 +23,7 @@ import br.ufms.nafmanager.persistencies.Persistencia;
 
 public class RegiaoGerenciar extends CustomActivity {
     private RegiaoAdapter adp;
-
+    Regiao reg = new Regiao();
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listagem_gerencial);
@@ -35,12 +37,50 @@ public class RegiaoGerenciar extends CustomActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Persistencia.getInstance().setRegiaoAtual((Regiao) parent.getItemAtPosition(position));
-                carregaCad();
+                showDialog();
+                reg = (Regiao) parent.getItemAtPosition(position);
+                Persistencia.getInstance().carregaRegiaoById(reg.getId());
+                aguardaRepresentante();
             }
         });
 
         registerForContextMenu(list);
+    }
+
+    private void aguardaRepresentante() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                carregouRepresentante();
+            }
+        }, 500);
+    }
+
+    private void carregouRepresentante(){
+        if(Persistencia.getInstance().carregouRepresentantes){
+            aguardaResolverNome();
+        }
+        else{
+            aguardaRepresentante();
+        }
+    }
+
+    private void aguardaResolverNome() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                carregouNome();
+            }
+        }, 100);
+    }
+
+    private void carregouNome(){
+        if(Persistencia.getInstance().carregouRepresentantesRegiao()){
+            carregaCad();
+        }
+        else{
+            aguardaResolverNome();
+        }
     }
 
     public void carregaCad(){
@@ -48,6 +88,7 @@ public class RegiaoGerenciar extends CustomActivity {
         novaIntent.putExtra("regiao", Persistencia.getInstance().getRegiaoAtual());
         startActivity(novaIntent);
         editando = true;
+        hideDialog();
     }
 
     @Override
@@ -73,7 +114,7 @@ public class RegiaoGerenciar extends CustomActivity {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        final Regiao reg = (Regiao) adp.getObjeto(marcador);
+        reg = (Regiao) adp.getObjeto(marcador);
         new AlertDialog.Builder(RegiaoGerenciar.this)
                         .setIcon(android.R.drawable.ic_delete)
                         .setTitle("Alerta!")
@@ -81,14 +122,36 @@ public class RegiaoGerenciar extends CustomActivity {
                         .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if(reg.remover()) {
-                                    adp.remover(marcador);
-                                    adp.notifyDataSetChanged();
-                                }
+                                Persistencia.getInstance().validarRemocaoRegiao(reg.getId());
+                                aguardandoValidacao();
                             }
                         })
                         .setNegativeButton("Não", null)
                         .show();
         return true;
+    }
+
+    public void validou(){
+        if(Persistencia.getInstance().isVerificouExclusao()){
+            if(Persistencia.getInstance().isPodeExcluir()){
+                reg.remover();
+                adp.remover(marcador);
+                adp.notifyDataSetChanged();
+            }else{
+                Toast.makeText(this, "Existem Unidades vinculadas a esta Região Fiscal", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else{
+            aguardandoValidacao();
+        }
+    }
+
+    private void aguardandoValidacao() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                validou();
+            }
+        }, 500);
     }
 }
