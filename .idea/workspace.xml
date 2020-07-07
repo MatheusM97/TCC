@@ -18,121 +18,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7313180c-cca0-40dc-b25e-7a5e881b96ba" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/assetWizardSettings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_multidex_multidex_instrumentation_2_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_measurement_api_17_4_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_measurement_base_17_4_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_measurement_impl_17_4_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_measurement_sdk_17_4_2_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__pub_devrel_easypermissions_2_0_1_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__pub_devrel_easypermissions_3_0_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/RelatorioActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/EstruturaRanking.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/FiltroRanking.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioCadastro.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioObjeto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioParticipante.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioRanking.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioRepresentanteRegiao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioRepresentanteUnidade.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioRepresentanteUniversidade.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioTempoMedio.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Participante.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Relatorios.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/ic_share.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/relatorio_estatisticas_cadastrais.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/relatorio_participante.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/relatorio_ranking.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/relatorio_representante_regiao.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/relatorio_representante_unidade.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/relatorio_representante_universidade.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/relatorio_tempo_medio.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/gradle_models.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_measurement_17_2_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_measurement_17_4_2_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_measurement_api_17_2_2_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_measurement_base_17_2_2_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_measurement_impl_17_2_2_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_measurement_sdk_17_2_2_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_measurement_sdk_api_17_2_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_android_gms_play_services_measurement_sdk_api_17_4_2_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_analytics_17_2_2_aar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_analytics_17_4_2_aar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_database_19_2_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_database_collection_17_0_0_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_firestore_21_3_1_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_firebase_firebase_iid_20_0_2_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__com_google_guava_listenablefuture_9999_0_empty_to_avoid_conflict_with_guava_jar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/CustomDatePickerFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/CustomDatePickerFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/CustomActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/CustomActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/LoginActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/SplashScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/SplashScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoAprovar.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoAprovar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoGerenciar.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoGerenciar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoInserir.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoInserir.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoSolicitar.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoSolicitar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/atendimento/AtendimentoActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/atendimento/AtendimentoActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoGerenciar.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoGerenciar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoInserir.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoInserir.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoPrincipal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/PdfVisualizador.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/PdfVisualizador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/unidade/UnidadeGerenciar.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/unidade/UnidadeGerenciar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/unidade/UnidadeInserir.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/unidade/UnidadeInserir.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/unidade/UnidadePrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/unidade/UnidadePrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadeGerenciar.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadeGerenciar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadeInserir.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadeInserir.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadePrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadePrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/usuario/UsuarioGerenciar.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/usuario/UsuarioGerenciar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/usuario/UsuarioInserir.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/usuario/UsuarioInserir.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/usuario/UsuarioPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/usuario/UsuarioPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/AcessoAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/AcessoAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/AcessoUsuarioAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/AcessoUsuarioAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/RegiaoAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/RegiaoAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/UsuarioAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/UsuarioAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Acesso.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Acesso.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/AcessoTipoEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/AcessoTipoEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/AtendidoTipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/AtendidoTipo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Atendimento.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Atendimento.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Cidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Cidade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/CustomObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/CustomObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Estado.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Estado.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Regiao.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Regiao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Unidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Unidade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/UnidadeTipo.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/UnidadeTipo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Universidade.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Universidade.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Usuario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/acesso_inserir.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/acesso_inserir.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/acesso_principal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/acesso_principal.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/acesso_solicitar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/acesso_solicitar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_atendimento.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_atendimento.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_login.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_relatorios.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/relatorio_principal.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/layout_unidade_tipo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/layout_unidade_tipo.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/regiao_inserir.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/regiao_inserir.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/regiao_principal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/regiao_principal.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/unidade_inserir.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/unidade_inserir.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/unidade_principal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/unidade_principal.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/universidade_inserir.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/universidade_inserir.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/universidade_principal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/universidade_principal.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/usuario_inserir.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/usuario_inserir.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/usuario_principal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/usuario_principal.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/relatorio_principal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/relatorio_principal.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -181,37 +83,48 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadePrincipal.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="19" column="56" lean-forward="true" selection-start-line="19" selection-start-column="56" selection-end-line="19" selection-end-column="56" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/LoginActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="149" lean-forward="true" selection-start-line="149" selection-end-line="149" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadeGerenciar.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="76" column="5" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/atendimento/AtendimentoActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="200" column="24" selection-start-line="200" selection-start-column="24" selection-end-line="200" selection-end-column="24" />
+            <state relative-caret-position="282">
+              <caret line="73" column="5" lean-forward="true" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
+              <folding>
+                <element signature="e#1930#1947#0" expanded="true" />
+                <element signature="e#3429#3443#0" expanded="true" />
+                <element signature="e#3761#3933#0" expanded="true" />
+                <element signature="e#3932#3933#0" expanded="true" />
+                <element signature="e#5270#5418#0" expanded="true" />
+                <element signature="e#5417#5418#0" expanded="true" />
+                <element signature="e#6019#6543#0" expanded="true" />
+                <element signature="e#6542#6543#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/RelatorioActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioPrincipal.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="18" column="54" lean-forward="true" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/relatorio_principal.xml">
+          <provider editor-type-id="android-designer2" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="130">
+              <caret line="46" column="46" lean-forward="true" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -219,8 +132,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Atendimento.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="134" column="29" selection-start-line="134" selection-start-column="29" selection-end-line="134" selection-end-column="29" />
+            <state relative-caret-position="258">
+              <caret line="135" column="29" lean-forward="true" selection-start-line="135" selection-start-column="29" selection-end-line="135" selection-end-column="29" />
+              <folding>
+                <element signature="e#5554#5555#0" expanded="true" />
+                <element signature="e#5593#5594#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/LoginActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="370">
+              <caret line="242" column="59" selection-start-line="242" selection-start-column="59" selection-end-line="242" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -228,8 +154,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Usuario.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="290" column="32" selection-start-line="290" selection-start-column="32" selection-end-line="290" selection-end-column="32" />
+            <state relative-caret-position="2329">
+              <caret line="174" selection-start-line="174" selection-end-line="174" />
             </state>
           </provider>
         </entry>
@@ -238,17 +164,8 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="7" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/CustomDatePickerFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="20" column="11" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
+            <state relative-caret-position="51">
+              <caret line="3" selection-start-line="3" selection-start-column="4" selection-end-line="8" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -257,8 +174,8 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_atendimento.xml">
           <provider editor-type-id="android-designer2" />
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="22" column="47" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="47" />
+            <state relative-caret-position="324">
+              <caret line="281" column="29" lean-forward="true" selection-start-line="281" selection-start-column="29" selection-end-line="281" selection-end-column="49" />
             </state>
           </provider>
         </entry>
@@ -289,19 +206,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>copi</find>
-      <find>acessome</find>
-      <find>usuario</find>
-      <find>ischec</find>
-      <find>cbalu</find>
-      <find>vincular</find>
-      <find>representant</find>
-      <find>representanteuni</find>
-      <find>cbRepresentanteUniversidade</find>
-      <find>btn_inserirAcesso</find>
-      <find>aprovar</find>
-      <find>realizar</find>
-      <find>onres</find>
       <find>spa</find>
       <find>getestadosby</find>
       <find>inser</find>
@@ -312,13 +216,26 @@
       <find>android:layout_marginLeft=&quot;50dp&quot;</find>
       <find>setchec</find>
       <find>setC</find>
-      <find>copiar</find>
       <find>estado</find>
       <find>tv_dataAtendimentoView</find>
       <find>validacp</find>
       <find>cpf</find>
       <find>salvar</find>
       <find>share</find>
+      <find>persistencia</find>
+      <find>show</find>
+      <find>message</find>
+      <find>progressdialog</find>
+      <find>nenhum ace</find>
+      <find>senha</find>
+      <find>button</find>
+      <find>copiar</find>
+      <find>atentimentoTipoOutro</find>
+      <find>btnfin</find>
+      <find>btn</find>
+      <find>validar</find>
+      <find>btnFinalizarAtendimento</find>
+      <find>rankin</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;ItdD34xP0a63qxRmw2P0&quot;, &quot;PA&quot;''''</replace>
@@ -350,6 +267,7 @@
       <replace>android:textSize=&quot;18dp&quot;</replace>
       <replace>android:layout_marginRight=&quot;30dp&quot;</replace>
       <replace>android:layout_marginLeft=&quot;30dp&quot;</replace>
+      <replace>atendimentoTipoOutro</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\TCC\app\src\main\java\br\ufms\nafmanager\adapters</dir>
@@ -361,10 +279,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/EstruturaRanking.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/FiltroRanking.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/CustomObject.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Universidade.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/AtendidoTipo.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Estado.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Cidade.java" />
@@ -382,7 +296,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/unidade/UnidadeGerenciar.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoGerenciar.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/unidade/UnidadePrincipal.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioPrincipal.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioParticipante.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioTempoMedio.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoInserir.java" />
@@ -404,14 +317,19 @@
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoSolicitar.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/AcessoTipoEnum.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoInserir.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadePrincipal.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadeGerenciar.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/atendimento/AtendimentoActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Atendimento.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Usuario.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/menu.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/CustomActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/PdfVisualizador.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_atendimento.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/atendimento/AtendimentoActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Atendimento.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/relatorio_principal.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioPrincipal.java" />
       </list>
     </option>
   </component>
@@ -429,7 +347,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -491,7 +408,7 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="nafmanager" type="462c0819:PsiDirectoryNode" />
               <item name="activities" type="462c0819:PsiDirectoryNode" />
-              <item name="regiao" type="462c0819:PsiDirectoryNode" />
+              <item name="atendimento" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NAFManager" type="b2602c69:ProjectViewProjectNode" />
@@ -501,8 +418,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="nafmanager" type="462c0819:PsiDirectoryNode" />
-              <item name="activities" type="462c0819:PsiDirectoryNode" />
-              <item name="relatorios" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="NAFManager" type="b2602c69:ProjectViewProjectNode" />
@@ -525,8 +441,9 @@
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -542,7 +459,7 @@
     <property name="project.structure.last.edited" value="Dependencies" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.externalDependencies" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="PsdUISettings">
     <option name="MODULE_TAB" value="Signing Configs" />
@@ -695,11 +612,11 @@
     <frame x="1358" y="-157" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.45939675" visible="true" weight="0.06716418" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.45287108" visible="true" weight="0.086886995" />
       <window_info id="Structure" order="1" sideWeight="0.52112675" side_tool="true" weight="0.1369936" />
       <window_info id="Captures" order="2" side_tool="true" weight="0.24962178" />
       <window_info id="Favorites" order="3" side_tool="true" weight="0.32980332" />
-      <window_info id="Build Variants" order="4" sideWeight="0.5406032" side_tool="true" visible="true" weight="0.06716418" />
+      <window_info id="Build Variants" order="4" sideWeight="0.5471289" side_tool="true" visible="true" weight="0.086886995" />
       <window_info id="Image Layers" order="5" />
       <window_info id="Designer" order="6" />
       <window_info id="Capture Tool" order="7" />
@@ -708,18 +625,18 @@
       <window_info anchor="bottom" id="Logcat" order="0" sideWeight="0.4977307" weight="0.49099836" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" weight="0.48862407" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32827735" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49626866" weight="0.1898527" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49626866" weight="0.35188216" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.32827735" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50053304" side_tool="true" weight="0.49187434" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32827735" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info active="true" anchor="bottom" id="Build" order="8" sideWeight="0.4968017" visible="true" weight="0.06608884" />
-      <window_info anchor="bottom" id="Android Profiler" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Build" order="8" sideWeight="0.4968017" weight="0.21767594" />
+      <window_info anchor="bottom" id="Android Profiler" order="9" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" weight="0.096481875" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info anchor="right" id="Preview" order="4" weight="0.38006395" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.37899786" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
       <window_info anchor="right" id="Hierarchy" order="6" weight="0.32980332" />
       <window_info anchor="right" id="Assistant" order="7" weight="0.32995737" />
@@ -922,6 +839,16 @@
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
+        <expression-string>task.getResult().size()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>task.getResult()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
         <expression-string>peso * valorInteiro</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
@@ -956,65 +883,9 @@
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>Persistencia.getInstance().getUsuariosComAcesso(</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>acesso</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/CustomObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="72" column="19" selection-start-line="72" selection-start-column="19" selection-end-line="72" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../SDK/sources/android-29/android/app/ActivityThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="2775" selection-start-line="2775" selection-end-line="2775" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Universidade.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="12" selection-start-line="12" selection-end-line="27" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../SDK/sources/android-29/android/widget/AdapterView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="807" column="18" selection-start-line="807" selection-start-column="18" selection-end-line="807" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/jre/jre/lib/rt.jar!/javax/swing/colorchooser/DefaultSwatchChooserPanel.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="160" column="18" selection-start-line="160" selection-start-column="18" selection-end-line="160" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_main.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/AcessoUsuarioAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1235">
-          <caret line="90" selection-start-line="90" selection-end-line="90" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoGerenciar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="203">
@@ -1247,20 +1118,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6613">
-          <caret line="431" column="33" selection-start-line="431" selection-start-column="33" selection-end-line="431" selection-end-column="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../SDK/sources/android-29/android/os/Looper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2397">
           <caret line="165" selection-start-line="165" selection-end-line="165" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadePrincipal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="19" column="56" selection-start-line="19" selection-start-column="56" selection-end-line="19" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/CustomObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="74" lean-forward="true" selection-start-line="74" selection-end-line="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadeGerenciar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="901">
+          <caret line="76" column="5" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
         </state>
       </provider>
     </entry>
@@ -1271,11 +1153,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_atendimento.xml">
+    <entry file="file://$PROJECT_DIR$/../SDK/sources/android-29/android/app/ProgressDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="126" column="21" selection-start-line="126" selection-start-column="14" selection-end-line="126" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/CustomActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="15" column="50" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17969">
+          <caret line="1099" column="5" selection-start-line="1099" selection-start-column="5" selection-end-line="1099" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/PdfVisualizador.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="918">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Usuario.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2329">
+          <caret line="174" selection-start-line="174" selection-end-line="174" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="47" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="47" />
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-start-column="4" selection-end-line="8" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -1286,53 +1206,68 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Usuario.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="290" column="32" selection-start-line="290" selection-start-column="32" selection-end-line="290" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_atendimento.xml">
       <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="7" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+        <state relative-caret-position="324">
+          <caret line="281" column="29" lean-forward="true" selection-start-line="281" selection-start-column="29" selection-end-line="281" selection-end-column="49" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Atendimento.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="134" column="29" selection-start-line="134" selection-start-column="29" selection-end-line="134" selection-end-column="29" />
+        <state relative-caret-position="258">
+          <caret line="135" column="29" lean-forward="true" selection-start-line="135" selection-start-column="29" selection-end-line="135" selection-end-column="29" />
+          <folding>
+            <element signature="e#5554#5555#0" expanded="true" />
+            <element signature="e#5593#5594#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/atendimento/AtendimentoActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="200" column="24" selection-start-line="200" selection-start-column="24" selection-end-line="200" selection-end-column="24" />
+        <state relative-caret-position="282">
+          <caret line="73" column="5" lean-forward="true" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
+          <folding>
+            <element signature="e#1930#1947#0" expanded="true" />
+            <element signature="e#3429#3443#0" expanded="true" />
+            <element signature="e#3761#3933#0" expanded="true" />
+            <element signature="e#3932#3933#0" expanded="true" />
+            <element signature="e#5270#5418#0" expanded="true" />
+            <element signature="e#5417#5418#0" expanded="true" />
+            <element signature="e#6019#6543#0" expanded="true" />
+            <element signature="e#6542#6543#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadeGerenciar.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/RelatorioActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="76" column="5" selection-start-line="76" selection-start-column="5" selection-end-line="76" selection-end-column="5" />
+        <state relative-caret-position="68">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadePrincipal.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/relatorio_principal.xml">
+      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="19" column="56" lean-forward="true" selection-start-line="19" selection-start-column="56" selection-end-line="19" selection-end-column="56" />
+        <state relative-caret-position="130">
+          <caret line="46" column="46" lean-forward="true" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioPrincipal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="18" column="54" lean-forward="true" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/LoginActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="149" lean-forward="true" selection-start-line="149" selection-end-line="149" />
+        <state relative-caret-position="370">
+          <caret line="242" column="59" selection-start-line="242" selection-start-column="59" selection-end-line="242" selection-end-column="59" />
         </state>
       </provider>
     </entry>

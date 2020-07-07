@@ -38,7 +38,6 @@ public class Persistencia {
 
     private List<StatusEnum> listagemAtivos = new ArrayList<StatusEnum>();
     //region Atributos
-    private static Persistencia mInstance = null;
     private Long versao = 1L;
 
     public boolean carregouUniversidades = false;
@@ -108,20 +107,8 @@ public class Persistencia {
     //endregion
 
     //region Geral
-    protected Persistencia() {
-        this.firebaseFirestore = FirebaseFirestore.getInstance();
-    }
 
-    public void Iniciar() {
-//        if (versao == -1) {
-//            this.inserirDadosDefault();
-//        }
-
-        this.instanciarLista();
-        this.carregaUnidadesTipo();
-        this.getAtendimentoTipoLocal();
-        this.carregaAtendidos();
-    }
+    private static Persistencia mInstance = null;
 
     public static synchronized Persistencia getInstance() {
         if (null == mInstance) {
@@ -129,6 +116,19 @@ public class Persistencia {
         }
         return mInstance;
     }
+
+    protected Persistencia() {
+        this.firebaseFirestore = FirebaseFirestore.getInstance();
+    }
+
+    public void Iniciar() {
+        this.instanciarLista();
+        this.carregaUnidadesTipo();
+        this.getAtendimentoTipoLocal();
+        this.carregaAtendidos();
+    }
+
+
 
     public void instanciarLista(){
         listagemAtivos = new ArrayList<StatusEnum>();

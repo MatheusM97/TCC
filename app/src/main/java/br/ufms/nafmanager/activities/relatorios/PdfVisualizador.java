@@ -71,14 +71,14 @@ public class PdfVisualizador extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
 
-        if(id == R.id.compartilhar){
+//        if(id == R.id.compartilhar){
 //            File file =  new File(Environment.getExternalStorageDirectory() + "/RelatorioNAF.pdf");
 //            Intent intent = new Intent();
 //            intent.setAction(Intent.ACTION_SEND);
 //            intent.setType("application/pdf");
 //            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
 //            startActivity(intent.createChooser(intent,"Compartilhar"));
-        }
+//        }
 
         return true;
     }

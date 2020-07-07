@@ -15,6 +15,7 @@ public class Atendimento extends CustomObject {
     private String tempoAtendimento;
     private Boolean conclusivo;
     private ArrayList<String> atendimentoTipoId;
+    private String atendimentoOutro;
     private String atendidoTipoId;
     private String acessoId;
     private String atendidoNome;
@@ -103,7 +104,7 @@ public class Atendimento extends CustomObject {
 
     @Override
     public boolean validar() {
-        if (atendimentoTipoId == null || atendimentoTipoId.size() == 0) {
+        if (atendimentoTipoId == null || atendimentoTipoId.size() == 0 && (atendimentoOutro == null || atendimentoOutro.length() <= 0)) {
             setMensagem("É necessário informar ao menos um atendimento!");
             return false;
         }
@@ -123,13 +124,13 @@ public class Atendimento extends CustomObject {
             return false;
         }
 
-        if(TipoDocumentoEnum.CPF.equals(atendidoTipoDocumento)){
+        if(TipoDocumentoEnum.CPF.equals(atendidoTipoDocumento) && atendidoDocumento.length() > 0){
             if(!Usuario.isValidCPF(atendidoDocumento)){
                 setMensagem("CPF inválido!");
                 return false;
             }
         }
-        else if (TipoDocumentoEnum.CNPJ.equals(atendidoTipoDocumento)){
+        else if (TipoDocumentoEnum.CNPJ.equals(atendidoTipoDocumento) && atendidoDocumento.length() > 0){
             if(!Usuario.isValidCNPJ(atendidoDocumento)){
                 setMensagem("CNPJ inválido!");
                 return false;
@@ -198,6 +199,14 @@ public class Atendimento extends CustomObject {
 
     public void setRetroativo(boolean retroativo) {
         this.retroativo = retroativo;
+    }
+
+    public String getAtendimentoOutro() {
+        return atendimentoOutro;
+    }
+
+    public void setAtendimentoOutro(String atendimentoOutro) {
+        this.atendimentoOutro = atendimentoOutro;
     }
 
     @Exclude

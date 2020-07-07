@@ -19,7 +19,7 @@ public class RelatorioPrincipal extends CustomActivity {
     private Button relatorioRepresentanteUniversidade;
     private Button relatorioRepresentanteUnidade;
     private Button relatorioRepresentanteRegiao;
-    private Button relatorioRanking;
+//    private Button relatorioRanking;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -126,19 +126,19 @@ public class RelatorioPrincipal extends CustomActivity {
             }
         });
 
-        relatorioRanking = findViewById(R.id.btn_relatorioRanking);
-        relatorioRanking.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog();
-                Persistencia.getInstance().getAtendimentoTipoLocal();
-                Persistencia.getInstance().carregaRegioes();
-                Persistencia.getInstance().carregaUnidades();
-                Persistencia.getInstance().carregaUniversidades();
-                Persistencia.getInstance().carregaParticipantes();
-                carregouRanking();
-            }
-        });
+//        relatorioRanking = findViewById(R.id.btn_relatorioRanking);
+//        relatorioRanking.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showDialog();
+//                Persistencia.getInstance().getAtendimentoTipoLocal();
+//                Persistencia.getInstance().carregaRegioes();
+//                Persistencia.getInstance().carregaUnidades();
+//                Persistencia.getInstance().carregaUniversidades();
+//                Persistencia.getInstance().carregaParticipantes();
+//                carregouRanking();
+//            }
+//        });
     }
 
     private void carregouRanking() {

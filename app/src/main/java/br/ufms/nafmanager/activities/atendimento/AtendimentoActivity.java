@@ -47,6 +47,7 @@ public class AtendimentoActivity extends AppCompatActivity {
     private CheckBox atendimentoConclusivo;
     private ListView lvAtendimentoTipo;
     private Button btnFinalizarAtendimento;
+    private EditText atendimentoTipoOutro;
 
     private SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
     private SimpleDateFormat formatoHora = new SimpleDateFormat("HH:mm:ss");
@@ -79,6 +80,7 @@ public class AtendimentoActivity extends AppCompatActivity {
         atendimentoConclusivo = (CheckBox) findViewById(R.id.ctv_atendimentoConclusivo);
         spnAtendido = (Spinner) findViewById(R.id.sp_atendido);
         atendidoTipoList = Persistencia.getInstance().getAtendido();
+        atendimentoTipoOutro = findViewById(R.id.atendimentoTipoOutro);
 
         etCpf = findViewById(R.id.et_cpfAtendimento);
         etCnpj = findViewById(R.id.et_cnpjAtendimento);
@@ -159,6 +161,10 @@ public class AtendimentoActivity extends AppCompatActivity {
 
     private void copiarTela(){
         atendimento.setAtendimentoTipoId(atendimentoTipoIds);
+
+        if(atendimentoTipoOutro.getText() != null && atendimentoTipoOutro.getText().toString() != null && atendimentoTipoOutro.getText().toString().length() > 0){
+            atendimento.setAtendimentoOutro(atendimentoTipoOutro.getText().toString());
+        }
 
         if(spnTipoDocumento.getSelectedItem().toString() != null){
             atendimento.setAtendidoTipoDocumento((TipoDocumentoEnum) spnTipoDocumento.getSelectedItem());

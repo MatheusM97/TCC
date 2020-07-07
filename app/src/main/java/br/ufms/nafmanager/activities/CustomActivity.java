@@ -13,6 +13,7 @@ public class CustomActivity extends AppCompatActivity {
 
     protected void showDialog() {
         this.progressDialog = new ProgressDialog(this);
+        this.progressDialog.setMessage("Aguarde...");
         this.progressDialog.setCancelable(false);
         this.progressDialog.setContentView(R.layout.layout_carregando);
         this.progressDialog.show();

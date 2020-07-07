@@ -250,13 +250,44 @@
 
         <ListView
             android:id="@+id/lv_atendimento_tipo"
-            android:layout_below="@+id/ctv_atendimentoConclusivo"
+            android:layout_below="@+id/atendimentoOutro"
             android:layout_above="@id/btn_finalizarAtendimento"
-            android:layout_marginBottom="47dp"
+            android:layout_marginBottom="98dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#F0F0F0"/>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="50dp"
+        android:id="@+id/layout_7">
+
+        <TextView
+            android:id="@+id/atendimentoOutro"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:paddingTop="12dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="10dp"
+            android:text="Outro:">
+        </TextView>
+
+        <EditText
+            android:id="@+id/atendimentoTipoOutro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="#000000"
+            android:textStyle="normal"
+            android:textSize="15dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="10dp">
+        </EditText>
     </LinearLayout>
 
     <RelativeLayout
