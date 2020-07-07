@@ -66,6 +66,11 @@ public class LoginActivity extends CustomActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+        hideDialog();
+
+        if(alert != null)
+            alert.hide();
+
         Persistencia.getInstance().setUsuarioAtual(null);
         Persistencia.getInstance().setAcessoAtual(null);
     }
@@ -228,6 +233,8 @@ public class LoginActivity extends CustomActivity {
         }
     }
 
+    private AlertDialog alert;
+
     private void selecionaAcessos() {
         if (usuarioAtual.getAcessos().size() > 1) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(LoginActivity.this);
@@ -238,8 +245,7 @@ public class LoginActivity extends CustomActivity {
 
             ListView lv = (ListView) convertView.findViewById(R.id.lv_selecionarAcesso);
 
-            final AlertDialog alert = alertDialog.create();
-
+            alert = alertDialog.create();
             alert.setTitle(" Selecione o acesso"); // Title
 
             acessoAdapter = new AcessoAdapter(LoginActivity.this, usuarioAtual.getAcessos());

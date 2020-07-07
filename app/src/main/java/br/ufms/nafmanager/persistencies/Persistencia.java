@@ -979,7 +979,7 @@ public class Persistencia {
 
         firebaseFirestore.collection("usuario")
                 .whereEqualTo("cpf", usuario.getCpf())
-                .whereEqualTo("senha", usuario.getSenha())
+                .whereEqualTo("senha", Usuario.criarHashSha256(usuario.getSenha()))
                 .whereEqualTo("status", StatusEnum.ATIVO)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override

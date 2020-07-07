@@ -141,7 +141,6 @@ public class UsuarioInserir extends CustomActivity {
         this.copiarTela();
         this.usuario.validarSenhas();
 
-
         if(usuario.getMensagem() != null && usuario.getMensagem().trim().length() > 0){
             inserir();
         }
@@ -156,6 +155,7 @@ public class UsuarioInserir extends CustomActivity {
 
     private void inserir(){
         if(usuario.getMensagem() == null || usuario.getMensagem().length() <= 0){
+            usuario.criptografarSenha();
             if(usuario.salvar()){
                 Persistencia.getInstance().setUsuarioCarregado(usuario);
                 finish();

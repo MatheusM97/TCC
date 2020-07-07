@@ -3,6 +3,9 @@ package br.ufms.nafmanager.model;
 import com.google.firebase.firestore.Exclude;
 import com.google.firebase.firestore.IgnoreExtraProperties;
 
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import br.ufms.nafmanager.adapters.MaskEditUtil;
@@ -313,5 +316,31 @@ public class Usuario extends CustomObject implements Searchable {
            return MaskEditUtil.unmask(this.cpf);
         }
         return null;
+    }
+
+    public static String criarHashSha256(String senha){
+        String senhaHex = "";
+        MessageDigest algorithm = null;
+        try {
+            algorithm = MessageDigest.getInstance("SHA-256");
+            byte messageDigest[] = algorithm.digest(senha.getBytes("UTF-8"));
+
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : messageDigest) {
+                hexString.append(String.format("%02X", 0xFF & b));
+            }
+            senhaHex = hexString.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        return senhaHex;
+    }
+
+    public void criptografarSenha() {
+        this.senha = criarHashSha256(this.senha);
     }
 }
