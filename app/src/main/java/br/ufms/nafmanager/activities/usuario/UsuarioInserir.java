@@ -1,5 +1,6 @@
 package br.ufms.nafmanager.activities.usuario;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import br.ufms.nafmanager.R;
 import br.ufms.nafmanager.activities.CustomActivity;
+import br.ufms.nafmanager.activities.acesso.AcessoPrincipal;
 import br.ufms.nafmanager.adapters.MaskEditUtil;
 import br.ufms.nafmanager.model.Universidade;
 import br.ufms.nafmanager.model.Usuario;
@@ -156,8 +158,11 @@ public class UsuarioInserir extends CustomActivity {
     private void inserir(){
         if(usuario.getMensagem() == null || usuario.getMensagem().length() <= 0){
             usuario.criptografarSenha();
-            if(usuario.salvar()){
+            if(usuario.salvar()){                
                 Persistencia.getInstance().setUsuarioCarregado(usuario);
+                Toast.makeText(this, "É necessário inserir algum acesso", Toast.LENGTH_SHORT).show();
+                Intent novaIntent = new Intent(getBaseContext(), AcessoPrincipal.class);
+                startActivity(novaIntent);
                 finish();
             }
         }

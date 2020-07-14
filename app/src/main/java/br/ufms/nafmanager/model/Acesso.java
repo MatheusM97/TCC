@@ -4,7 +4,7 @@ import com.google.firebase.firestore.Exclude;
 
 import br.ufms.nafmanager.persistencies.Persistencia;
 
-public class Acesso extends CustomObject {
+public class Acesso extends CustomObject implements Comparable<Acesso> {
     private String usuarioId;
     private String universidadeId;
     private String unidadeId;
@@ -215,5 +215,12 @@ public class Acesso extends CustomObject {
     @Exclude
     public void setNome(String nome){
         this.nome = nome;
+    }
+
+    @Override
+    public int compareTo(Acesso o) {
+        if(this.id.equals(o.getId()))
+            return 1;
+        return 0;
     }
 }

@@ -68,8 +68,10 @@ public class LoginActivity extends CustomActivity {
         super.onRestart();
         hideDialog();
 
-        if(alert != null)
+        if(alert != null) {
             alert.hide();
+            alert.hide();
+        }
 
         Persistencia.getInstance().setUsuarioAtual(null);
         Persistencia.getInstance().setAcessoAtual(null);
@@ -80,7 +82,7 @@ public class LoginActivity extends CustomActivity {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
-                    realizarLogin();
+//                    realizarLogin();
                     return true;
                 }
                 return false;
@@ -225,6 +227,7 @@ public class LoginActivity extends CustomActivity {
         }
 
         if(Persistencia.getInstance().carregouUniversidades){
+            hideDialog();
             selecionaAcessos();
         }
 

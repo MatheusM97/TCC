@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NAFManager</string>
+    <string name="app_name">NAFApp</string>
     <string-array name="unidade_tipo">
         <item>Superintendência</item>
         <item>Delegacia</item>

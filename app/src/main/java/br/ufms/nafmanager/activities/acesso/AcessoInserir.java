@@ -136,15 +136,20 @@ public class AcessoInserir extends CustomActivity {
 
     private void validar() {
         copiarTela();
-        showDialog();
-        if (edicao) {
-            Persistencia.getInstance().setPesquisouAcessoJahCadastrado(true);
-            Persistencia.getInstance().setPodeGravarAcesso(true);
-        } else {
-            acesso.validarDuplicidade();
+        if(acesso.getMensagem() != null && acesso.getMensagem().length() >0){
+            Toast.makeText(this, acesso.getMensagem(), Toast.LENGTH_SHORT).show();
         }
+        else{
+            showDialog();
+            if (edicao) {
+                Persistencia.getInstance().setPesquisouAcessoJahCadastrado(true);
+                Persistencia.getInstance().setPodeGravarAcesso(true);
+            } else {
+                acesso.validarDuplicidade();
+            }
 
-        validarAcesso();
+            validarAcesso();
+        }
     }
 
     private void inserir() {
@@ -219,6 +224,8 @@ public class AcessoInserir extends CustomActivity {
             if (cbAluno.isChecked())
                 acesso.setAluno(true);
         }
+
+        acesso.validar();
     }
 
     private void controlaTipoAcesso() {

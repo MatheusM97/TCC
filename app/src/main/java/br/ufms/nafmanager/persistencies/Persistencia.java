@@ -1110,6 +1110,11 @@ public class Persistencia {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Acesso ac  = (Acesso) document.toObject(Acesso.class);
+//                        for(Acesso acesso: acessos){
+//                            if(acesso.getId().equals(ac.getId()))
+//                                break;
+//                        }
+
                         if(!acessos.contains(ac)){
                             acessos.add(ac);
                         }

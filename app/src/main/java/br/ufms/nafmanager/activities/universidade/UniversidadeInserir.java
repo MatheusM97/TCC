@@ -19,7 +19,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import br.ufms.nafmanager.R;
 import br.ufms.nafmanager.adapters.UsuarioAdapter;
@@ -38,6 +37,7 @@ public class UniversidadeInserir extends AppCompatActivity {
     private Spinner spinnerEstado;
     private Spinner spinnerCidade;
     private Spinner spinnerUnidades;
+    private ArrayList<Estado> estadoLista;
     private ArrayList<Cidade> cidadeLista;
     private ArrayList<Unidade> unidadeLista;
     private ArrayAdapter<Estado> estAdp;
@@ -80,7 +80,7 @@ public class UniversidadeInserir extends AppCompatActivity {
     }
 
     private void vincularComponentes() {
-        List<Estado> estadoLista = new ArrayList<>();
+        estadoLista = new ArrayList<>();
         cidadeLista = new ArrayList<Cidade>();
 
         universidadeNome = (EditText) findViewById(R.id.et_universidade_nome);
@@ -116,6 +116,29 @@ public class UniversidadeInserir extends AppCompatActivity {
                 return false;
             }
         });
+
+        this.spinnerUnidades.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(!copiandoTela){
+                    Unidade und = (Unidade) parent.getSelectedItem();
+                    und.getRegiaoId();
+
+                    Regiao reg = new Regiao();
+                    reg.setId(und.getRegiaoId());
+
+                    reg = reg.buscaObjetoNaLista(Persistencia.getInstance().getRegioes());
+
+                    estadoLista = Persistencia.getInstance().getEstadosByRegiao(reg);
+                    setAdapterEstado();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         Regiao reg = new Regiao();
 
         estadoLista = new ArrayList<>();
@@ -124,12 +147,9 @@ public class UniversidadeInserir extends AppCompatActivity {
             reg.setId(unidadeLista.get(0).getRegiaoId());
             reg = reg.buscaObjetoNaLista(Persistencia.getInstance().getRegioes());
             estadoLista = Persistencia.getInstance().getEstadosByRegiao(reg);
+            setAdapterEstado();
         }
 
-        estAdp = new ArrayAdapter<Estado>(this, android.R.layout.simple_spinner_dropdown_item, estadoLista);
-        estAdp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        spinnerEstado.setAdapter(estAdp);
         spinnerEstado.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -187,6 +207,12 @@ public class UniversidadeInserir extends AppCompatActivity {
         }
 
         Toast.makeText(this, universidade.getMensagem(), Toast.LENGTH_SHORT).show();
+    }
+
+    private void setAdapterEstado() {
+        estAdp = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, estadoLista);
+        estAdp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerEstado.setAdapter(estAdp);
     }
 
     private void carregarTela() {

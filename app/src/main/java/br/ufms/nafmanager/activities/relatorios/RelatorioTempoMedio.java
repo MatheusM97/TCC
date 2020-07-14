@@ -346,7 +346,7 @@ public class RelatorioTempoMedio extends CustomActivity {
     private void imprimirCabecalho(PdfDocument.PageInfo pageInfo) {
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(25.0f);
-        canvas.drawText("NAF Manager", pageInfo.getPageWidth()/2,28, paint);
+        canvas.drawText("NAFApp", pageInfo.getPageWidth()/2,28, paint);
 
         paint.setTextAlign(Paint.Align.CENTER);
         paint.setTextSize(20.0f);
