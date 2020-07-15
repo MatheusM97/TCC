@@ -3315,5 +3315,56 @@ public class Persistencia {
         });
     }
 
+    public void removerSolicitacoesUniversidade(String universidadeId){
+        firebaseFirestore.collection("acesso")
+                .whereEqualTo("status", StatusEnum.INATIVO)
+                .whereEqualTo("universidadeId", universidadeId)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Acesso ac = document.toObject(Acesso.class);
+                        firebaseFirestore.collection("acesso").document(ac.getId()).delete();
+                    }
+                }
+            }
+        });
+    }
+
+    public void removerSolicitacoesUnidade(String unidadeId){
+        firebaseFirestore.collection("acesso")
+                .whereEqualTo("status", StatusEnum.INATIVO)
+                .whereEqualTo("unidadeId", unidadeId)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Acesso ac = document.toObject(Acesso.class);
+                        firebaseFirestore.collection("acesso").document(ac.getId()).delete();
+                    }
+                }
+            }
+        });
+    }
+
+    public void removerSolicitacoesRegiao(String regiaoId){
+        firebaseFirestore.collection("acesso")
+                .whereEqualTo("status", StatusEnum.INATIVO)
+                .whereEqualTo("regiaoId", regiaoId)
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        Acesso ac = document.toObject(Acesso.class);
+                        firebaseFirestore.collection("acesso").document(ac.getId()).delete();
+                    }
+                }
+            }
+        });
+    }
+
 //endregion
 }

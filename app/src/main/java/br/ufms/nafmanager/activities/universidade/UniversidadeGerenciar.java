@@ -143,6 +143,7 @@ public class UniversidadeGerenciar extends CustomActivity {
             if(Persistencia.getInstance().isPodeExcluir()){
                 unv.remover();
                 adp.remover(marcador);
+                Persistencia.getInstance().removerSolicitacoesUniversidade(unv.getId());
                 adp.notifyDataSetChanged();
             }else{
                 Toast.makeText(this, "Existem Participantes vinculadas a esta Universidade", Toast.LENGTH_SHORT).show();

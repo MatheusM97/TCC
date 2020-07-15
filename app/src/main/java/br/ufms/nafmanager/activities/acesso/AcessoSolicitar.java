@@ -63,11 +63,16 @@ public class AcessoSolicitar extends CustomActivity {
 
     private void inserir(){
         copiarTela();
-        showDialog();
+        if(acesso.getMensagem() != null && acesso.getMensagem().length() >0){
+            Toast.makeText(this, acesso.getMensagem(), Toast.LENGTH_SHORT).show();
+        }
+        else{
+            showDialog();
 
-        acesso.setSolicitando(true);
-        Persistencia.getInstance().verificarAcessoExistente(acesso);
-        aguardaValidarCadastroExistente();
+            acesso.setSolicitando(true);
+            Persistencia.getInstance().verificarAcessoExistente(acesso);
+            aguardaValidarCadastroExistente();
+        }
     }
 
     private void verificaCadastroExistente() {
@@ -182,6 +187,8 @@ public class AcessoSolicitar extends CustomActivity {
             if(cbAluno.isChecked())
                 acesso.setAluno(true);
         }
+
+        acesso.validar();
     }
 
     private void controlaTipoAcesso() {

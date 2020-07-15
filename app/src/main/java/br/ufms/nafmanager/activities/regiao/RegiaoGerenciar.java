@@ -136,6 +136,7 @@ public class RegiaoGerenciar extends CustomActivity {
             if(Persistencia.getInstance().isPodeExcluir()){
                 reg.remover();
                 adp.remover(marcador);
+                Persistencia.getInstance().removerSolicitacoesRegiao(reg.getId());
                 adp.notifyDataSetChanged();
             }else{
                 Toast.makeText(this, "Existem Unidades vinculadas a esta Região Fiscal", Toast.LENGTH_SHORT).show();

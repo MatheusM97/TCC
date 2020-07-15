@@ -144,6 +144,7 @@ public class UnidadeGerenciar extends CustomActivity {
             if(Persistencia.getInstance().isPodeExcluir()){
                 und.remover();
                 adp.remover(marcador);
+                Persistencia.getInstance().removerSolicitacoesUnidade(und.getId());
                 adp.notifyDataSetChanged();
             }else{
                 Toast.makeText(this, "Existem Universidades vinculadas a esta Unidade da Receita", Toast.LENGTH_SHORT).show();

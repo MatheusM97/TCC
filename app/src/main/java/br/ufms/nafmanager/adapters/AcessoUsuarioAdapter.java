@@ -50,22 +50,18 @@ public class AcessoUsuarioAdapter extends ArrayAdapter<Acesso> {
             und = und.buscaObjetoNaLista(Persistencia.getInstance().getUnidades());
             subtitleText.setText("Unidade: " + und.getNome());
         }
-
-        if (ac.getTipoValor().equals(AcessoTipoEnum.UNIVERSIDADE.getValor()) && ac.getUniversidadeId().length() > 0) {
+        else if (ac.getTipoValor().equals(AcessoTipoEnum.UNIVERSIDADE.getValor()) && ac.getUniversidadeId().length() > 0) {
             Universidade unv = new Universidade();
             unv.setId(ac.getUniversidadeId());
             unv = unv.buscaObjetoNaLista(Persistencia.getInstance().getUniversidades());
             subtitleText.setText("Universidade: " + unv.getNome());
         }
-
-        if (ac.getTipoValor().equals(AcessoTipoEnum.REGIAO.getValor()) && ac.getRegiaoId().length() > 0) {
+        else if (ac.getTipoValor().equals(AcessoTipoEnum.REGIAO.getValor()) && ac.getRegiaoId().length() > 0) {
             Regiao reg = new Regiao();
             reg.setId(ac.getRegiaoId());
             reg = reg.buscaObjetoNaLista(Persistencia.getInstance().getRegioes());
             subtitleText.setText("Região: " + reg.getNome());
-        }
-
-        if (ac.getTipoValor().equals(AcessoTipoEnum.MODERADOR.getValor()) && ac.isModerador()) {
+        }else if (ac.getTipoValor().equals(AcessoTipoEnum.MODERADOR.getValor()) && ac.isModerador()) {
             subtitleText.setText("Moderador");
         }
 
