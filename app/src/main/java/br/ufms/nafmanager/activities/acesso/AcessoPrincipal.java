@@ -30,9 +30,12 @@ public class AcessoPrincipal extends CustomActivity {
             public void onClick(View v) {
                 Persistencia.getInstance().carregaUsuarios();
 
-                Acesso ac = Persistencia.getInstance().getAcessoAtual();
-
-                Persistencia.getInstance().carregaUnidadeUniversidadeRegiaoByAcesso(ac);
+//                Acesso ac = Persistencia.getInstance().getAcessoAtual();
+//
+//                Persistencia.getInstance().carregaUnidadeUniversidadeRegiaoByAcesso(ac);
+                Persistencia.getInstance().carregaRegioes();
+                Persistencia.getInstance().carregaUnidades();
+                Persistencia.getInstance().carregaUniversidades();
 
                 showDialog();
                 carregouUsuario();
@@ -123,7 +126,10 @@ public class AcessoPrincipal extends CustomActivity {
     }
 
     private void carregouUsuario() {
-        if(Persistencia.getInstance().carregouUsuarios && Persistencia.getInstance().carregouAcessosPossiveis && Persistencia.getInstance().carregouUniversidades){
+        if(Persistencia.getInstance().carregouUsuarios &&
+                Persistencia.getInstance().carregouUniversidades &&
+                Persistencia.getInstance().carregouUnidades &&
+                Persistencia.getInstance().carregouRegioes){
             hideDialog();
             iniciarTelas(new AcessoInserir());
         }

@@ -67,7 +67,7 @@ public class Persistencia {
     private ArrayList<Acesso> acessosRegistrados = new ArrayList<>();
     private ArrayList<Usuario> usuariosComAcesso = new ArrayList<>();
     private ArrayList<Universidade> universidades = new ArrayList<>();
-    private ArrayList<Regiao> regioes = new ArrayList<>();
+    private ArrayList<Regiao> regioes = new ArrayList<Regiao>();
     private ArrayList<Acesso> usuarioAcesso = new ArrayList<>();
     private Acesso acessoAtual;
     private Acesso acessoCarregado;
@@ -212,7 +212,7 @@ public class Persistencia {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Regiao rg = (Regiao) document.toObject(Regiao.class);
-                        if(!regioes.contains(rg)){
+                        if(!existeRegiao(rg.getId())){
                             regioes.add(rg);
                         }
                     }
@@ -279,7 +279,9 @@ public class Persistencia {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Unidade und = (Unidade) document.toObject(Unidade.class);
-                        unidades.add(und);
+                        if(!existeUnidade(und.getId())){
+                            unidades.add(und);
+                        }
                     }
                 }
 
@@ -460,7 +462,9 @@ public class Persistencia {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Universidade unv = (Universidade) document.toObject(Universidade.class);
-                        universidades.add(unv);
+                        if(!existeUniversidade(unv.getId())){
+                            universidades.add(unv);
+                        }
                     }
                     carregouUniversidades = true;
                 }
@@ -3364,6 +3368,30 @@ public class Persistencia {
                 }
             }
         });
+    }
+
+    public boolean existeRegiao(String regiaoId){
+        for(Regiao regiao: regioes){
+            if(regiao.getId().equals(regiaoId))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean existeUnidade(String unidadeId){
+        for(Unidade unidade: unidades){
+            if(unidade.getId().equals(unidadeId))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean existeUniversidade(String universidadeId){
+        for(Universidade universidade: universidades){
+            if(universidade.getId().equals(universidadeId))
+                return true;
+        }
+        return false;
     }
 
 //endregion

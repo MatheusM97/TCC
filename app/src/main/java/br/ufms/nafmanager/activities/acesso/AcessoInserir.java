@@ -534,13 +534,13 @@ public class AcessoInserir extends CustomActivity {
     private ArrayList<Regiao> getRegiaoAtualizada() {
         ArrayList<Regiao> regs = new ArrayList<>();
 
-        Acesso acessoLogado = Persistencia.getInstance().getAcessoAtual();
+        Acesso acesso = Persistencia.getInstance().getAcessoAtual();
 
-        if (acessoLogado.getNivelAcesso() == 7L) {
+        if (acesso.getNivelAcesso() == 7L) {
             regs = Persistencia.getInstance().getRegioes();
-        } else if (acessoLogado.getNivelAcesso() == 6L) {
+        } else if (acesso.getNivelAcesso() == 6L) {
             for (Regiao reg : Persistencia.getInstance().getRegioes()) {
-                if (reg.getId().equals(Persistencia.getInstance().getAcessoAtual().getRegiaoId()))
+                if (reg.getId().equals(acesso.getRegiaoId()))
                     regs.add(reg);
             }
         }
@@ -555,10 +555,18 @@ public class AcessoInserir extends CustomActivity {
 
         if (acesso.getNivelAcesso() == 5L) {
             for (Unidade reg : Persistencia.getInstance().getUnidades()) {
-                if (reg.getId().equals(Persistencia.getInstance().getAcessoAtual().getUnidadeId()))
+                if (reg.getId().equals(acesso.getUnidadeId()))
                     regs.add(reg);
             }
-        } else if (acesso.getNivelAcesso() > 5L) {
+        }
+        else if (acesso.getNivelAcesso() == 6L) {
+            for(Unidade unidade: Persistencia.getInstance().getUnidades()){
+                if(unidade.getRegiaoId().equals(acesso.getRegiaoId())){
+                    regs.add(unidade);
+                }
+            }
+        }
+        else if (acesso.getNivelAcesso() == 7L){
             regs = Persistencia.getInstance().getUnidades();
         }
 
@@ -569,13 +577,36 @@ public class AcessoInserir extends CustomActivity {
         ArrayList<Universidade> reg = new ArrayList<>();
         Acesso acesso = Persistencia.getInstance().getAcessoAtual();
 
-        if (acesso.getNivelAcesso() <= 4L) {
+        if (acesso.getNivelAcesso() == 4L) {
             for (Universidade un : Persistencia.getInstance().getUniversidades()) {
-                if (!reg.contains(un) && un.getId().equals(acesso.getUniversidadeId())) {
+                if (un.getId().equals(acesso.getUniversidadeId())) {
                     reg.add(un);
                 }
             }
-        } else {
+        }
+        else if (acesso.getNivelAcesso() == 5L) {
+            for(Universidade universidade: Persistencia.getInstance().getUniversidades()){
+                if(universidade.getUnidadeId().equals(acesso.getUnidadeId())){
+                    reg.add(universidade);
+                }
+            }
+        }
+        else if (acesso.getNivelAcesso() == 6L){
+            ArrayList<String> unidId = new ArrayList<>();
+
+            for(Unidade unidade: Persistencia.getInstance().getUnidades()){
+                if(unidade.getRegiaoId().equals(acesso.getRegiaoId())){
+                    unidId.add(unidade.getId());
+                }
+            }
+
+            for(Universidade universidade: Persistencia.getInstance().getUniversidades()){
+                if(unidId.contains(universidade.getUnidadeId())){
+                    reg.add(universidade);
+                }
+            }
+        }
+        else if (acesso.getNivelAcesso() == 7L){
             reg = Persistencia.getInstance().getUniversidades();
         }
 
