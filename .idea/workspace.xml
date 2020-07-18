@@ -25,8 +25,14 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoInserir.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoInserir.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoInserir.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoInserir.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/usuario/UsuarioInserir.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/usuario/UsuarioInserir.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Usuario.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -75,57 +81,238 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Acesso.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="187" column="16" selection-start-line="187" selection-start-column="16" selection-end-line="187" selection-end-column="16" />
-              <folding>
-                <element signature="e#1648#1649#0" expanded="true" />
-                <element signature="e#1679#1680#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="676" selection-start-line="676" selection-end-line="676" />
+            <state relative-caret-position="268">
+              <caret line="1418" lean-forward="true" selection-start-line="1418" selection-end-line="1418" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3076#3084#0" expanded="true" />
-                <element signature="e#14889#16703#0" expanded="true" />
-                <element signature="e#16702#16703#0" expanded="true" />
-                <element signature="e#28097#28583#0" expanded="true" />
-                <element signature="e#28335#28483#1" />
-                <element signature="e#28582#28583#0" expanded="true" />
-                <element signature="e#135381#135864#0" expanded="true" />
-                <element signature="e#135863#135864#0" expanded="true" />
-                <element signature="e#136142#136625#0" expanded="true" />
-                <element signature="e#136624#136625#0" expanded="true" />
-                <element signature="e#136899#137382#0" expanded="true" />
-                <element signature="e#137381#137382#0" expanded="true" />
+                <element signature="e#30425#31032#0" expanded="true" />
+                <element signature="e#31031#31032#0" expanded="true" />
+                <element signature="e#31667#32108#0" expanded="true" />
+                <element signature="e#32107#32108#0" expanded="true" />
+                <element signature="e#44870#45388#0" expanded="true" />
+                <element signature="e#45387#45388#0" expanded="true" />
+                <element signature="e#57457#57458#0" expanded="true" />
+                <element signature="e#57500#57501#0" expanded="true" />
+                <element signature="e#57591#57592#0" expanded="true" />
+                <element signature="e#57631#57632#0" expanded="true" />
+                <element signature="e#58312#58822#0" expanded="true" />
+                <element signature="e#58821#58822#0" expanded="true" />
+                <element signature="e#59487#60004#0" expanded="true" />
+                <element signature="e#60003#60004#0" expanded="true" />
+                <element signature="e#60673#64595#0" expanded="true" />
+                <element signature="e#61727#62877#0" expanded="true" />
+                <element signature="e#62876#62877#0" expanded="true" />
+                <element signature="e#63363#64513#0" expanded="true" />
+                <element signature="e#64512#64513#0" expanded="true" />
+                <element signature="e#64594#64595#0" expanded="true" />
+                <element signature="e#65123#66069#0" expanded="true" />
+                <element signature="e#66068#66069#0" expanded="true" />
+                <element signature="e#66417#67363#0" expanded="true" />
+                <element signature="e#67362#67363#0" expanded="true" />
+                <element signature="e#68086#68087#0" expanded="true" />
+                <element signature="e#68139#68140#0" expanded="true" />
+                <element signature="e#68190#68191#0" expanded="true" />
+                <element signature="e#68237#68238#0" expanded="true" />
+                <element signature="e#68281#68282#0" expanded="true" />
+                <element signature="e#68322#68323#0" expanded="true" />
+                <element signature="e#68367#68368#0" expanded="true" />
+                <element signature="e#68409#68410#0" expanded="true" />
+                <element signature="e#68453#68454#0" expanded="true" />
+                <element signature="e#68494#68495#0" expanded="true" />
+                <element signature="e#68559#68560#0" expanded="true" />
+                <element signature="e#68600#68601#0" expanded="true" />
+                <element signature="e#69666#69667#0" expanded="true" />
+                <element signature="e#69704#69705#0" expanded="true" />
+                <element signature="e#69746#69747#0" expanded="true" />
+                <element signature="e#69785#69786#0" expanded="true" />
+                <element signature="e#69832#69833#0" expanded="true" />
+                <element signature="e#69876#69877#0" expanded="true" />
+                <element signature="e#71999#72749#0" expanded="true" />
+                <element signature="e#72748#72749#0" expanded="true" />
+                <element signature="e#76693#77534#0" expanded="true" />
+                <element signature="e#77533#77534#0" expanded="true" />
+                <element signature="e#77901#78761#0" expanded="true" />
+                <element signature="e#78760#78761#0" expanded="true" />
+                <element signature="e#79364#80184#0" expanded="true" />
+                <element signature="e#80183#80184#0" expanded="true" />
+                <element signature="e#80824#81616#0" expanded="true" />
+                <element signature="e#81615#81616#0" expanded="true" />
+                <element signature="e#84732#85466#0" expanded="true" />
+                <element signature="e#85465#85466#0" expanded="true" />
+                <element signature="e#85815#86703#0" expanded="true" />
+                <element signature="e#86702#86703#0" expanded="true" />
+                <element signature="e#87036#87796#0" expanded="true" />
+                <element signature="e#87795#87796#0" expanded="true" />
+                <element signature="e#88153#88722#0" expanded="true" />
+                <element signature="e#88721#88722#0" expanded="true" />
+                <element signature="e#88935#89759#0" expanded="true" />
+                <element signature="e#89758#89759#0" expanded="true" />
+                <element signature="e#90192#91079#0" expanded="true" />
+                <element signature="e#91078#91079#0" expanded="true" />
+                <element signature="e#91493#92176#0" expanded="true" />
+                <element signature="e#92175#92176#0" expanded="true" />
+                <element signature="e#92465#93328#0" expanded="true" />
+                <element signature="e#93327#93328#0" expanded="true" />
+                <element signature="e#94125#94907#0" expanded="true" />
+                <element signature="e#94906#94907#0" expanded="true" />
+                <element signature="e#95340#96174#0" expanded="true" />
+                <element signature="e#96173#96174#0" expanded="true" />
+                <element signature="e#96531#97540#0" expanded="true" />
+                <element signature="e#97539#97540#0" expanded="true" />
+                <element signature="e#98104#98685#0" expanded="true" />
+                <element signature="e#98684#98685#0" expanded="true" />
+                <element signature="e#99055#99541#0" expanded="true" />
+                <element signature="e#99540#99541#0" expanded="true" />
+                <element signature="e#102373#103147#0" expanded="true" />
+                <element signature="e#103146#103147#0" expanded="true" />
+                <element signature="e#103551#104607#0" expanded="true" />
+                <element signature="e#104606#104607#0" expanded="true" />
+                <element signature="e#105002#106070#0" expanded="true" />
+                <element signature="e#106069#106070#0" expanded="true" />
+                <element signature="e#106452#107483#0" expanded="true" />
+                <element signature="e#107482#107483#0" expanded="true" />
+                <element signature="e#108580#108581#0" expanded="true" />
+                <element signature="e#108609#108610#0" expanded="true" />
+                <element signature="e#108647#108648#0" expanded="true" />
+                <element signature="e#108681#108682#0" expanded="true" />
+                <element signature="e#108728#108729#0" expanded="true" />
+                <element signature="e#108759#108760#0" expanded="true" />
+                <element signature="e#108806#108807#0" expanded="true" />
+                <element signature="e#108837#108838#0" expanded="true" />
+                <element signature="e#109123#109124#0" expanded="true" />
+                <element signature="e#109153#109154#0" expanded="true" />
+                <element signature="e#109389#109390#0" expanded="true" />
+                <element signature="e#109424#109425#0" expanded="true" />
+                <element signature="e#109635#109636#0" expanded="true" />
+                <element signature="e#109671#109672#0" expanded="true" />
+                <element signature="e#110537#110538#0" expanded="true" />
+                <element signature="e#110581#110582#0" expanded="true" />
+                <element signature="e#110638#110639#0" expanded="true" />
+                <element signature="e#110674#110675#0" expanded="true" />
+                <element signature="e#110714#110715#0" expanded="true" />
+                <element signature="e#110749#110750#0" expanded="true" />
+                <element signature="e#110806#110807#0" expanded="true" />
+                <element signature="e#110854#110855#0" expanded="true" />
+                <element signature="e#110904#110905#0" expanded="true" />
+                <element signature="e#110944#110945#0" expanded="true" />
+                <element signature="e#111114#111115#0" expanded="true" />
+                <element signature="e#111149#111150#0" expanded="true" />
+                <element signature="e#111206#111207#0" expanded="true" />
+                <element signature="e#111254#111255#0" expanded="true" />
+                <element signature="e#111308#111309#0" expanded="true" />
+                <element signature="e#111354#111355#0" expanded="true" />
+                <element signature="e#111392#111393#0" expanded="true" />
+                <element signature="e#111426#111427#0" expanded="true" />
+                <element signature="e#111480#111481#0" expanded="true" />
+                <element signature="e#111526#111527#0" expanded="true" />
+                <element signature="e#111571#111572#0" expanded="true" />
+                <element signature="e#111601#111602#0" expanded="true" />
+                <element signature="e#111658#111659#0" expanded="true" />
+                <element signature="e#111696#111697#0" expanded="true" />
+                <element signature="e#111753#111754#0" expanded="true" />
+                <element signature="e#111791#111792#0" expanded="true" />
+                <element signature="e#111829#111830#0" expanded="true" />
+                <element signature="e#111863#111864#0" expanded="true" />
+                <element signature="e#111917#111918#0" expanded="true" />
+                <element signature="e#111963#111964#0" expanded="true" />
+                <element signature="e#112001#112002#0" expanded="true" />
+                <element signature="e#112035#112036#0" expanded="true" />
+                <element signature="e#112089#112090#0" expanded="true" />
+                <element signature="e#112135#112136#0" expanded="true" />
+                <element signature="e#112320#112321#0" expanded="true" />
+                <element signature="e#112356#112357#0" expanded="true" />
+                <element signature="e#112526#112527#0" expanded="true" />
+                <element signature="e#112556#112557#0" expanded="true" />
+                <element signature="e#112613#112614#0" expanded="true" />
+                <element signature="e#112651#112652#0" expanded="true" />
+                <element signature="e#112711#112712#0" expanded="true" />
+                <element signature="e#112751#112752#0" expanded="true" />
+                <element signature="e#112811#112812#0" expanded="true" />
+                <element signature="e#112851#112852#0" expanded="true" />
+                <element signature="e#113027#113028#0" expanded="true" />
+                <element signature="e#113063#113064#0" expanded="true" />
+                <element signature="e#113235#113236#0" expanded="true" />
+                <element signature="e#113273#113274#0" expanded="true" />
+                <element signature="e#113456#113457#0" expanded="true" />
+                <element signature="e#113508#113509#0" expanded="true" />
+                <element signature="e#113726#113727#0" expanded="true" />
+                <element signature="e#113766#113767#0" expanded="true" />
+                <element signature="e#113940#113941#0" expanded="true" />
+                <element signature="e#113985#113986#0" expanded="true" />
+                <element signature="e#114186#114187#0" expanded="true" />
+                <element signature="e#114227#114228#0" expanded="true" />
+                <element signature="e#114422#114423#0" expanded="true" />
+                <element signature="e#114462#114463#0" expanded="true" />
+                <element signature="e#114642#114643#0" expanded="true" />
+                <element signature="e#114681#114682#0" expanded="true" />
+                <element signature="e#114844#114845#0" expanded="true" />
+                <element signature="e#114882#114883#0" expanded="true" />
+                <element signature="e#115053#115054#0" expanded="true" />
+                <element signature="e#115104#115105#0" expanded="true" />
+                <element signature="e#115316#115317#0" expanded="true" />
+                <element signature="e#115355#115356#0" expanded="true" />
+                <element signature="e#115520#115521#0" expanded="true" />
+                <element signature="e#115560#115561#0" expanded="true" />
+                <element signature="e#115740#115741#0" expanded="true" />
+                <element signature="e#115791#115792#0" expanded="true" />
+                <element signature="e#116020#116021#0" expanded="true" />
+                <element signature="e#116060#116061#0" expanded="true" />
+                <element signature="e#129735#129736#0" expanded="true" />
+                <element signature="e#129789#129790#0" expanded="true" />
+                <element signature="e#130152#130797#0" expanded="true" />
+                <element signature="e#130796#130797#0" expanded="true" />
+                <element signature="e#131032#131444#0" expanded="true" />
+                <element signature="e#131443#131444#0" expanded="true" />
+                <element signature="e#131772#131773#0" expanded="true" />
+                <element signature="e#131817#131818#0" expanded="true" />
+                <element signature="e#131949#131950#0" expanded="true" />
+                <element signature="e#131989#131990#0" expanded="true" />
+                <element signature="e#132026#132027#0" expanded="true" />
+                <element signature="e#132060#132061#0" expanded="true" />
+                <element signature="e#132375#132804#0" expanded="true" />
+                <element signature="e#132803#132804#0" expanded="true" />
+                <element signature="e#133133#133562#0" expanded="true" />
+                <element signature="e#133561#133562#0" expanded="true" />
+                <element signature="e#133895#134324#0" expanded="true" />
+                <element signature="e#134323#134324#0" expanded="true" />
+                <element signature="e#134656#135085#0" expanded="true" />
+                <element signature="e#135084#135085#0" expanded="true" />
+                <element signature="e#135408#135837#0" expanded="true" />
+                <element signature="e#135836#135837#0" expanded="true" />
+                <element signature="e#136135#136618#0" expanded="true" />
+                <element signature="e#136617#136618#0" expanded="true" />
+                <element signature="e#136896#137379#0" expanded="true" />
+                <element signature="e#137378#137379#0" expanded="true" />
+                <element signature="e#137653#138136#0" expanded="true" />
+                <element signature="e#138135#138136#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoInserir.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoGerenciar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="609" column="64" lean-forward="true" selection-start-line="609" selection-start-column="64" selection-end-line="609" selection-end-column="64" />
+            <state relative-caret-position="408">
+              <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/CustomObject.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoInserir.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
-              <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
+            <state relative-caret-position="2380">
+              <caret line="183" lean-forward="true" selection-start-line="183" selection-end-line="183" />
+              <folding>
+                <element signature="e#2029#2172#0" expanded="true" />
+                <element signature="e#2171#2172#0" expanded="true" />
+                <element signature="e#4757#4881#0" expanded="true" />
+                <element signature="e#4880#4881#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -133,17 +320,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Regiao.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="8" column="40" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="40" />
+            <state relative-caret-position="228">
+              <caret line="84" column="26" selection-start-line="84" selection-start-column="19" selection-end-line="84" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadeGerenciar.java">
+        <entry file="file://$PROJECT_DIR$/../SDK/sources/android-29/android/os/Looper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="144" column="38" lean-forward="true" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="38" />
+            <state relative-caret-position="540">
+              <caret line="165" selection-start-line="165" selection-end-line="165" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoAprovar.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="31" selection-start-line="31" selection-end-line="31" />
             </state>
           </provider>
         </entry>
@@ -151,21 +347,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoPrincipal.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="33" column="2" lean-forward="true" selection-start-line="33" selection-start-column="2" selection-end-line="33" selection-end-column="2" />
-              <folding>
-                <element signature="e#891#1299#0" expanded="true" />
-                <element signature="e#1298#1299#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="302">
+              <caret line="149" column="5" lean-forward="true" selection-start-line="149" selection-start-column="5" selection-end-line="149" selection-end-column="5" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoGerenciar.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoSolicitar.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="138" column="82" lean-forward="true" selection-start-line="138" selection-start-column="82" selection-end-line="138" selection-end-column="82" />
+            <state relative-caret-position="1836">
+              <caret line="134" column="47" selection-start-line="134" selection-start-column="47" selection-end-line="134" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/AcessoUsuarioAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="986">
+              <caret line="74" selection-start-line="74" selection-end-line="74" />
             </state>
           </provider>
         </entry>
@@ -187,13 +388,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>acesso</find>
-      <find>whereAr</find>
-      <find>persistencia</find>
-      <find>salvar</find>
-      <find>firebaseFirestore</find>
-      <find>login</find>
-      <find>unidades      hideDialog();</find>
       <find>spinnerUnidades</find>
       <find>unidade</find>
       <find>this.spinnerUnidades.</find>
@@ -211,12 +405,19 @@
       <find>removeruniversidade</find>
       <find>remover</find>
       <find>remove</find>
-      <find>validar</find>
       <find>btn</find>
       <find>btn_inserirAcesso</find>
       <find>inserir</find>
       <find>carregouAcessosPossiveis</find>
       <find>existere</find>
+      <find>inserirAcesso</find>
+      <find>getintent</find>
+      <find>new Intent(</find>
+      <find>resume</find>
+      <find>cida</find>
+      <find>copiar</find>
+      <find>carregar</find>
+      <find>validar</find>
     </findStrings>
     <replaceStrings>
       <replace>&quot;ItdD34xP0a63qxRmw2P0&quot;, &quot;PA&quot;''''</replace>
@@ -266,9 +467,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Unidade.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioRanking.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/unidade/UnidadeInserir.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/unidade/UnidadePrincipal.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoInserir.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoPrincipal.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Regiao.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/acesso_solicitar.xml" />
@@ -289,11 +488,8 @@
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Atendimento.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/relatorio_principal.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioPrincipal.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Usuario.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Acesso.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadeInserir.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/usuario/UsuarioInserir.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/layout_atendimento.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/relatorios/RelatorioRepresentanteRegiao.java" />
@@ -308,9 +504,14 @@
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoGerenciar.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoSolicitar.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/CustomObject.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoPrincipal.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Usuario.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/usuario/UsuarioInserir.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoInserir.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoPrincipal.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoInserir.java" />
       </list>
     </option>
   </component>
@@ -492,8 +693,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.44853738" weight="0.15671642" />
       <window_info id="Structure" order="1" sideWeight="0.52112675" side_tool="true" weight="0.1369936" />
@@ -506,10 +706,10 @@
       <window_info id="Resources Explorer" order="8" weight="0.32980332" />
       <window_info id="simpleUML" order="9" weight="0.32980332" />
       <window_info anchor="bottom" id="Logcat" order="0" sideWeight="0.4977307" weight="0.49099836" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" weight="0.48772505" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49946696" weight="0.48754063" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32827735" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49626866" weight="0.35188216" />
-      <window_info anchor="bottom" id="Terminal" order="4" weight="0.32733223" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49626866" weight="0.35102925" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="4" visible="true" weight="0.32719395" />
       <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50053304" side_tool="true" weight="0.49187434" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32827735" />
       <window_info anchor="bottom" id="Version Control" order="7" />
@@ -560,13 +760,13 @@
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java</url>
-          <line>2411</line>
+          <line>2448</line>
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java</url>
-          <line>2391</line>
+          <line>2428</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
@@ -584,7 +784,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java</url>
-          <line>2565</line>
+          <line>2602</line>
           <properties />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
@@ -602,31 +802,31 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java</url>
-          <line>2439</line>
+          <line>2476</line>
           <properties />
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java</url>
-          <line>2449</line>
+          <line>2486</line>
           <properties />
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java</url>
-          <line>2456</line>
+          <line>2493</line>
           <properties />
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java</url>
-          <line>2448</line>
+          <line>2485</line>
           <properties />
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java</url>
-          <line>2400</line>
+          <line>2437</line>
           <properties />
           <option name="timeStamp" value="14" />
         </line-breakpoint>
@@ -638,7 +838,7 @@
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java</url>
-          <line>2407</line>
+          <line>2444</line>
           <properties />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
@@ -666,35 +866,11 @@
           <properties />
           <option name="timeStamp" value="25" />
         </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/AcessoUsuarioAdapter.java</url>
-          <line>71</line>
-          <properties />
-          <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/AcessoUsuarioAdapter.java</url>
-          <line>76</line>
-          <properties />
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoInserir.java</url>
-          <line>166</line>
-          <properties />
-          <option name="timeStamp" value="82" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/usuario/UsuarioPrincipal.java</url>
           <line>37</line>
           <properties />
           <option name="timeStamp" value="85" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoInserir.java</url>
-          <line>485</line>
-          <properties />
-          <option name="timeStamp" value="114" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadeInserir.java</url>
@@ -721,26 +897,8 @@
           <option name="timeStamp" value="145" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoInserir.java</url>
-          <line>108</line>
-          <properties />
-          <option name="timeStamp" value="148" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/AcessoUsuarioAdapter.java</url>
-          <line>53</line>
-          <properties />
-          <option name="timeStamp" value="154" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/AcessoUsuarioAdapter.java</url>
-          <line>56</line>
-          <properties />
-          <option name="timeStamp" value="156" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java</url>
-          <line>1132</line>
+          <line>1141</line>
           <properties />
           <option name="timeStamp" value="159" />
         </line-breakpoint>
@@ -763,6 +921,26 @@
       </expression>
     </expressions>
     <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>this.acesso.getTipoValor().equals(AcessoTipoEnum.UNIVERSIDADE</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>AcessoTipoEnum.UNIVERSIDADE</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>this.acesso.getTipoValor()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>acesso</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>Persistencia.getInstance().carregouRegioes</expression-string>
         <language-id>JAVA</language-id>
@@ -788,131 +966,28 @@
         <language-id>JAVA</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>Persistencia.getInstance().carregouUsuarios &amp;&amp;
-                Persistencia.getInstance().carregouAcessosPossiveis &amp;&amp;
-                Persistencia.getInstance().carregouUniversidades &amp;&amp;
-                Persistencia.getInstance().carregouUnidades &amp;&amp;
-                Persistencia.getInstance().carregouRegioes</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>Persistencia.getInstance().getUniversidades()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>unv.setId(ac.getUniversidadeId())</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>Universidade unv = new Universidade();</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/usuario/UsuarioGerenciar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="82" column="74" selection-start-line="82" selection-start-column="74" selection-end-line="82" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/AcessoAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="28" column="5" lean-forward="true" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/SplashScreen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="163">
-          <caret line="140" column="68" lean-forward="true" selection-start-line="140" selection-start-column="68" selection-end-line="140" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../SDK/sources/android-29/android/view/ViewRootImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="2422" selection-start-line="2422" selection-end-line="2422" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/usuario/UsuarioPrincipal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="40" column="78" lean-forward="true" selection-start-line="40" selection-start-column="78" selection-end-line="40" selection-end-column="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/unidade/UnidadePrincipal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="18" column="56" lean-forward="true" selection-start-line="18" selection-start-column="56" selection-end-line="18" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoAprovar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="28" column="21" lean-forward="true" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/universidade_inserir.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2040">
-          <caret line="120" column="31" selection-start-line="120" selection-start-column="31" selection-end-line="120" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/regiao_inserir.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1394">
-          <caret line="82" selection-start-line="82" selection-end-line="82" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/unidade_inserir.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2227">
           <caret line="131" selection-start-line="131" selection-end-line="131" />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/acesso_inserir.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3638">
           <caret line="214" selection-start-line="214" selection-end-line="214" />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/usuario_inserir.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../SDK/sources/android-29/android/os/Looper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2397">
-          <caret line="165" selection-start-line="165" selection-end-line="165" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadePrincipal.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -957,12 +1032,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/relatorio_principal.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
           <caret line="46" column="46" selection-start-line="46" selection-start-column="46" selection-end-line="46" selection-end-column="46" />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/RelatorioActivity.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -972,39 +1047,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" selection-start-line="3" selection-start-column="4" selection-end-line="8" selection-end-column="14" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Atendimento.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/AcessoTipoEnum.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Usuario.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="183" column="34" lean-forward="true" selection-start-line="183" selection-start-column="34" selection-end-line="183" selection-end-column="34" />
-          <folding>
-            <element signature="e#8041#8042#0" expanded="true" />
-            <element signature="e#8099#8100#0" expanded="true" />
-            <element signature="e#9135#9136#0" expanded="true" />
-            <element signature="e#9191#9192#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/../SDK/sources/android-29/java/util/ArrayList.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1024,41 +1072,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/LoginActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="244" column="5" lean-forward="true" selection-start-line="244" selection-start-column="5" selection-end-line="244" selection-end-column="5" />
-          <folding>
-            <element signature="e#2475#2838#0" expanded="true" />
-            <element signature="e#2837#2838#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/CustomActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="e#715#716#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/usuario/UsuarioInserir.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2397">
-          <caret line="161" column="72" selection-start-line="161" selection-start-column="72" selection-end-line="161" selection-end-column="72" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/relatorio_ranking.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2040">
           <caret line="120" column="34" selection-start-line="120" selection-start-column="30" selection-end-line="120" selection-end-column="34" />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
@@ -1075,12 +1095,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_atendimento.xml">
-      <provider editor-type-id="android-designer2" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="107">
           <caret line="61" column="35" lean-forward="true" selection-start-line="61" selection-start-column="35" selection-end-line="61" selection-end-column="35" />
         </state>
       </provider>
+      <provider editor-type-id="android-designer2" />
     </entry>
     <entry file="file://$PROJECT_DIR$/../SDK/sources/android-29/android/widget/AbsListView.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1096,13 +1116,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/AcessoUsuarioAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="55" column="41" selection-start-line="55" selection-start-column="41" selection-end-line="55" selection-end-column="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/unidade/UnidadeGerenciar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1110,23 +1123,197 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../SDK/sources/android-29/android/app/ActivityThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="123">
+          <caret line="3578" selection-start-line="3578" selection-end-line="3578" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../SDK/sources/android-29/android/app/Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1744" column="19" selection-start-line="1744" selection-start-column="19" selection-end-line="1744" selection-end-column="19" />
+          <folding>
+            <element signature="e#76536#76537#0" expanded="true" />
+            <element signature="e#76566#76567#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/CustomActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
+          <folding>
+            <element signature="e#670#671#0" expanded="true" />
+            <element signature="e#715#716#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadeGerenciar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2057">
+          <caret line="144" column="38" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoGerenciar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="138" column="82" lean-forward="true" selection-start-line="138" selection-start-column="82" selection-end-line="138" selection-end-column="82" />
+        <state relative-caret-position="1955">
+          <caret line="138" column="82" selection-start-line="138" selection-start-column="82" selection-end-line="138" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/AtendimentoTipo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Estado.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="29" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Cidade.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Atendimento.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="21" column="37" lean-forward="true" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/AtendidoTipo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="37" column="1" lean-forward="true" selection-start-line="37" selection-start-column="1" selection-end-line="37" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="163" column="9" lean-forward="true" selection-start-line="163" selection-start-column="9" selection-end-line="163" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/CustomObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="84" selection-start-line="84" selection-end-line="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/usuario/UsuarioInserir.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="143" column="26" lean-forward="true" selection-start-line="143" selection-start-column="26" selection-end-line="143" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Usuario.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="156" lean-forward="true" selection-start-line="156" selection-end-line="156" />
+          <folding>
+            <element signature="e#8041#8042#0" expanded="true" />
+            <element signature="e#8099#8100#0" expanded="true" />
+            <element signature="e#9135#9136#0" expanded="true" />
+            <element signature="e#9191#9192#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoInserir.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="22" selection-start-column="22" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/AcessoTipoEnum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Acesso.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+          <folding>
+            <element signature="e#1533#1534#0" expanded="true" />
+            <element signature="e#1648#1649#0" expanded="true" />
+            <element signature="e#1679#1680#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoAprovar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoSolicitar.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
-          <folding>
-            <element signature="e#12135#12341#0" expanded="true" />
-            <element signature="e#12340#12341#0" expanded="true" />
-            <element signature="e#14953#15096#0" expanded="true" />
-            <element signature="e#15095#15096#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1836">
+          <caret line="134" column="47" selection-start-line="134" selection-start-column="47" selection-end-line="134" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/adapters/AcessoUsuarioAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="74" selection-start-line="74" selection-end-line="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoPrincipal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="149" column="5" lean-forward="true" selection-start-line="149" selection-start-column="5" selection-end-line="149" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../SDK/sources/android-29/android/os/Looper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="165" selection-start-line="165" selection-end-line="165" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoGerenciar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../SDK/sources/android-29/android/view/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="6294" selection-start-line="6294" selection-end-line="6294" />
         </state>
       </provider>
     </entry>
@@ -1139,87 +1326,238 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../SDK/sources/android-29/android/os/Handler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="107" selection-start-line="107" selection-end-line="107" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/CustomObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
-          <caret line="110" lean-forward="true" selection-start-line="110" selection-end-line="110" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/universidade/UniversidadeGerenciar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="144" column="38" lean-forward="true" selection-start-line="144" selection-start-column="38" selection-end-line="144" selection-end-column="38" />
+        <state relative-caret-position="191">
+          <caret line="790" selection-start-line="790" selection-end-line="790" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Regiao.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="8" column="40" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="40" />
+        <state relative-caret-position="228">
+          <caret line="84" column="26" selection-start-line="84" selection-start-column="19" selection-end-line="84" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../SDK/sources/android-29/android/view/View.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/regiao/RegiaoInserir.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="6294" selection-start-line="6294" selection-end-line="6294" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/model/Acesso.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="187" column="16" selection-start-line="187" selection-start-column="16" selection-end-line="187" selection-end-column="16" />
+        <state relative-caret-position="2380">
+          <caret line="183" lean-forward="true" selection-start-line="183" selection-end-line="183" />
           <folding>
-            <element signature="e#1648#1649#0" expanded="true" />
-            <element signature="e#1679#1680#0" expanded="true" />
+            <element signature="e#2029#2172#0" expanded="true" />
+            <element signature="e#2171#2172#0" expanded="true" />
+            <element signature="e#4757#4881#0" expanded="true" />
+            <element signature="e#4880#4881#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/persistencies/Persistencia.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="676" selection-start-line="676" selection-end-line="676" />
+        <state relative-caret-position="268">
+          <caret line="1418" lean-forward="true" selection-start-line="1418" selection-end-line="1418" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3076#3084#0" expanded="true" />
-            <element signature="e#14889#16703#0" expanded="true" />
-            <element signature="e#16702#16703#0" expanded="true" />
-            <element signature="e#28097#28583#0" expanded="true" />
-            <element signature="e#28335#28483#1" />
-            <element signature="e#28582#28583#0" expanded="true" />
-            <element signature="e#135381#135864#0" expanded="true" />
-            <element signature="e#135863#135864#0" expanded="true" />
-            <element signature="e#136142#136625#0" expanded="true" />
-            <element signature="e#136624#136625#0" expanded="true" />
-            <element signature="e#136899#137382#0" expanded="true" />
-            <element signature="e#137381#137382#0" expanded="true" />
+            <element signature="e#30425#31032#0" expanded="true" />
+            <element signature="e#31031#31032#0" expanded="true" />
+            <element signature="e#31667#32108#0" expanded="true" />
+            <element signature="e#32107#32108#0" expanded="true" />
+            <element signature="e#44870#45388#0" expanded="true" />
+            <element signature="e#45387#45388#0" expanded="true" />
+            <element signature="e#57457#57458#0" expanded="true" />
+            <element signature="e#57500#57501#0" expanded="true" />
+            <element signature="e#57591#57592#0" expanded="true" />
+            <element signature="e#57631#57632#0" expanded="true" />
+            <element signature="e#58312#58822#0" expanded="true" />
+            <element signature="e#58821#58822#0" expanded="true" />
+            <element signature="e#59487#60004#0" expanded="true" />
+            <element signature="e#60003#60004#0" expanded="true" />
+            <element signature="e#60673#64595#0" expanded="true" />
+            <element signature="e#61727#62877#0" expanded="true" />
+            <element signature="e#62876#62877#0" expanded="true" />
+            <element signature="e#63363#64513#0" expanded="true" />
+            <element signature="e#64512#64513#0" expanded="true" />
+            <element signature="e#64594#64595#0" expanded="true" />
+            <element signature="e#65123#66069#0" expanded="true" />
+            <element signature="e#66068#66069#0" expanded="true" />
+            <element signature="e#66417#67363#0" expanded="true" />
+            <element signature="e#67362#67363#0" expanded="true" />
+            <element signature="e#68086#68087#0" expanded="true" />
+            <element signature="e#68139#68140#0" expanded="true" />
+            <element signature="e#68190#68191#0" expanded="true" />
+            <element signature="e#68237#68238#0" expanded="true" />
+            <element signature="e#68281#68282#0" expanded="true" />
+            <element signature="e#68322#68323#0" expanded="true" />
+            <element signature="e#68367#68368#0" expanded="true" />
+            <element signature="e#68409#68410#0" expanded="true" />
+            <element signature="e#68453#68454#0" expanded="true" />
+            <element signature="e#68494#68495#0" expanded="true" />
+            <element signature="e#68559#68560#0" expanded="true" />
+            <element signature="e#68600#68601#0" expanded="true" />
+            <element signature="e#69666#69667#0" expanded="true" />
+            <element signature="e#69704#69705#0" expanded="true" />
+            <element signature="e#69746#69747#0" expanded="true" />
+            <element signature="e#69785#69786#0" expanded="true" />
+            <element signature="e#69832#69833#0" expanded="true" />
+            <element signature="e#69876#69877#0" expanded="true" />
+            <element signature="e#71999#72749#0" expanded="true" />
+            <element signature="e#72748#72749#0" expanded="true" />
+            <element signature="e#76693#77534#0" expanded="true" />
+            <element signature="e#77533#77534#0" expanded="true" />
+            <element signature="e#77901#78761#0" expanded="true" />
+            <element signature="e#78760#78761#0" expanded="true" />
+            <element signature="e#79364#80184#0" expanded="true" />
+            <element signature="e#80183#80184#0" expanded="true" />
+            <element signature="e#80824#81616#0" expanded="true" />
+            <element signature="e#81615#81616#0" expanded="true" />
+            <element signature="e#84732#85466#0" expanded="true" />
+            <element signature="e#85465#85466#0" expanded="true" />
+            <element signature="e#85815#86703#0" expanded="true" />
+            <element signature="e#86702#86703#0" expanded="true" />
+            <element signature="e#87036#87796#0" expanded="true" />
+            <element signature="e#87795#87796#0" expanded="true" />
+            <element signature="e#88153#88722#0" expanded="true" />
+            <element signature="e#88721#88722#0" expanded="true" />
+            <element signature="e#88935#89759#0" expanded="true" />
+            <element signature="e#89758#89759#0" expanded="true" />
+            <element signature="e#90192#91079#0" expanded="true" />
+            <element signature="e#91078#91079#0" expanded="true" />
+            <element signature="e#91493#92176#0" expanded="true" />
+            <element signature="e#92175#92176#0" expanded="true" />
+            <element signature="e#92465#93328#0" expanded="true" />
+            <element signature="e#93327#93328#0" expanded="true" />
+            <element signature="e#94125#94907#0" expanded="true" />
+            <element signature="e#94906#94907#0" expanded="true" />
+            <element signature="e#95340#96174#0" expanded="true" />
+            <element signature="e#96173#96174#0" expanded="true" />
+            <element signature="e#96531#97540#0" expanded="true" />
+            <element signature="e#97539#97540#0" expanded="true" />
+            <element signature="e#98104#98685#0" expanded="true" />
+            <element signature="e#98684#98685#0" expanded="true" />
+            <element signature="e#99055#99541#0" expanded="true" />
+            <element signature="e#99540#99541#0" expanded="true" />
+            <element signature="e#102373#103147#0" expanded="true" />
+            <element signature="e#103146#103147#0" expanded="true" />
+            <element signature="e#103551#104607#0" expanded="true" />
+            <element signature="e#104606#104607#0" expanded="true" />
+            <element signature="e#105002#106070#0" expanded="true" />
+            <element signature="e#106069#106070#0" expanded="true" />
+            <element signature="e#106452#107483#0" expanded="true" />
+            <element signature="e#107482#107483#0" expanded="true" />
+            <element signature="e#108580#108581#0" expanded="true" />
+            <element signature="e#108609#108610#0" expanded="true" />
+            <element signature="e#108647#108648#0" expanded="true" />
+            <element signature="e#108681#108682#0" expanded="true" />
+            <element signature="e#108728#108729#0" expanded="true" />
+            <element signature="e#108759#108760#0" expanded="true" />
+            <element signature="e#108806#108807#0" expanded="true" />
+            <element signature="e#108837#108838#0" expanded="true" />
+            <element signature="e#109123#109124#0" expanded="true" />
+            <element signature="e#109153#109154#0" expanded="true" />
+            <element signature="e#109389#109390#0" expanded="true" />
+            <element signature="e#109424#109425#0" expanded="true" />
+            <element signature="e#109635#109636#0" expanded="true" />
+            <element signature="e#109671#109672#0" expanded="true" />
+            <element signature="e#110537#110538#0" expanded="true" />
+            <element signature="e#110581#110582#0" expanded="true" />
+            <element signature="e#110638#110639#0" expanded="true" />
+            <element signature="e#110674#110675#0" expanded="true" />
+            <element signature="e#110714#110715#0" expanded="true" />
+            <element signature="e#110749#110750#0" expanded="true" />
+            <element signature="e#110806#110807#0" expanded="true" />
+            <element signature="e#110854#110855#0" expanded="true" />
+            <element signature="e#110904#110905#0" expanded="true" />
+            <element signature="e#110944#110945#0" expanded="true" />
+            <element signature="e#111114#111115#0" expanded="true" />
+            <element signature="e#111149#111150#0" expanded="true" />
+            <element signature="e#111206#111207#0" expanded="true" />
+            <element signature="e#111254#111255#0" expanded="true" />
+            <element signature="e#111308#111309#0" expanded="true" />
+            <element signature="e#111354#111355#0" expanded="true" />
+            <element signature="e#111392#111393#0" expanded="true" />
+            <element signature="e#111426#111427#0" expanded="true" />
+            <element signature="e#111480#111481#0" expanded="true" />
+            <element signature="e#111526#111527#0" expanded="true" />
+            <element signature="e#111571#111572#0" expanded="true" />
+            <element signature="e#111601#111602#0" expanded="true" />
+            <element signature="e#111658#111659#0" expanded="true" />
+            <element signature="e#111696#111697#0" expanded="true" />
+            <element signature="e#111753#111754#0" expanded="true" />
+            <element signature="e#111791#111792#0" expanded="true" />
+            <element signature="e#111829#111830#0" expanded="true" />
+            <element signature="e#111863#111864#0" expanded="true" />
+            <element signature="e#111917#111918#0" expanded="true" />
+            <element signature="e#111963#111964#0" expanded="true" />
+            <element signature="e#112001#112002#0" expanded="true" />
+            <element signature="e#112035#112036#0" expanded="true" />
+            <element signature="e#112089#112090#0" expanded="true" />
+            <element signature="e#112135#112136#0" expanded="true" />
+            <element signature="e#112320#112321#0" expanded="true" />
+            <element signature="e#112356#112357#0" expanded="true" />
+            <element signature="e#112526#112527#0" expanded="true" />
+            <element signature="e#112556#112557#0" expanded="true" />
+            <element signature="e#112613#112614#0" expanded="true" />
+            <element signature="e#112651#112652#0" expanded="true" />
+            <element signature="e#112711#112712#0" expanded="true" />
+            <element signature="e#112751#112752#0" expanded="true" />
+            <element signature="e#112811#112812#0" expanded="true" />
+            <element signature="e#112851#112852#0" expanded="true" />
+            <element signature="e#113027#113028#0" expanded="true" />
+            <element signature="e#113063#113064#0" expanded="true" />
+            <element signature="e#113235#113236#0" expanded="true" />
+            <element signature="e#113273#113274#0" expanded="true" />
+            <element signature="e#113456#113457#0" expanded="true" />
+            <element signature="e#113508#113509#0" expanded="true" />
+            <element signature="e#113726#113727#0" expanded="true" />
+            <element signature="e#113766#113767#0" expanded="true" />
+            <element signature="e#113940#113941#0" expanded="true" />
+            <element signature="e#113985#113986#0" expanded="true" />
+            <element signature="e#114186#114187#0" expanded="true" />
+            <element signature="e#114227#114228#0" expanded="true" />
+            <element signature="e#114422#114423#0" expanded="true" />
+            <element signature="e#114462#114463#0" expanded="true" />
+            <element signature="e#114642#114643#0" expanded="true" />
+            <element signature="e#114681#114682#0" expanded="true" />
+            <element signature="e#114844#114845#0" expanded="true" />
+            <element signature="e#114882#114883#0" expanded="true" />
+            <element signature="e#115053#115054#0" expanded="true" />
+            <element signature="e#115104#115105#0" expanded="true" />
+            <element signature="e#115316#115317#0" expanded="true" />
+            <element signature="e#115355#115356#0" expanded="true" />
+            <element signature="e#115520#115521#0" expanded="true" />
+            <element signature="e#115560#115561#0" expanded="true" />
+            <element signature="e#115740#115741#0" expanded="true" />
+            <element signature="e#115791#115792#0" expanded="true" />
+            <element signature="e#116020#116021#0" expanded="true" />
+            <element signature="e#116060#116061#0" expanded="true" />
+            <element signature="e#129735#129736#0" expanded="true" />
+            <element signature="e#129789#129790#0" expanded="true" />
+            <element signature="e#130152#130797#0" expanded="true" />
+            <element signature="e#130796#130797#0" expanded="true" />
+            <element signature="e#131032#131444#0" expanded="true" />
+            <element signature="e#131443#131444#0" expanded="true" />
+            <element signature="e#131772#131773#0" expanded="true" />
+            <element signature="e#131817#131818#0" expanded="true" />
+            <element signature="e#131949#131950#0" expanded="true" />
+            <element signature="e#131989#131990#0" expanded="true" />
+            <element signature="e#132026#132027#0" expanded="true" />
+            <element signature="e#132060#132061#0" expanded="true" />
+            <element signature="e#132375#132804#0" expanded="true" />
+            <element signature="e#132803#132804#0" expanded="true" />
+            <element signature="e#133133#133562#0" expanded="true" />
+            <element signature="e#133561#133562#0" expanded="true" />
+            <element signature="e#133895#134324#0" expanded="true" />
+            <element signature="e#134323#134324#0" expanded="true" />
+            <element signature="e#134656#135085#0" expanded="true" />
+            <element signature="e#135084#135085#0" expanded="true" />
+            <element signature="e#135408#135837#0" expanded="true" />
+            <element signature="e#135836#135837#0" expanded="true" />
+            <element signature="e#136135#136618#0" expanded="true" />
+            <element signature="e#136617#136618#0" expanded="true" />
+            <element signature="e#136896#137379#0" expanded="true" />
+            <element signature="e#137378#137379#0" expanded="true" />
+            <element signature="e#137653#138136#0" expanded="true" />
+            <element signature="e#138135#138136#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoPrincipal.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="33" column="2" lean-forward="true" selection-start-line="33" selection-start-column="2" selection-end-line="33" selection-end-column="2" />
-          <folding>
-            <element signature="e#891#1299#0" expanded="true" />
-            <element signature="e#1298#1299#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/br/ufms/nafmanager/activities/acesso/AcessoInserir.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="609" column="64" lean-forward="true" selection-start-line="609" selection-start-column="64" selection-end-line="609" selection-end-column="64" />
         </state>
       </provider>
     </entry>

@@ -726,23 +726,32 @@ public class Persistencia {
         if(usuariosIds.size() == 0){
             carregouUsuariosAcesso = true;
         }else{
-            firebaseFirestore.collection("usuario").orderBy("nome")
-                    .whereEqualTo("status", StatusEnum.ATIVO)
-                    .whereIn("id", usuariosIds)
-                    .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    if (task.isSuccessful()) {
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Usuario usr = (Usuario) document.toObject(Usuario.class);
-                            if(!usuariosComAcesso.contains(usr))
-                                usuariosComAcesso.add(usr);
+            for(String usuarioId: usuariosIds){
+                firebaseFirestore.collection("usuario").orderBy("nome")
+                        .whereEqualTo("status", StatusEnum.ATIVO)
+                        .whereEqualTo("id", usuarioId)
+                        .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Usuario usr = (Usuario) document.toObject(Usuario.class);
+                                if(!usuariosComAcesso.contains(usr))
+                                    usuariosComAcesso.add(usr);
+                            }
                         }
-
-                        carregouUsuariosAcesso = true;
                     }
-                }
-            });
+                });
+            }
+        }
+    }
+
+    public void verificaCarregouUsuarioAcessos(){
+        if(usuariosIds.size() > 0 && usuariosIds.size() == usuariosComAcesso.size()){
+            carregouUsuariosAcesso = true;
+        }
+        else{
+            carregouUsuariosAcesso = false;
         }
     }
 
@@ -1393,16 +1402,34 @@ public class Persistencia {
     }
 
     private boolean podeInserirRegiao = false;
+
     public boolean isPodeInserirRegiao() {
         return podeInserirRegiao;
     }
+
+    private ArrayList<String> estadosRegiaoInserir = new ArrayList<>();
+    private ArrayList<String> estadosRegiaoInserirConsultado = new ArrayList<>();
 
     public void validarInserirRegiao(final Regiao regiao){
         podeInserirRegiao = true;
         validouInserirRegiao = false;
 
+        estadosRegiaoInserir = new ArrayList<>();
+        estadosRegiaoInserirConsultado = new ArrayList<>();
+
+        estadosRegiaoInserir = regiao.getEstados();
+        for(String estado: regiao.getEstados()){
+            validaEstadoNaRegiao(regiao, estado);
+        }
+
+        if(regiao.getEstados().size() == 0){
+            validouInserirRegiao = true;
+        }
+    }
+
+    public void validaEstadoNaRegiao(final Regiao regiao, final String estado) {
         firebaseFirestore.collection("regiao")
-                .whereArrayContainsAny("estados", regiao.getEstados())
+                .whereArrayContainsAny("estados", Arrays.asList(estado))
                 .whereEqualTo("status", StatusEnum.ATIVO)
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -1410,15 +1437,25 @@ public class Persistencia {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Regiao reg = document.toObject(Regiao.class);
-                        if(!reg.getId().equals(regiao.getId()))
+                        if (!reg.getId().equals(regiao.getId()))
                             podeInserirRegiao = false;
                     }
                 }
-
                 validouInserirRegiao = true;
+                estadosRegiaoInserirConsultado.add(estado);
             }
         });
     }
+
+    public boolean validouEstadosNaRegiao(){
+        if(estadosRegiaoInserir.size() == estadosRegiaoInserirConsultado.size()){
+            return true;
+        }
+
+        return false;
+    }
+
+
 
     //endregion
 

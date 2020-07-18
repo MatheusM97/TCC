@@ -139,6 +139,7 @@ public class AcessoPrincipal extends CustomActivity {
     }
 
     private void aguardandoUsuariosAcesso() {
+        Persistencia.getInstance().verificaCarregouUsuarioAcessos();
         if(Persistencia.getInstance().carregouUsuariosAcesso){
             hideDialog();
             iniciarTelas(new AcessoGerenciar());

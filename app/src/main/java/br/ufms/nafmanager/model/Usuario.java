@@ -155,7 +155,7 @@ public class Usuario extends CustomObject implements Searchable {
             this.setMensagem("Confirme a senha!");
         }
 
-        if(!senha2.equals(senha)){
+        if(!senha.equals(senha2)){
             this.setMensagem("As senhas não são iguais!");
         }
     }

@@ -519,7 +519,7 @@ public class AcessoInserir extends CustomActivity {
                 this.acesso.getTipoValor().equals(AcessoTipoEnum.UNIDADE.getValor())) {
             if (this.acesso.isRepresentante())
                 this.cbRepresentante.setChecked(true);
-        } else if (this.acesso.getTipoValor().equals(AcessoTipoEnum.UNIVERSIDADE)) {
+        } else if (this.acesso.getTipoValor().equals(AcessoTipoEnum.UNIVERSIDADE.getValor())) {
             if (this.acesso.isRepresentante())
                 this.cbRepresentanteUniversidade.setChecked(true);
         }

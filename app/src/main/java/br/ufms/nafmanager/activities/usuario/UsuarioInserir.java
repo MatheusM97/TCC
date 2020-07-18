@@ -14,6 +14,7 @@ import java.util.List;
 
 import br.ufms.nafmanager.R;
 import br.ufms.nafmanager.activities.CustomActivity;
+import br.ufms.nafmanager.activities.MainActivity;
 import br.ufms.nafmanager.activities.acesso.AcessoPrincipal;
 import br.ufms.nafmanager.adapters.MaskEditUtil;
 import br.ufms.nafmanager.model.Universidade;
@@ -141,6 +142,13 @@ public class UsuarioInserir extends CustomActivity {
 
     public void preValidar() {
         this.copiarTela();
+        this.usuario.validar();
+
+        if(this.usuario.getMensagem() != null && this.usuario.getMensagem().length() > 0){
+            Toast.makeText(this, this.usuario.getMensagem(), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         this.usuario.validarSenhas();
 
         if(usuario.getMensagem() != null && usuario.getMensagem().trim().length() > 0){
@@ -161,9 +169,18 @@ public class UsuarioInserir extends CustomActivity {
             if(usuario.salvar()){                
                 Persistencia.getInstance().setUsuarioCarregado(usuario);
                 Toast.makeText(this, "É necessário inserir algum acesso", Toast.LENGTH_SHORT).show();
-                Intent novaIntent = new Intent(getBaseContext(), AcessoPrincipal.class);
-                startActivity(novaIntent);
-                finish();
+                if(!auto){
+                    Intent novaIntent = new Intent(UsuarioInserir.this, AcessoPrincipal.class);
+                    startActivity(novaIntent);
+                    finish();
+                }
+                else{
+                    Persistencia.getInstance().setUsuarioAtual(usuario);
+                    Intent novaIntent = new Intent(UsuarioInserir.this, MainActivity.class);
+                    novaIntent.putExtra("autoSolicitacao", true);
+                    startActivity(novaIntent);
+                    finish();
+                }
             }
         }
 

@@ -106,21 +106,25 @@ public class RegiaoInserir extends CustomActivity {
     }
 
     private void inserir(){
+        showDialog();
         copiarTela();
         Persistencia.getInstance().validarInserirRegiao(regiao);
         aguardandoValidacao();
     }
 
     private void aguardando(){
-        if(Persistencia.getInstance().isValidouInserirRegiao()){
+        if(Persistencia.getInstance().isValidouInserirRegiao() && Persistencia.getInstance().validouEstadosNaRegiao()){
             if(Persistencia.getInstance().isPodeInserirRegiao()){
                 if(regiao.salvar()){
+                    hideDialog();
                     Persistencia.getInstance().setRegiaoAtual(regiao);
                     finish();
                 }
                 Toast.makeText(this, regiao.getMensagem(), Toast.LENGTH_SHORT).show();
+                hideDialog();
             }
             else{
+                hideDialog();
                 Toast.makeText(this, "Estado já cadastrado em uma Região Fiscal", Toast.LENGTH_SHORT).show();
             }
         }

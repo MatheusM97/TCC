@@ -47,6 +47,9 @@ public class MainActivity extends AppCompatActivity {
         carregaComponentes();
 
         controlaAcesso();
+        if(getIntent().hasExtra("autoSolicitacao")){
+            iniciarTelas(new AcessoPrincipal());
+        }
     }
 
     private void carregaComponentes() {

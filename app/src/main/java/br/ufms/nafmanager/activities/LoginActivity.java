@@ -66,10 +66,12 @@ public class LoginActivity extends CustomActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-        hideDialog();
+
+        if(this.progressDialog != null){
+            hideDialog();
+        }
 
         if(alert != null) {
-            alert.hide();
             alert.hide();
         }
 
