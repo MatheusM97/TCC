@@ -577,6 +577,13 @@ public class AcessoInserir extends CustomActivity {
         ArrayList<Universidade> reg = new ArrayList<>();
         Acesso acesso = Persistencia.getInstance().getAcessoAtual();
 
+        if (acesso.getNivelAcesso() == 2L) {
+            for (Universidade un : Persistencia.getInstance().getUniversidades()) {
+                if (un.getId().equals(acesso.getUniversidadeId())) {
+                    reg.add(un);
+                }
+            }
+        }
         if (acesso.getNivelAcesso() == 4L) {
             for (Universidade un : Persistencia.getInstance().getUniversidades()) {
                 if (un.getId().equals(acesso.getUniversidadeId())) {
