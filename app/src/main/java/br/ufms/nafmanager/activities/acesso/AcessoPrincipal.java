@@ -160,6 +160,7 @@ public class AcessoPrincipal extends CustomActivity {
     }
 
     private void aguardandoSolicitacoes(){
+        Persistencia.getInstance().verificaCarregouUsuarioAcessos();
         if(Persistencia.getInstance().carregouUsuariosAcesso){
             hideDialog();
             iniciarTelas(new AcessoAprovar());

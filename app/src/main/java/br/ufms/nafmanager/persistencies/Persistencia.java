@@ -747,7 +747,7 @@ public class Persistencia {
     }
 
     public void verificaCarregouUsuarioAcessos(){
-        if(usuariosIds.size() > 0 && usuariosIds.size() == usuariosComAcesso.size()){
+        if((usuariosIds.size() > 0 && usuariosIds.size() == usuariosComAcesso.size() )|| carregouUsuariosAcesso){
             carregouUsuariosAcesso = true;
         }
         else{
@@ -1123,12 +1123,9 @@ public class Persistencia {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         Acesso ac  = (Acesso) document.toObject(Acesso.class);
-//                        for(Acesso acesso: acessos){
-//                            if(acesso.getId().equals(ac.getId()))
-//                                break;
-//                        }
+                        Acesso existe = ac.buscaObjetoNaLista(acessos);
 
-                        if(!acessos.contains(ac)){
+                        if(existe == null){
                             acessos.add(ac);
                         }
                     }
